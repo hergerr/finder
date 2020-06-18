@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_DB=finderdb
+      - POSTGRES_USER=finder
+      - POSTGRES_PASSWORD=W4lepsze
+    volumes:
+      - data:/var/lib/postgresql/data/
+  web:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend/:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  front:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - './frontend/:/app'
+      - '/app/node_modules'
+    ports:
+      - '3001:3000'
+    stdin_open: true
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - web
+volumes:
+  data:
