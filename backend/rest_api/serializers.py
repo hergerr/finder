@@ -28,4 +28,4 @@ class RoomOfferDetailSerializer(serializers.ModelSerializer):
 class RoomOfferListSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomOffer
-        fields = ['title', 'price', 'area', 'location', 'number_of_flatmates']
+        fields = ['id', 'title', 'price', 'area', 'location', 'number_of_flatmates']

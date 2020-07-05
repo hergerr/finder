@@ -52,14 +52,14 @@ def user_room_detail(request):
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'PUT':
-        offer = get_object_or_404(RoomOfferDetailSerializer,  id=data['id'], owner=data['owner'])
+        offer = get_object_or_404(RoomOffer,  id=data['id'], owner=data['owner'])
         serializer = RoomOfferDetailSerializer(offer, data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
+            return JsonResponse(serializer.data, status=200)
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        offer = get_object_or_404(RoomOfferDetailSerializer,  id=data['id'], owner=data['owner'])
-        offer.delete
-        return JsonResponse(serializer.data, status=201)
+        offer = get_object_or_404(RoomOffer,  id=data['id'], owner=data['owner'])
+        offer.delete()
+        return Response(status=200)
