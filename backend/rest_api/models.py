@@ -8,6 +8,7 @@ class RoomOffer(models.Model):
     title = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
     area = models.IntegerField(default=0)
+    location = models.CharField(max_length=100)
     number_of_flatmates = models.IntegerField(default=0)
     building_features = models.TextField()
     flat_features = models.TextField()
@@ -31,6 +32,13 @@ class MateOffer(models.Model):
 
     def __repr__(self):
         return f'{self.area}: {self.title}'
+
+# https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#extending-the-existing-user-model
+class LikedOffer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    room_offers = models.ManyToManyField(RoomOffer)
+    mate_offers = models.ManyToManyField(MateOffer)
+
 
 class Conversation(models.Model):
     members = models.ManyToManyField(User)

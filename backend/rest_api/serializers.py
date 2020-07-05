@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,3 +17,15 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+class RoomOfferDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoomOffer
+        fields = ['owner', 'title', 'price', 'area', 'location',
+        'number_of_flatmates','building_features', 'flat_features',
+        'flatmates_features', 'rules', 'phone']
+
+class RoomOfferListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoomOffer
+        fields = ['title', 'price', 'area', 'location', 'number_of_flatmates']
