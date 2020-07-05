@@ -64,10 +64,10 @@ curl \
   -X DELETE \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1NDk4ODAxLCJqdGkiOiIzN2M3NDA0NjliYzE0NTg2OTBiOTUyM2Q4Y2JjNDZmYyIsInVzZXJfaWQiOjR9.HCEJ7TlkcUO7gace1b66_EcCIRwHnVTO_N8IAxNPfcM" \
-  -d '{"id":"1"}' \
+  -d '{"id":"2"}' \
   http://localhost:8000/user_room_detail/
 ```
-- modify room
+- modify room offer
 ```bash
 curl \
   -X PUT \
@@ -75,6 +75,14 @@ curl \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1NDk4ODAxLCJqdGkiOiIzN2M3NDA0NjliYzE0NTg2OTBiOTUyM2Q4Y2JjNDZmYyIsInVzZXJfaWQiOjR9.HCEJ7TlkcUO7gace1b66_EcCIRwHnVTO_N8IAxNPfcM" \
   -d '{"id": "2", "title": "Room in city center", "price": "1900", "area": "30", "location": "Dominikanski Square", "building_features": "modern building;2nd floor;elevator available;peaceful neigborhood", "flat_features": "fully furnitured;two bathrooms;kitchen;living room", "flatmates_features": "2 students;parties on weekend;interested in electrical engeneering", "rules":"No smoking;No pets", "phone":"123456789"}' \
   http://localhost:8000/user_room_detail/
+```
+- get user's room offers
+```bash
+curl \
+  -X GET \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1NDk4ODAxLCJqdGkiOiIzN2M3NDA0NjliYzE0NTg2OTBiOTUyM2Q4Y2JjNDZmYyIsInVzZXJfaWQiOjR9.HCEJ7TlkcUO7gace1b66_EcCIRwHnVTO_N8IAxNPfcM" \
+  http://localhost:8000/user_room_list/
 ```
 
 ### Development wiki

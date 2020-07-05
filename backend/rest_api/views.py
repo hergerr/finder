@@ -9,6 +9,7 @@ from .serializers import *
 from .models import *
 
 
+# -----------------------GUEST VIEWS----------------------
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_user(request):
@@ -19,7 +20,6 @@ def register_user(request):
         serializer.save()
         return JsonResponse(serializer.data, status=201)
     return JsonResponse(serializer.errors, status=400)
-
 
 # TODO: paging?
 @api_view(['GET'])
@@ -37,6 +37,7 @@ def get_room_offer_detail(request, room_offer_id):
     serializer = RoomOfferListSerializer(data)
     return Response(serializer.data)
 
+# -----------------------USER VIEWS----------------------
 
 # view for user (adding, editing, deleting user's offer)
 @api_view(['POST', 'PUT', 'DELETE'])
@@ -63,3 +64,9 @@ def user_room_detail(request):
         offer = get_object_or_404(RoomOffer,  id=data['id'], owner=data['owner'])
         offer.delete()
         return Response(status=200)
+
+@api_view(['GET'])
+def user_room_list(request):
+    data = RoomOffer.objects.filter(owner=request.user)
+    serializer = RoomOfferListSerializer(data, many=True)
+    return Response(serializer.data)
