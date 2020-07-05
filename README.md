@@ -28,6 +28,30 @@ TODO:
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"username": "admin", "password": "admin"}' \
+  -d '{"username": "new", "password": "new"}' \
   http://localhost:8000/token/
+```
+- register
+```bash
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"username": "new", "email": "a@a.pl", "password": "new"}' \
+  http://localhost:8000/register/
+```
+
+
+### Development wiki
+#### Posgres
+- getting in postgres db
+```bash
+docker exec -it finder_db_1 psql -U finder -d finderdb
+```
+- listing tables
+```bash
+\dt
+```
+- list table content
+```sql
+select * from auth_user;
 ```
