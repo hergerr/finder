@@ -29,3 +29,15 @@ class RoomOfferListSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomOffer
         fields = ['id', 'title', 'price', 'area', 'location', 'number_of_flatmates']
+
+
+class MateOfferDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = MateOffer
+        fields = ['title', 'age', 'location', 'field_of_study', 'features', 'customs', 'phone']
+
+
+class MateOfferListSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = MateOffer
+        fields = ['title', 'age', 'location', 'features']

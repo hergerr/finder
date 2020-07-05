@@ -48,6 +48,22 @@ curl \
   http://localhost:8000/all_room_offers_list/
 ```
 
+- get room offer detail
+```bash
+curl \
+  -X GET \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/room_offer_detail/3
+```
+
+- get all mates offer
+```bash
+curl \
+  -X GET \
+  -H "Content-Type: application/json" \
+  http://localhost:8000/all_mate_offers_list/
+```
+
 #### User available endpoints
 - add room offer
 ```bash

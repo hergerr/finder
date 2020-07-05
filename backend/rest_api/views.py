@@ -29,13 +29,28 @@ def get_all_room_list_offers(request):
     serializer = RoomOfferListSerializer(data, many=True)
     return Response(serializer.data)
 
-
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_room_offer_detail(request, room_offer_id):
-    data = RoomOfferDetailSerializer.objects.get(room_offer_id)
-    serializer = RoomOfferListSerializer(data)
+    data = get_object_or_404(RoomOffer, id=room_offer_id)
+    serializer = RoomOfferDetailSerializer(data)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_all_mate_list_offers(request):
+    data = MateOffer.objects.all()
+    serializer = MateOfferListSerializer(data, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_mate_offer_detail(request, mate_offer_id):
+    data = get_object_or_404(MateOffer, id=room_offer_id)
+    serializer = MateOfferDetailSerializer(data)
+    return Response(serializer.data)
+
 
 # -----------------------USER VIEWS----------------------
 
