@@ -21,6 +21,7 @@ TODO:
 - connection between sites - sugestion of rooms in flatmate app
 - common account panel for both sites
 - favourite section in user account
+- forgot password, mail verification?
 
 ### CURL wiki
 #### Guest available endpoints
