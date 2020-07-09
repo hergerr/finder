@@ -71,7 +71,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODQ4MjY1LCJqdGkiOiI4OTBhNWVhNzFlY2E0MjQwOWNlMTYzN2MzZTUyNWY4ZiIsInVzZXJfaWQiOjd9.ahFBM2X0Y46Hfq4PWGV4di6Nq13xejHmqPPsXxxY9SE" \
   -d '{"title": "Room in city center", "price": "900", "area": "30", "location": "Dominikanski Square", "building_features": "modern building;2nd floor;elevator available;peaceful neigborhood", "flat_features": "fully furnitured;two bathrooms;kitchen;living room", "flatmates_features": "2 students;parties on weekend;interested in electrical engeneering", "rules":"No smoking;No pets", "phone":"123456789"}' \
   http://localhost:8000/user_room_detail/
 ```
