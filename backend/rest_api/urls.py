@@ -12,8 +12,8 @@ urlpatterns = [
    
     # ------ USER VIEWS -----
     path('user_room_detail/', views.user_room_detail),
-    path('user_room_list/', views.user_room_list)
+    path('user_room_list/', views.user_room_list),
 
     path('user_mate_detail/', views.user_mate_detail),
-    path('user_mate_list/', views.user_mate_list)
+    path('user_mate_list/', views.user_mate_list),
 ]
