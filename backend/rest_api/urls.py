@@ -16,4 +16,5 @@ urlpatterns = [
 
     path('user_mate_detail/', views.user_mate_detail),
     path('user_mate_list/', views.user_mate_list),
+    path('add_mate_offer_to_liked/', views.add_mate_offer_to_liked),
 ]

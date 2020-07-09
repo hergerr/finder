@@ -47,7 +47,7 @@ def get_all_mate_list_offers(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_mate_offer_detail(request, mate_offer_id):
-    data = get_object_or_404(MateOffer, id=room_offer_id)
+    data = get_object_or_404(MateOffer, id=mate_offer_id)
     serializer = MateOfferDetailSerializer(data)
     return Response(serializer.data)
 
@@ -117,3 +117,21 @@ def user_mate_list(request):
     data = MateOffer.objects.filter(owner=request.user)
     serializer = MateOfferListSerializer(data, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def add_mate_offer_to_liked(request):
+    data = request.data
+    data['owner'] = request.user.id
+    print(data)
+
+    try:
+        user_liked_offers = get_object_or_404(LikedOffer, user=data['owner'])
+        liked_offer = get_object_or_404(MateOffer, id=data['id'])
+        user_liked_offers.add(liked_offer)
+        return Response(status=200)
+    except:
+        import traceback
+        for line in traceback.format_exc().splitlines():
+            print(line)        
+        return Response(status=400)

@@ -138,6 +138,16 @@ curl \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
   http://localhost:8000/user_mate_list/
 ```
+
+- add mate offer to user's fav
+```bash
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
+  -d '{"id": "4"}' \
+  http://localhost:8000/add_mate_offer_to_liked/ 
+```
 ### Development wiki
 #### Postgres
 - getting in postgres db

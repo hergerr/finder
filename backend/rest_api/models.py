@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class RoomOffer(models.Model):
     owner = models.ForeignKey(
@@ -35,9 +36,22 @@ class MateOffer(models.Model):
 
 # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#extending-the-existing-user-model
 class LikedOffer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='liked_offer')
     room_offers = models.ManyToManyField(RoomOffer)
     mate_offers = models.ManyToManyField(MateOffer)
+
+# create / update 1:1 user extension when user model created / updated
+# https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        LikedOffer.objects.create(user=instance)
+
+
+# strange backref name
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.liked_offer.save()
 
 
 class Conversation(models.Model):
