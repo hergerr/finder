@@ -102,6 +102,23 @@ curl \
   http://localhost:8000/user_room_list/
 ```
 
+- add room offer to user's fav
+```bash
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODQ4MjY1LCJqdGkiOiI4OTBhNWVhNzFlY2E0MjQwOWNlMTYzN2MzZTUyNWY4ZiIsInVzZXJfaWQiOjd9.ahFBM2X0Y46Hfq4PWGV4di6Nq13xejHmqPPsXxxY9SE" \
+  -d '{"id": "1"}' \
+  http://localhost:8000/add_room_offer_to_liked/ -v
+```
+
+- get user's fav room offers
+```bash
+curl \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODQ4MjY1LCJqdGkiOiI4OTBhNWVhNzFlY2E0MjQwOWNlMTYzN2MzZTUyNWY4ZiIsInVzZXJfaWQiOjd9.ahFBM2X0Y46Hfq4PWGV4di6Nq13xejHmqPPsXxxY9SE" \
+  http://localhost:8000/get_liked_room_offers/ -v
+```
 - add mate offer
 ```bash
 curl \
