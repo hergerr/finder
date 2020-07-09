@@ -71,7 +71,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1NDk4ODAxLCJqdGkiOiIzN2M3NDA0NjliYzE0NTg2OTBiOTUyM2Q4Y2JjNDZmYyIsInVzZXJfaWQiOjR9.HCEJ7TlkcUO7gace1b66_EcCIRwHnVTO_N8IAxNPfcM" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
   -d '{"title": "Room in city center", "price": "900", "area": "30", "location": "Dominikanski Square", "building_features": "modern building;2nd floor;elevator available;peaceful neigborhood", "flat_features": "fully furnitured;two bathrooms;kitchen;living room", "flatmates_features": "2 students;parties on weekend;interested in electrical engeneering", "rules":"No smoking;No pets", "phone":"123456789"}' \
   http://localhost:8000/user_room_detail/
 ```
@@ -102,6 +102,42 @@ curl \
   http://localhost:8000/user_room_list/
 ```
 
+- add mate offer
+```bash
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
+  -d '{"title": "Peaceful IT student", "age": "22", "location": "Grunwaldzki Square", "field_of_study": "Computer science", "features":"peaceful;quiet;gaming;cycling", "customs": "no smoking;no partying;wakes up at 11-12;goes to bed 23-24", "phone":"123456789"}' \
+  http://localhost:8000/user_mate_detail/
+```
+- delete mate offer
+```bash
+curl \
+  -X DELETE \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
+  -d '{"id":"1"}' \
+  http://localhost:8000/user_mate_detail/
+```
+- modify mate offer
+```bash
+curl \
+  -X PUT \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
+  -d '{"id":"3", "title": "Peaceful IT student", "age": "20", "location": "Grunwaldzki Square", "field_of_study": "Computer science", "features":"peaceful;quiet;gaming;cycling", "customs": "no smoking;no partying;wakes up at 11-12;goes to bed 23-24", "phone":"123456789"}' \
+  http://localhost:8000/user_mate_detail/
+```
+
+- get user's mate offers
+```bash
+curl \
+  -X GET \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
+  http://localhost:8000/user_mate_list/
+```
 ### Development wiki
 #### Postgres
 - getting in postgres db

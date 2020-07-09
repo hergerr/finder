@@ -33,11 +33,11 @@ class RoomOfferListSerializer(serializers.ModelSerializer):
 
 class MateOfferDetailSerializer(serializers.ModelSerializer):
     class Meta:
-        models = MateOffer
-        fields = ['title', 'age', 'location', 'field_of_study', 'features', 'customs', 'phone']
+        model = MateOffer
+        fields = ['owner', 'title', 'age', 'location', 'field_of_study', 'features', 'customs', 'phone']
 
 
 class MateOfferListSerializer(serializers.ModelSerializer):
     class Meta:
-        models = MateOffer
-        fields = ['title', 'age', 'location', 'features']
+        model = MateOffer
+        fields = ['id', 'title', 'age', 'location', 'features']

@@ -24,7 +24,7 @@ class MateOffer(models.Model):
         'auth.user', related_name='mate_offer', on_delete=models.CASCADE, null=False, blank=False)
     title = models.CharField(max_length=100)
     age = models.IntegerField(default=0)
-    area = models.IntegerField(default=0)
+    location = models.CharField(max_length=100)
     field_of_study = models.CharField(max_length=100)
     features = models.TextField()
     customs = models.TextField()
