@@ -25,14 +25,6 @@ TODO:
 
 ### CURL wiki
 #### Guest available endpoints
-- login
-```bash
-curl \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"username": "new", "password": "new"}' \
-  http://localhost:8000/token/
-```
 - register
 ```bash
 curl \
@@ -40,6 +32,14 @@ curl \
   -H "Content-Type: application/json" \
   -d '{"username": "new", "email": "a@a.pl", "password": "new"}' \
   http://localhost:8000/register/
+```
+- login
+```bash
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"username": "new", "password": "new"}' \
+  http://localhost:8000/token/
 ```
 - get all room offers (list view)
 ```bash
@@ -107,7 +107,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODQ4MjY1LCJqdGkiOiI4OTBhNWVhNzFlY2E0MjQwOWNlMTYzN2MzZTUyNWY4ZiIsInVzZXJfaWQiOjd9.ahFBM2X0Y46Hfq4PWGV4di6Nq13xejHmqPPsXxxY9SE" \
   -d '{"title": "Peaceful IT student", "age": "22", "location": "Grunwaldzki Square", "field_of_study": "Computer science", "features":"peaceful;quiet;gaming;cycling", "customs": "no smoking;no partying;wakes up at 11-12;goes to bed 23-24", "phone":"123456789"}' \
   http://localhost:8000/user_mate_detail/
 ```
@@ -144,9 +144,17 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODMyNDkxLCJqdGkiOiJiYTQyMjMxMDQxN2E0MzJlODA4MjJhZTE2NTYzYWI0MyIsInVzZXJfaWQiOjJ9.5CMZYyS9F6p0FVZQbwWoxbylKCvXW3Bl7kbCLT-WE3k" \
-  -d '{"id": "4"}' \
-  http://localhost:8000/add_mate_offer_to_liked/ 
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODQ4MjY1LCJqdGkiOiI4OTBhNWVhNzFlY2E0MjQwOWNlMTYzN2MzZTUyNWY4ZiIsInVzZXJfaWQiOjd9.ahFBM2X0Y46Hfq4PWGV4di6Nq13xejHmqPPsXxxY9SE" \
+  -d '{"id": "1"}' \
+  http://localhost:8000/add_mate_offer_to_liked/ -v
+```
+
+- get user's fav mate offers
+```bash
+curl \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI1ODQ4MjY1LCJqdGkiOiI4OTBhNWVhNzFlY2E0MjQwOWNlMTYzN2MzZTUyNWY4ZiIsInVzZXJfaWQiOjd9.ahFBM2X0Y46Hfq4PWGV4di6Nq13xejHmqPPsXxxY9SE" \
+  http://localhost:8000/get_liked_mate_offers/ -v
 ```
 ### Development wiki
 #### Postgres

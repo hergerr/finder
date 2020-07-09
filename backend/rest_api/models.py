@@ -32,7 +32,7 @@ class MateOffer(models.Model):
     phone = models.CharField(max_length=20)
 
     def __repr__(self):
-        return f'{self.area}: {self.title}'
+        return f'{self.location}: {self.title}'
 
 # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#extending-the-existing-user-model
 class LikedOffer(models.Model):
@@ -48,7 +48,6 @@ def create_user_profile(sender, instance, created, **kwargs):
         LikedOffer.objects.create(user=instance)
 
 
-# strange backref name
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.liked_offer.save()

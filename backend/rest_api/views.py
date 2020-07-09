@@ -128,10 +128,27 @@ def add_mate_offer_to_liked(request):
     try:
         user_liked_offers = get_object_or_404(LikedOffer, user=data['owner'])
         liked_offer = get_object_or_404(MateOffer, id=data['id'])
-        user_liked_offers.add(liked_offer)
+        user_liked_offers.mate_offers.add(liked_offer)
         return Response(status=200)
+    except:    
+        return Response(status=400)
+
+@api_view(['GET'])
+def get_liked_mate_offers(request):
+    data = request.data
+    data['owner'] = request.user.id
+
+    try:
+        current_user = User.objects.get(pk=data['owner'])
+        data = current_user.liked_offer.mate_offers.all()
+        serializer = MateOfferListSerializer(data=data, many=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
+        return JsonResponse(serializer.data, status=404, safe=False)
     except:
         import traceback
         for line in traceback.format_exc().splitlines():
-            print(line)        
+            print(line)    
         return Response(status=400)
