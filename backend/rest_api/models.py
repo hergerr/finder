@@ -4,8 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class RoomOffer(models.Model):
-    owner = models.ForeignKey(
-        'auth.User', related_name='room_offer', on_delete=models.CASCADE, null=False, blank=False)
+    owner = models.ForeignKey(User, related_name='room_offer', on_delete=models.CASCADE, null=False, blank=False)
     title = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
     area = models.IntegerField(default=0)
@@ -21,8 +20,7 @@ class RoomOffer(models.Model):
         return f'{self.area}: {self.title}'
 
 class MateOffer(models.Model):
-    owner = models.ForeignKey(
-        'auth.user', related_name='mate_offer', on_delete=models.CASCADE, null=False, blank=False)
+    owner = models.ForeignKey(User, related_name='mate_offer', on_delete=models.CASCADE, null=False, blank=False)
     title = models.CharField(max_length=100)
     age = models.IntegerField(default=0)
     location = models.CharField(max_length=100)
@@ -61,8 +59,8 @@ class Conversation(models.Model):
         return f'Conversation: {self.subject}'
 
 class Message(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
-    receivers = models.ManyToManyField(User)
     content = models.TextField()
     date = models.DateField()
 
