@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from datetime import datetime
 from .serializers import *
 from .models import *
 
@@ -192,3 +193,25 @@ def get_liked_mate_offers(request):
         for line in traceback.format_exc().splitlines():
             print(line)    
         return Response(status=400)
+
+@api_view(['POST'])
+def send_message(request, subject, receiver, content):
+    sender = request.user.id
+    conv = Conversation.objects.filter(members__in=[sender, owner], subject=subject)
+
+    # check if converstaion exists
+    if conv:
+        new_message = Message(owner=sender, conversation=conv, datetime=datetime.now(), content=content)
+        new_message.save()
+        new_message.conversation = conv
+    else:
+        user1 = User.objects.get(pk=sender)
+        user2 = User.objects.get(pk=receiver)
+    
+        new_conversation = Conversation(subject=subject)
+        new_conversation.members.add(user1, user2)
+
+        new_message = Message(owner=sender, conversation=conv, datetime=datetime.now(), content=content)
+        new_message.save()
+        new_message.conversation = conv
+
