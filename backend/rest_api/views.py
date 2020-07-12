@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import AllowAny
@@ -195,23 +196,34 @@ def get_liked_mate_offers(request):
         return Response(status=400)
 
 @api_view(['POST'])
-def send_message(request, subject, receiver, content):
-    sender = request.user.id
-    conv = Conversation.objects.filter(members__in=[sender, owner], subject=subject)
+def send_message(request):
+    sender = request.user
+    subject = request.data['subject']
+    receiver = request.data['receiver']
+    content = request.data['content']
+
+    conv = Conversation.objects.filter(members__in=[sender, receiver], subject=subject).first()
 
     # check if converstaion exists
     if conv:
-        new_message = Message(owner=sender, conversation=conv, datetime=datetime.now(), content=content)
+        new_message = Message(owner=sender, conversation=conv, datetime=timezone.now(), content=content)
         new_message.save()
         new_message.conversation = conv
+        return Response(status=200)
     else:
-        user1 = User.objects.get(pk=sender)
+        user1 = sender
         user2 = User.objects.get(pk=receiver)
     
         new_conversation = Conversation(subject=subject)
+        new_conversation.save()
         new_conversation.members.add(user1, user2)
 
-        new_message = Message(owner=sender, conversation=conv, datetime=datetime.now(), content=content)
+        new_message = Message(owner=sender, conversation=new_conversation, datetime=timezone.now(), content=content)
         new_message.save()
-        new_message.conversation = conv
+        return Response(status=200)
+    return Response(status=400)
 
+
+@api_view(['POST'])
+def get_conversation(request, receiver,):
+    pass

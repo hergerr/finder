@@ -62,7 +62,7 @@ class Message(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
     content = models.TextField()
-    date = models.DateField()
+    datetime = models.DateTimeField()
 
     def __repr__(self):
-        return f'Message from: {self.date}'
+        return f'{self.datetime} message from {self.owner}: {self.content}'
