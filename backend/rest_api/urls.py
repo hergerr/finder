@@ -23,4 +23,6 @@ urlpatterns = [
 
     path('send_message/', views.send_message),
     path('get_conversation/', views.get_conversation),
+    path('get_user_conversations/', views.get_user_conversations),
+    path('delete_conversation/<int:id>/', views.delete_conversation)
 ]

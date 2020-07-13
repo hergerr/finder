@@ -238,3 +238,24 @@ def get_conversation(request):
         for line in traceback.format_exc().splitlines():
             print(line)    
         return Response(status=400)
+
+@api_view(['GET'])
+def get_user_conversations(request):
+    owner = request.user    
+    data = Conversation.objects.filter(members__in=[owner])
+
+    serializer = ConversationSerializer(data, many=True)
+    return Response(serializer.data, status=200)
+
+
+@api_view(['DELETE'])
+def delete_conversation(request, id):
+    try:
+        conv = get_object_or_404(Conversation, pk=id)
+        conv.delete()
+        return Response(status=200)
+    except:
+        import traceback
+        for line in traceback.format_exc().splitlines():
+            print(line)    
+        return Response(status=400)
