@@ -230,11 +230,9 @@ def get_conversation(request):
         owner = request.user
         second_member = User.objects.get(pk=request.data['second_member'])
         # https://stackoverflow.com/questions/2218327/django-manytomany-filter
-        data = Conversation.objects.filter(members__in=[owner, second_member], subject=request.data['subject']).distinct()
-        serializer = ConversationSerializer(data, many=True)
-        data = serializer.data
-        return Response(data, status=200)
-        # return JsonResponse(serializer.data, status=404, safe=False)
+        data = Conversation.objects.filter(members__in=[owner, second_member], subject=request.data['subject']).distinct().first()
+        serializer = ConversationSerializer(instance=data)
+        return Response(serializer.data, status=200)
     except:
         import traceback
         for line in traceback.format_exc().splitlines():

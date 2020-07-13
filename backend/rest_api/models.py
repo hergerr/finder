@@ -60,7 +60,7 @@ class Conversation(models.Model):
 
 class Message(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
-    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='message')
     content = models.TextField()
     datetime = models.DateTimeField()
 
