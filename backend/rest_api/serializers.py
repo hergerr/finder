@@ -41,3 +41,17 @@ class MateOfferListSerializer(serializers.ModelSerializer):
     class Meta:
         model = MateOffer
         fields = ['id', 'title', 'age', 'location', 'features']
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['owner', 'content', 'datetime']
+
+
+class ConversationSerializer(serializers.ModelSerializer):
+    message = MessageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Conversation
+        fields = ['members', 'subject', 'message']

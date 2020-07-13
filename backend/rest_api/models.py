@@ -16,7 +16,7 @@ class RoomOffer(models.Model):
     rules = models.TextField()
     phone = models.CharField(max_length=20)
 
-    def __repr__(self):
+    def __str__(self):
         return f'{self.area}: {self.title}'
 
 class MateOffer(models.Model):
@@ -29,7 +29,7 @@ class MateOffer(models.Model):
     customs = models.TextField()
     phone = models.CharField(max_length=20)
 
-    def __repr__(self):
+    def __str__(self):
         return f'{self.location}: {self.title}'
 
 # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#extending-the-existing-user-model
@@ -55,7 +55,7 @@ class Conversation(models.Model):
     members = models.ManyToManyField(User)
     subject = models.CharField(max_length=100)
 
-    def __repr__(self):
+    def __str__(self):
         return f'Conversation: {self.subject}'
 
 class Message(models.Model):
@@ -64,5 +64,5 @@ class Message(models.Model):
     content = models.TextField()
     datetime = models.DateTimeField()
 
-    def __repr__(self):
+    def __str__(self):
         return f'{self.datetime} message from {self.owner}: {self.content}'

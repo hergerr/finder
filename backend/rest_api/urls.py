@@ -22,4 +22,5 @@ urlpatterns = [
     path('get_liked_mate_offers/', views.get_liked_mate_offers),
 
     path('send_message/', views.send_message),
+    path('get_conversation/', views.get_conversation),
 ]

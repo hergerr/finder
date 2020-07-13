@@ -224,6 +224,19 @@ def send_message(request):
     return Response(status=400)
 
 
-@api_view(['POST'])
-def get_conversation(request, receiver,):
-    pass
+@api_view(['GET'])
+def get_conversation(request):
+    try:
+        owner = request.user
+        second_member = User.objects.get(pk=request.data['second_member'])
+        # https://stackoverflow.com/questions/2218327/django-manytomany-filter
+        data = Conversation.objects.filter(members__in=[owner, second_member], subject=request.data['subject']).distinct()
+        serializer = ConversationSerializer(data, many=True)
+        data = serializer.data
+        return Response(data, status=200)
+        # return JsonResponse(serializer.data, status=404, safe=False)
+    except:
+        import traceback
+        for line in traceback.format_exc().splitlines():
+            print(line)    
+        return Response(status=400)

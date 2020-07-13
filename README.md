@@ -184,6 +184,16 @@ curl \
   http://localhost:8000/send_message/
 
 ```
+
+- get conversation with given user and subcject
+```bash
+curl \
+  -X GET \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -d '{"second_member": "3", "subject": "Room in city center"}' \
+  http://localhost:8000/get_conversation/
+```
 ### Development wiki
 #### Postgres
 - getting in postgres db
