@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,41 +6,57 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
+import room_landing from './assets/images/room_landing.jpg';
+import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing-page/landing-page.component'
 
 function App() {
+  const [url, setUrl] = useState("/mates");
+  const [title, setTitle] = useState("mate")
+  const [buttonText, setButtonText] = useState("room")
+
   return (
     <div className="App">
-    <p className="App-logo">MateFinder</p>
-    <Router>
-      <div>
-        <nav className="App-nav">
-          <ul>
-            <li>
-              <Link to="/">Find mates</Link>
-            </li>
-            <li>
-              <Link to="/about">Add offer</Link>
-            </li>
-            <li>
-              <Link to="/users">My account</Link>
-            </li>
-          </ul>
-        </nav>
+      <p className="App-logo">{title}Finder</p>
+      <Router>
+        <div>
+          <nav className="App-nav">
+            <ul>
+              <li>
+                <Link to={url} onClick={e => {
+                  if (url === "/mates"){
+                    setUrl("/");
+                    setTitle("room");
+                    setButtonText("mate")
+                  } else {
+                    setUrl("/mates");
+                    setTitle("mate");
+                    setButtonText("room");
+                  }
+                }}>Find {buttonText}</Link>
+              </li>
+              <li>
+                <Link to="/offer">Add offer</Link>
+              </li>
+              <li>
+                <Link to="/account">My account</Link>
+              </li>
+            </ul>
+          </nav>
 
-        <Switch>
-          <Route path="/about">
-            {/* <About /> */}
-          </Route>
-          <Route path="/users">
-            {/* <Users /> */}
-          </Route>
-          <Route path="/">
-            <LandingPage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            <Route path="/about">
+              {/* <About /> */}
+            </Route>
+            <Route path={url}>
+              <LandingPage title={`Find your ${title} in Wrocław`} image={mate_landing} />
+            </Route>
+            <Route path="/">
+              <LandingPage title={`Find your ${title} in Wrocław`} image={room_landing} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
 
   );

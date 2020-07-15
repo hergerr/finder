@@ -1,6 +1,5 @@
 import React from 'react';
 import './landing-page.styles.css';
-import room_landing from '../../assets/images/room_landing.jpg';
 
 class LandingPage extends React.Component {
     constructor(props) {
@@ -11,8 +10,8 @@ class LandingPage extends React.Component {
 
         return (
             <div>
-                <p className="LandingPage-title">Find your place in Wrocław</p>
-                <img className="LandingPage-image" src={room_landing}></img>
+                <p className="LandingPage-title">{this.props.title}</p>
+                <img className="LandingPage-image" src={this.props.image}></img>
                 <button className="LandingPage-button">Search</button> 
             </div>
         )
