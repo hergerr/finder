@@ -12,8 +12,9 @@ import { LandingPage } from './pages/landing-page/landing-page.component';
 
 function App() {
   const [url, setUrl] = useState("/mates");
-  const [title, setTitle] = useState("mate")
-  const [buttonText, setButtonText] = useState("room")
+  const [title, setTitle] = useState("mate");
+  const [buttonText, setButtonText] = useState("room");
+  const [displayLoginPopup, setDisplayLoginPopup] = useState(false);
 
   return (
     <div className="App">
@@ -39,7 +40,9 @@ function App() {
                 <Link to="/offer">Add offer</Link>
               </li>
               <li>
-                <Link to="/account">My account</Link>
+                <Link to="/account" onClick={e => {
+                  setDisplayLoginPopup(!displayLoginPopup);
+                }}>My account</Link>
               </li>
             </ul>
           </nav>
@@ -49,10 +52,10 @@ function App() {
               {/* <About /> */}
             </Route>
             <Route path={url}>
-              <LandingPage title={`Find your ${title} in Wrocław`} image={mate_landing} />
+              <LandingPage title={`Find your ${title} in Wrocław`} image={mate_landing} render_login_popup={displayLoginPopup}/>
             </Route>
             <Route path="/">
-              <LandingPage title={`Find your ${title} in Wrocław`} image={room_landing} />
+              <LandingPage title={`Find your ${title} in Wrocław`} image={room_landing} render_login_popup={displayLoginPopup}/>
             </Route>
           </Switch>
         </div>
