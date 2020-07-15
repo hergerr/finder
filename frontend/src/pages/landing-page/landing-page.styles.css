@@ -1,0 +1,24 @@
+.LandingPage-image {
+    width: 100%;
+    height: 80%;
+}
+
+.LandingPage-title {
+    color: white;
+    font-size: 60px;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}
+
+.LandingPage-button {
+    color: white;
+    font-size: 30px;
+    border-radius: 10px;
+    border-color: #E46E00;
+    padding: 10px 30px;
+    background-color: #E46E00;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+}

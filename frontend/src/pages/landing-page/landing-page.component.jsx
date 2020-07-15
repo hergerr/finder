@@ -11,8 +11,9 @@ class LandingPage extends React.Component {
 
         return (
             <div>
-                <p>Find your place in Wrocław</p>
-                <img src={room_landing}></img>
+                <p className="LandingPage-title">Find your place in Wrocław</p>
+                <img className="LandingPage-image" src={room_landing}></img>
+                <button className="LandingPage-button">Search</button> 
             </div>
         )
 

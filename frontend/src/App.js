@@ -10,9 +10,11 @@ import { LandingPage } from './pages/landing-page/landing-page.component'
 
 function App() {
   return (
+    <div className="App">
+    <p className="App-logo">MateFinder</p>
     <Router>
       <div>
-        <nav>
+        <nav className="App-nav">
           <ul>
             <li>
               <Link to="/">Find mates</Link>
@@ -39,6 +41,8 @@ function App() {
         </Switch>
       </div>
     </Router>
+    </div>
+
   );
 }
 
