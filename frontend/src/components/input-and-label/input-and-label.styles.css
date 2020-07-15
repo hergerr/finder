@@ -1,0 +1,9 @@
+.InputAndLabel-input {
+    display: block;
+    width: 300px;
+}
+
+.InputAndLabel-label {
+    font-size: 15px;
+    margin-top: 20px;
+}
