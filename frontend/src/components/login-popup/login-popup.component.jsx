@@ -11,14 +11,18 @@ class LoginPopup extends React.Component {
     render() {
         return (
             <div className="LoginPopup-container">
-                <h3>Log in</h3>
-                <InputAndLabel label="username" />
-                <InputAndLabel label="password" />
-                <div className="LoginPopup-links">
-                    <p>No account?</p><p className="LoginPopup-register">Register</p>
-                    <p className="LoginPopup-forgot">Forgot password?</p>
+                <div className="LoginPopup-form-wrapper">
+                    <h3>Log in</h3>
+                    <InputAndLabel label="username" />
+                    <InputAndLabel label="password" />
+                    <div className="LoginPopup-links">
+                        <p>No account?</p><p className="LoginPopup-register">Register</p>
+                        <p className="LoginPopup-forgot">Forgot password?</p>
+                    </div>
+                    <div className="LoginPopup-button">
+                        <PopupButton content="Log in" />
+                    </div>
                 </div>
-                <PopupButton content="Log in"/>
             </div>
         )
     }
