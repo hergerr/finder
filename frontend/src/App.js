@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <p className="App-logo">{title}Finder</p>
       <Router>
-        <div>
+        <div className="App-nav-container">
           <nav className="App-nav">
             <ul>
               <li>
