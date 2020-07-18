@@ -1,8 +1,17 @@
 .RegisterPopup-container {
     background-color: white;
     padding: 20px;
-    max-width: 500px;
+    width: 500px;
     border: 1px solid black;
+    opacity: 92%;
+    border-radius: 20px;
+}
+
+.RegisterPopup-close{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
 }
 
 .RegisterPopup-form-wrapper {
@@ -19,6 +28,7 @@
     display: inline;
 }
 
+
 .RegisterPopup-button {
     margin-top: 20px;
     text-align: right;
@@ -30,6 +40,9 @@
 
 .RegisterPopup-login {
     color: #E46E00;
+    background-color: white;
+    border: none;
     display: inline;
     margin-left: 10px;
+    cursor: pointer;
 }

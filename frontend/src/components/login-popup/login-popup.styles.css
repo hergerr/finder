@@ -30,16 +30,23 @@
 }
 
 .LoginPopup-links {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .LoginPopup-register {
     color: #E46E00;
+    background-color: white;
+    border: none;
+    display: inline;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .LoginPopup-forgot {
     color: #E46E00;
+    background-color: white;
+    border: none;
+    cursor: pointer;
     margin-left: 70px;
 }
 
