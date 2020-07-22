@@ -7,7 +7,6 @@ App for finding student quarters and flatmates
 
 ###### Landing page (flats):
 
-- **Find mates** - redirect to FindMates
 - **Add offer** - redirect to Login/Register,  to adding form when logged
 - **My account** - redirect to Login/Register, to panel when logged
 
@@ -22,6 +21,7 @@ TODO:
 - common account panel for both sites
 - favourite section in user account
 - forgot password, mail verification?
+- drag and drop https://react-dnd.github.io/react-dnd/about
 
 ### CURL wiki
 #### Guest available endpoints
