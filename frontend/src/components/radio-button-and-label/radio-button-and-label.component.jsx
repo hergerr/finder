@@ -14,7 +14,7 @@ const Input = styled.input`
 export const RadioButtonAndLabel = (props) => (
     <Container>
         <Label>{ props.label }</Label>
-        <Input type="radio"></Input>
+        <Input type="radio" id="pets" name="pets" onChange={props.onChange} value={props.value}></Input>
     </Container>
 
 )

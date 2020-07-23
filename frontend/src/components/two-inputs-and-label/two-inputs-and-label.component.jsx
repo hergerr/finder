@@ -25,7 +25,7 @@ const Input = styled.input`
 export const TwoInputsAndLabel = (props) => (
     <Container>
         <Label>{props.label}</Label>
-        <SmallLabel>from</SmallLabel><Input/>
-        <SmallLabel>to</SmallLabel><Input/>
+        <SmallLabel>from</SmallLabel><Input id={props.idFrom} name={props.nameFrom} onChange={props.onChange} value={props.valueFrom}/>
+        <SmallLabel>to</SmallLabel><Input id={props.idTo} name={props.nameTo} onChange={props.onChange} value={props.valueTo} />
     </Container>
 )
