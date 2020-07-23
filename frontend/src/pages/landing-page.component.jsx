@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LoginPopup } from '../../components/login-popup/login-popup.component';
-import { MatePopup } from '../../components/mate-popup/mate-popup.component';
+import { LoginPopup } from '../components/login-popup.component';
+import { MatePopup } from '../components/mate-popup.component';
 
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Title = styled.p`
     left: 30%;
 `
 
-const Image = styled.image`
+const Image = styled.img`
     width: 100%;
     position: absolute;
     top: 0;
@@ -59,7 +59,7 @@ class LandingPage extends React.Component {
         return (
             <Container>
                 <Title>{this.props.title}</Title>
-                <img className="LandingPage-image" src={this.props.image} alt="page background"></img>
+                <Image src={this.props.image} alt="page background"></Image>
                 {this.props.render_login_popup &&
                     <PopupContainer>
                         <LoginPopup/>

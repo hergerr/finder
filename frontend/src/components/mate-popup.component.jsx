@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { TwoInputsAndLabel } from '../two-inputs-and-label/two-inputs-and-label.component';
-import { InputAndLabel } from '../input-and-label/input-and-label.component';
-import { RadioButtonAndLabel } from '../radio-button-and-label/radio-button-and-label.component';
+import { TwoInputsAndLabel } from './two-inputs-and-label.component';
+import { InputAndLabel } from './input-and-label.component';
+import { RadioButtonAndLabel } from './radio-button-and-label.component';
 
 const Container = styled.div`
     max-width: 500px;

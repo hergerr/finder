@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { InputAndLabel } from '../input-and-label/input-and-label.component';
-import { PopupButton } from '../popup-button/popup-button.component';
-import { LoginPopup } from '../login-popup/login-popup.component';
+import { InputAndLabel } from './input-and-label.component';
+import { PopupButton } from './popup-button.component';
+import { LoginPopup } from './login-popup.component';
 import { Times } from '@styled-icons/fa-solid'
 
 

@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
-import { LandingPage } from './pages/landing-page/landing-page.component';
+import { LandingPage } from './pages/landing-page.component';
 
 
 const App = styled.div`
