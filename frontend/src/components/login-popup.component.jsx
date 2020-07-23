@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { RegisterPopup } from './register-popup.component';
@@ -63,6 +65,10 @@ const ButtonWrapper = styled.div`
     text-align: right;
 `
 
+const Feedback = styled.div`
+    color: red;
+`
+
 class LoginPopup extends React.Component {
     constructor(props) {
         super(props);
@@ -79,25 +85,50 @@ class LoginPopup extends React.Component {
                                 visible: false
                             })
                         }} />
-                        <FormWrapper>
-                            <Title>Log in</Title>
-                            <InputAndLabel label="username" />
-                            <InputAndLabel label="password" />
-                            <Links>
-                                <Paragraph>No account?</Paragraph>
-                                <RegisterButton to="/register" onClick={e => {
-                                    this.setState({
-                                        visible: false,
-                                        registerVisible: true
-                                    })
-                                }}>Register</RegisterButton>
-                                <ForgotButton to="/forgot">Forgot password?</ForgotButton>
+                        <Formik
+                            initialValues={{
+                                username: '',
+                                password: '',
+                            }}
 
-                            </Links>
-                            <ButtonWrapper>
-                                <PopupButton content="Log in" />
-                            </ButtonWrapper>
-                        </FormWrapper>
+                            validationSchema={Yup.object({
+                                username: Yup.string()
+                                    .required('required'),
+                                password: Yup.string()
+                                    .required("required")
+                            })}
+
+                            onSubmit={values => {
+                                alert(JSON.stringify(values));
+                            }}
+                        >
+                            {props => (
+                                <FormWrapper onSubmit={props.handleSubmit}>
+                                    <Title>Log in</Title>
+                                    <InputAndLabel label="username" name="username" id="username" value={props.values.username} onChange={props.handleChange} />
+                                    {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
+                                    <InputAndLabel type="password" label="password" name="password" id="password" value={props.values.password} onChange={props.handleChange} />
+                                    {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
+                                    <Links>
+                                        <Paragraph>No account?</Paragraph>
+                                        <RegisterButton to="/register" onClick={e => {
+                                            this.setState({
+                                                visible: false,
+                                                registerVisible: true
+                                            })
+                                        }}>Register</RegisterButton>
+                                        <ForgotButton to="/forgot">Forgot password?</ForgotButton>
+
+                                    </Links>
+
+                                    <ButtonWrapper>
+                                        <PopupButton content="Log in" />
+                                    </ButtonWrapper>
+                                </FormWrapper>
+                            )}
+
+                        </Formik>
+
 
                     </Container>
                 }

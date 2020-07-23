@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { LoginPopup } from './login-popup.component';
@@ -55,6 +57,10 @@ const LoginButton = styled.button`
     cursor: pointer;
 `
 
+const Feedback = styled.div`
+    color: red;
+`
+
 class RegisterPopup extends React.Component {
     constructor(props) {
         super(props);
@@ -70,26 +76,62 @@ class RegisterPopup extends React.Component {
                         visible: false
                     })
                 }} />
-                <FormWrapper>
-                    <Title>Register</Title>
-                    <InputAndLabel label="username" />
-                    <InputAndLabel label="email" />
-                    <InputAndLabel label="password" />
-                    <InputAndLabel label="repeat password" />
 
-                    <Links>
-                        <Paragraph>Already have an account?</Paragraph>
-                        <LoginButton onClick={e => {
-                            this.setState({
-                                loginVisible: true,
-                                visible:false
-                            });
-                        }}>Log in</LoginButton>
-                    </Links>
-                    <ButtonWrapper>
-                        <PopupButton content="Register" />
-                    </ButtonWrapper>
-                </FormWrapper>
+                <Formik
+                    initialValues={{
+                        username: '',
+                        email: '',
+                        password: '',
+                        repeatedPassword: ''
+                    }}
+
+                    validationSchema = {Yup.object({
+                        username: Yup.string()
+                            .required('required'),
+                        email: Yup.string()
+                            .email('invalid email address')
+                            .required('required'),
+                        password: Yup.string()
+                            .required('password is required'),
+                        repeatedPassword: Yup.string()
+                            .oneOf([Yup.ref('password'), null], 'passwords must match')
+                    })}
+                
+                    onSubmit={values => {
+                        alert(JSON.stringify(values));
+                    }}
+                
+                >
+
+                {props => (
+                    <FormWrapper onSubmit={props.handleSubmit}>
+                        <Title>Register</Title>
+                        <InputAndLabel label="username" name="username" id="username" onChange={props.handleChange} value={props.values.username} />
+                        {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
+                        <InputAndLabel label="email" name="email" id="email" onChange={props.handleChange} value={props.values.email} />
+                        {props.errors.email && <Feedback>{props.errors.email}</Feedback>}
+                        <InputAndLabel type="password" label="password" name="password" id="password" onChange={props.handleChange} value={props.values.password} />
+                        {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
+                        <InputAndLabel type="password" label="repeat password" name="repeatedPassword" id="repeatedPassword" onChange={props.handleChange} value={props.values.repeatedPassword} />
+                        {props.errors.repeatedPassword && <Feedback>{props.errors.repeatedPassword}</Feedback>}
+
+                        <Links>
+                            <Paragraph>Already have an account?</Paragraph>
+                            <LoginButton onClick={e => {
+                                this.setState({
+                                    loginVisible: true,
+                                    visible:false
+                                });
+                            }}>Log in</LoginButton>
+                        </Links>
+                        <ButtonWrapper>
+                            <PopupButton content="Register" />
+                        </ButtonWrapper>
+                    </FormWrapper>
+                )}
+                    
+                </Formik>
+
             </Container>
         } else if (this.state.loginVisible) {
             toRender = <LoginPopup />

@@ -18,6 +18,6 @@ const Input = styled.input`
 export const InputAndLabel = (props) => (
     <Container>
         <Label>{props.label}</Label>
-        <Input id={props.id} onChange={props.onChange} value={props.value}></Input>
+        <Input type={props.type} id={props.id} onChange={props.onChange} value={props.value}></Input>
     </Container>
 )
