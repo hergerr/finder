@@ -3,39 +3,20 @@
 }
 
 .App-nav-container {
-  background-color: #E5E5E5;
 }
 
 .App-nav {
-  position: absolute;
-  z-index: 2;
-  right: 20px;
+
 }
 
 .App-nav li {
-  float: right;
-  list-style-type: none;
-  background-color: white;
-  padding: 5px;
-  border: 1px solid black;
-  border-radius: 3px;
-  margin-right: 10px;
+
 }
 
 .App-nav li a {
-  display: block;
-  text-align: center;
-  padding: 1px 16px;
-  text-decoration: none;
-  color: black;
+
 }
 
 .App-logo {
-  font-family: 'Nova Slim', cursive;
-  margin: 0;
-  position: absolute;
-  z-index: 2;
-  top: 15px;
-  left: 15px;
-  font-size: 35px;
+
 }
