@@ -1,10 +1,23 @@
 import React from 'react';
-import './input-and-label.styles.css';
+import styled from 'styled-components';
+
+const Container = styled.div`
+`
+
+const Label = styled.div`
+    font-size: 15px;
+    margin-top: 20px;
+`
+
+const Input = styled.input`
+    display: block;
+    width: 100%;
+`
 
 
 export const InputAndLabel = (props) => (
-    <div className="InputAndLabel-container">
-        <div className="InputAndLabel-label">{props.label}</div>
-        <input className="InputAndLabel-input" id={props.id}  onChange={props.onChange} value={props.value}/>
-    </div>
+    <Container>
+        <Label>{props.label}</Label>
+        <Input id={props.id} onChange={props.onChange} value={props.value}></Input>
+    </Container>
 )

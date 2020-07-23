@@ -1,10 +1,67 @@
 import React from 'react';
-import './login-popup.styles.css';
+import styled from 'styled-components';
 import { InputAndLabel } from '../input-and-label/input-and-label.component';
 import { PopupButton } from '../popup-button/popup-button.component';
 import { RegisterPopup } from '../register-popup/register-popup.component';
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Times } from '@styled-icons/fa-solid'
+
+const Container = styled.div`
+    background-color: white;
+    padding: 20px;
+    width: 500px;
+    border: 1px solid black;
+    opacity: 92%;
+    border-radius: 20px;
+`
+
+const Cross = styled(Times)`
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 10px;
+    cursor: pointer;
+`
+
+// https://stackoverflow.com/questions/114543/how-to-horizontally-center-a-div
+const FormWrapper = styled.form`
+    width: 70%;
+    margin: 0 auto;
+`
+
+const Title = styled.h3`
+    text-align: center;
+    font-size: 30px;
+`
+
+const Links = styled.div`
+    margin-top: 10px;
+`
+
+const Paragraph = styled.p`
+    display: inline;
+`
+
+const RegisterButton = styled.button`
+    color: #E46E00;
+    background-color: white;
+    border: none;
+    display: inline;
+    margin-left: 10px;
+    cursor: pointer;
+`
+
+const ForgotButton = styled.button`
+    color: #E46E00;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 70px;
+`
+
+const ButtonWrapper = styled.div`
+    margin-top: 20px;
+    text-align: right;
+`
 
 class LoginPopup extends React.Component {
     constructor(props) {
@@ -16,31 +73,33 @@ class LoginPopup extends React.Component {
         return (
             <div>
                 {this.state.visible &&
-                    <div className="LoginPopup-container">
-                        <FontAwesomeIcon icon={faTimes} className="LoginPopup-close" onClick={e => {
+                    <Container>
+                        <Cross onClick={e => {
                             this.setState({
                                 visible: false
                             })
                         }} />
-                        <div className="LoginPopup-form-wrapper">
-                            <h3>Log in</h3>
+                        <FormWrapper>
+                            <Title>Log in</Title>
                             <InputAndLabel label="username" />
                             <InputAndLabel label="password" />
-                            <div className="LoginPopup-links">
-                                <p>No account?</p>
-                                <button to="/register" className="LoginPopup-register" onClick={e => {
+                            <Links>
+                                <Paragraph>No account?</Paragraph>
+                                <RegisterButton to="/register" onClick={e => {
                                     this.setState({
                                         visible: false,
                                         registerVisible: true
                                     })
-                                }}>Register</button>
-                                <button to="/forgot" className="LoginPopup-forgot">Forgot password?</button>
-                            </div>
-                            <div className="LoginPopup-button">
+                                }}>Register</RegisterButton>
+                                <ForgotButton to="/forgot">Forgot password?</ForgotButton>
+
+                            </Links>
+                            <ButtonWrapper>
                                 <PopupButton content="Log in" />
-                            </div>
-                        </div>
-                    </div>
+                            </ButtonWrapper>
+                        </FormWrapper>
+
+                    </Container>
                 }
 
                 {

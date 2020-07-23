@@ -1,6 +1,16 @@
 import React from 'react';
-import './popup-button.styles.css';
+import styled from 'styled-components';
+
+const Button = styled.button`
+    padding: 10px 30px;
+    border: 1px solid black;
+    background-color: white;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+`
+
 
 export const PopupButton = (props) => (
-    <button className="PopupButton">{props.content}</button>
+    <Button>{props.content}</Button>
 )
