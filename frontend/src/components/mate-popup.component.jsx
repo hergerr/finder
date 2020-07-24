@@ -6,6 +6,7 @@ import { TwoInputsAndLabel } from './two-inputs-and-label.component';
 import { InputAndLabel } from './input-and-label.component';
 import { CheckboxAndLabel } from './checkbox-and-label.component';
 import { SearchButton } from './search-button.component';
+import { Cross } from './cross.component';
 
 const Container = styled.div`
     max-width: 500px;
@@ -27,6 +28,7 @@ const ButtonWrapper = styled.div`
 `
 
 export const MatePopup = (props) => {
+
     const formik = useFormik({
         initialValues: {
             ageFrom: 0,
@@ -68,6 +70,7 @@ export const MatePopup = (props) => {
 
     return (
         <Container>
+            <Cross onClick={props.closeHandler} />
             <FormWrapper onSubmit={formik.handleSubmit}>
                 <TwoInputsAndLabel label="Age" idFrom="ageFrom" idTo="ageTo" nameFrom="ageFrom" nameTo="ageTo" onChange={formik.handleChange} valueFrom={formik.values.ageFrom} valueTo={formik.values.ageTo} />
                 {/* komunikat jesli walidacja sie nie powiedzie */}

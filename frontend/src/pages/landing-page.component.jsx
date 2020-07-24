@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { LoginPopup } from '../components/login-popup.component';
 import { MatePopup } from '../components/mate-popup.component';
-
+import { RoomPopup } from '../components/room-popup.component';
 
 const Container = styled.div`
 `
@@ -36,10 +36,14 @@ const Button = styled.button`
 `
 
 const PopupContainer = styled.div`
-    z-index: 20;
+    z-index: 2;
     position: absolute;
     top: 36%;
     left: 37%;
+`
+
+const SearchContainer = styled(PopupContainer)`
+    width: 500px;
 `
 
 class LandingPage extends React.Component {
@@ -48,18 +52,24 @@ class LandingPage extends React.Component {
         this.state = {showSearchPopup: false};
     }
 
+    handleClosing = (e) => {
+        this.setState({showSearchPopup: !this.state.showSearchPopup});
+    }
+
     render() {
         let popup;
         if(this.state.showSearchPopup && this.props.title.includes("mate")){
-            popup = <MatePopup/>
+            popup = <MatePopup closeHandler={this.handleClosing}/>
+        } else if (this.state.showSearchPopup && this.props.title.includes("room")){
+            popup = <RoomPopup/>
         } else {
-            popup = "ndasjkndjkasnkj";
+            popup = null;
         }
 
         return (
             <Container>
                 <Title>{this.props.title}</Title>
-                {/* <Image src={this.props.image} alt="page background"/> */}
+                <Image src={this.props.image} alt="page background"/>
                 {this.props.render_login_popup &&
                     <PopupContainer>
                         <LoginPopup/>
@@ -68,8 +78,9 @@ class LandingPage extends React.Component {
                 <Button onClick={ e => {
                     this.setState({showSearchPopup: !this.state.showSearchPopup})
                 } }>Search</Button>  
-                {/* {popup} */}
-                <MatePopup/>
+                <SearchContainer>
+                    {popup}
+                </SearchContainer>
             </Container>
         )
 
