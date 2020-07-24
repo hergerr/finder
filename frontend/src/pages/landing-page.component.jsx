@@ -22,17 +22,17 @@ const Image = styled.img`
     z-index: 1;
 `
 
-const Button = styled.image`
+const Button = styled.button`
     color: white;
     font-size: 30px;
     border-radius: 10px;
-    border: none;
     padding: 10px 30px;
-    background-color: #E46E00;
+    background-color: var(--color-orange);
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     top: 60%;
     left: 50%;
+    cursor: pointer;
 `
 
 const PopupContainer = styled.div`
@@ -59,7 +59,7 @@ class LandingPage extends React.Component {
         return (
             <Container>
                 <Title>{this.props.title}</Title>
-                <Image src={this.props.image} alt="page background"></Image>
+                {/* <Image src={this.props.image} alt="page background"/> */}
                 {this.props.render_login_popup &&
                     <PopupContainer>
                         <LoginPopup/>

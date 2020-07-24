@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { RegisterPopup } from './register-popup.component';
-import { Times } from '@styled-icons/fa-solid'
+import { Cross } from './cross.component';
 
 const Container = styled.div`
     background-color: white;
@@ -14,14 +14,6 @@ const Container = styled.div`
     border: 1px solid black;
     opacity: 92%;
     border-radius: 20px;
-`
-
-const Cross = styled(Times)`
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    width: 10px;
-    cursor: pointer;
 `
 
 // https://stackoverflow.com/questions/114543/how-to-horizontally-center-a-div

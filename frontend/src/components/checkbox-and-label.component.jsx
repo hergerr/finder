@@ -11,10 +11,10 @@ const Label = styled.div`
 const Input = styled.input`
 `
 
-export const RadioButtonAndLabel = (props) => (
+export const CheckboxAndLabel = (props) => (
     <Container>
         <Label>{ props.label }</Label>
-        <Input type="radio" id="pets" name="pets" onChange={props.onChange} value={props.value}></Input>
+        <Input type="checkbox" id={props.id} name={props.name} onChange={props.onChange}/>
     </Container>
 
 )

@@ -1,3 +1,8 @@
+/* https://joshwcomeau.com/css/css-variables-for-react-devs/ */
+html {
+  --color-orange: #E46E00;
+}
+
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;

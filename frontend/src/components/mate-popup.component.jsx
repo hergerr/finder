@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { TwoInputsAndLabel } from './two-inputs-and-label.component';
 import { InputAndLabel } from './input-and-label.component';
-import { RadioButtonAndLabel } from './radio-button-and-label.component';
+import { CheckboxAndLabel } from './checkbox-and-label.component';
+import { SearchButton } from './search-button.component';
 
 const Container = styled.div`
     max-width: 500px;
@@ -20,6 +21,11 @@ const FormWrapper = styled.form`
     margin: 0 auto;
 `
 
+const ButtonWrapper = styled.div`
+    text-align: center;
+    margin: 10px 0;
+`
+
 export const MatePopup = (props) => {
     const formik = useFormik({
         initialValues: {
@@ -30,8 +36,8 @@ export const MatePopup = (props) => {
             bedFrom: 0,
             bedTo: 24,
             district: '',
-            pets: 1,
-            smoking: 1,
+            pets: false,
+            smoking: false,
         },
 
         validationSchema: Yup.object({
@@ -86,9 +92,11 @@ export const MatePopup = (props) => {
                     <div>{formik.errors.bedTo}</div>
                 ) : null}
                 <InputAndLabel label="District" id="district" name="district" onChange={formik.handleChange} value={formik.values.district} />
-                <RadioButtonAndLabel label="Pets" id="pets" name="pets" onChange={formik.handleChange} value={formik.values.pets} />
-                <RadioButtonAndLabel label="Smoking" id="smoking" name="smoking" onChange={formik.handleChange} value={formik.values.smoking} />
-                <button type="submit">Submit</button>
+                <CheckboxAndLabel label="Pets" id="pets" name="pets" onChange={formik.handleChange} value={formik.values.pets} />
+                <CheckboxAndLabel label="Smoking" id="smoking" name="smoking" onChange={formik.handleChange} value={formik.values.smoking} />
+                <ButtonWrapper>
+                    <SearchButton>Submit</SearchButton>
+                </ButtonWrapper>
             </FormWrapper>
         </Container>
     )
