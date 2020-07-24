@@ -9,13 +9,12 @@ import {
 import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing-page.component';
-
+import { MateListPage } from './pages/mate-list-page.component';
 
 const App = styled.div`
 `
 
 const NavContainer = styled.div`
-  background-color: #E5E5E5;
 `
 
 const Nav = styled.nav`
@@ -61,17 +60,17 @@ class Application extends React.Component {
   }
 
   handleLoginClosing = (e) => {
-    this.setState({displayLoginPopup: !this.state.displayLoginPopup});
+    this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
   }
 
   handleRegisterClosing = (e) => {
-    this.setState({displayRegisterPopup: !this.state.displayRegisterPopup});
+    this.setState({ displayRegisterPopup: !this.state.displayRegisterPopup });
   }
 
   handleSwitchVisibility = (e) => {
-    this.setState({displayRegisterPopup: !this.state.displayRegisterPopup});
+    this.setState({ displayRegisterPopup: !this.state.displayRegisterPopup });
 
-    this.setState({displayLoginPopup: !this.state.displayLoginPopup});
+    this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
   }
 
   render() {
@@ -105,28 +104,31 @@ class Application extends React.Component {
             </Nav>
 
             <Switch>
+              <Route path="/mate/list">
+                <MateListPage />
+              </Route>
               <Route path="/about">
-                {/* <About /> */}
+                <MateListPage />
               </Route>
               <Route path={this.state.url}>
-                <LandingPage 
-                  title={`Find your ${this.state.title} in Wrocław`} 
-                  image={mate_landing} 
-                  renderLoginPopup={this.state.displayLoginPopup} 
-                  renderRegisterPopup={this.state.displayRegisterPopup} 
+                <LandingPage
+                  title={`Find your ${this.state.title} in Wrocław`}
+                  image={mate_landing}
+                  renderLoginPopup={this.state.displayLoginPopup}
+                  renderRegisterPopup={this.state.displayRegisterPopup}
                   handleLoginClosing={this.handleLoginClosing}
-                  handleRegisterClosing={this.handleLoginClosing} 
-                  handleSwitchVisibility={this.handleSwitchVisibility}/>
+                  handleRegisterClosing={this.handleLoginClosing}
+                  handleSwitchVisibility={this.handleSwitchVisibility} />
               </Route>
               <Route path="/">
-                <LandingPage 
-                  title={`Find your ${this.state.title} in Wrocław`} 
-                  image={room_landing} 
+                <LandingPage
+                  title={`Find your ${this.state.title} in Wrocław`}
+                  image={room_landing}
                   renderLoginPopup={this.state.displayLoginPopup}
-                  renderRegisterPopup={this.state.displayRegisterPopup} 
+                  renderRegisterPopup={this.state.displayRegisterPopup}
                   handleLoginClosing={this.handleLoginClosing}
-                  handleRegisterClosing={this.handleLoginClosing} 
-                  handleSwitchVisibility={this.handleSwitchVisibility }/>
+                  handleRegisterClosing={this.handleLoginClosing}
+                  handleSwitchVisibility={this.handleSwitchVisibility} />
               </Route>
             </Switch>
           </NavContainer>

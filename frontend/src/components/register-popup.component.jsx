@@ -4,7 +4,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
-import { LoginPopup } from './login-popup.component';
 import { Cross } from './cross.component';
 
 
@@ -54,6 +53,7 @@ const Feedback = styled.div`
 `
 
 class RegisterPopup extends React.Component {
+    // eslint-disable-next-line
     constructor(props) {
         super(props);
     }

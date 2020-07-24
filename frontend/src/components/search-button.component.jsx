@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const SearchButton = styled.button`
+export const Button = styled.button`
     color: var(--color-text);
     color: white;
     font-size: 15px;
@@ -11,3 +11,7 @@ export const SearchButton = styled.button`
     border:none;
     cursor: pointer;
 `
+
+export const SearchButton = (props) => (
+    <Button type="submit">{props.children}</Button>
+)

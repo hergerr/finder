@@ -4,7 +4,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
-import { RegisterPopup } from './register-popup.component';
 import { Cross } from './cross.component';
 
 const Container = styled.div`
@@ -62,6 +61,7 @@ const Feedback = styled.div`
 `
 
 class LoginPopup extends React.Component {
+    // eslint-disable-next-line
     constructor(props) {
         super(props);
     }

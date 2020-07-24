@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Times } from '@styled-icons/fa-solid';
 

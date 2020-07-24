@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -6,6 +6,7 @@ import { TwoInputsAndLabel } from './two-inputs-and-label.component';
 import { InputAndLabel } from './input-and-label.component';
 import { CheckboxAndLabel } from './checkbox-and-label.component';
 import { SearchButton } from './search-button.component';
+import { Cross } from './cross.component';
 
 const Container = styled.div`
     max-width: 500px;
@@ -57,6 +58,7 @@ export const RoomPopup = (props) => {
 
     return (
         <Container>
+            <Cross onClick={props.closeHandler} />
             <FormWrapper onSubmit={formik.handleSubmit}>
                 <TwoInputsAndLabel label="Price" idFrom="priceFrom" idTo="priceTo" nameFrom="priceFrom" nameTo="priceTo" onChange={formik.handleChange} valueFrom={formik.values.priceFrom} valueTo={formik.values.priceTo} />
                 {formik.touched.priceFrom && formik.errors.priceFrom ? (

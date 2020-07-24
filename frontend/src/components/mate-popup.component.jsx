@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -7,6 +7,7 @@ import { InputAndLabel } from './input-and-label.component';
 import { CheckboxAndLabel } from './checkbox-and-label.component';
 import { SearchButton } from './search-button.component';
 import { Cross } from './cross.component';
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     max-width: 500px;
@@ -98,7 +99,9 @@ export const MatePopup = (props) => {
                 <CheckboxAndLabel label="Pets" id="pets" name="pets" onChange={formik.handleChange} value={formik.values.pets} />
                 <CheckboxAndLabel label="Smoking" id="smoking" name="smoking" onChange={formik.handleChange} value={formik.values.smoking} />
                 <ButtonWrapper>
-                    <SearchButton>Submit</SearchButton>
+                    <Link to="/mate/list">
+                        <SearchButton>Submit</SearchButton>
+                    </Link>
                 </ButtonWrapper>
             </FormWrapper>
         </Container>
