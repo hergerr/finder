@@ -64,19 +64,13 @@ const Feedback = styled.div`
 class LoginPopup extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { visible: true, registerVisible: false }
     }
 
     render() {
         return (
             <div>
-                {this.state.visible &&
                     <Container>
-                        <Cross onClick={e => {
-                            this.setState({
-                                visible: false
-                            })
-                        }} />
+                        <Cross onClick={this.props.handleLoginClosing} />
                         <Formik
                             initialValues={{
                                 username: '',
@@ -101,17 +95,6 @@ class LoginPopup extends React.Component {
                                     {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
                                     <InputAndLabel type="password" label="password" name="password" id="password" value={props.values.password} onChange={props.handleChange} />
                                     {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
-                                    <Links>
-                                        <Paragraph>No account?</Paragraph>
-                                        <RegisterButton to="/register" onClick={e => {
-                                            this.setState({
-                                                visible: false,
-                                                registerVisible: true
-                                            })
-                                        }}>Register</RegisterButton>
-                                        <ForgotButton to="/forgot">Forgot password?</ForgotButton>
-
-                                    </Links>
 
                                     <ButtonWrapper>
                                         <PopupButton content="Log in" />
@@ -121,14 +104,13 @@ class LoginPopup extends React.Component {
 
                         </Formik>
 
+                        <Links>
+                            <Paragraph>No account?</Paragraph>
+                            <RegisterButton to="/register" onClick={this.props.handleSwitchVisibility}>Register</RegisterButton>
+                            <ForgotButton to="/forgot">Forgot password?</ForgotButton>
+                        </Links>
 
                     </Container>
-                }
-
-                {
-                    this.state.registerVisible &&
-                    <RegisterPopup />
-                }
 
             </div>
 

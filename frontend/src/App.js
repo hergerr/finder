@@ -57,7 +57,21 @@ const Logo = styled.p`
 class Application extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { url: "/mates", title: "mate", buttonText: "room", displayLoginPopup: false };
+    this.state = { url: "/mates", title: "mate", buttonText: "room", displayLoginPopup: false, displayRegisterPopup: false };
+  }
+
+  handleLoginClosing = (e) => {
+    this.setState({displayLoginPopup: !this.state.displayLoginPopup});
+  }
+
+  handleRegisterClosing = (e) => {
+    this.setState({displayRegisterPopup: !this.state.displayRegisterPopup});
+  }
+
+  handleSwitchVisibility = (e) => {
+    this.setState({displayRegisterPopup: !this.state.displayRegisterPopup});
+
+    this.setState({displayLoginPopup: !this.state.displayLoginPopup});
   }
 
   render() {
@@ -82,7 +96,8 @@ class Application extends React.Component {
                   <Link to="/offer">Add offer</Link>
                 </li>
                 <li>
-                  <Link to="/account" onClick={e => {
+                  {/* pokaz lub schowaj dialog do rejestracji lub logowania */}
+                  <Link to="/" onClick={e => {
                     this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
                   }}>My account</Link>
                 </li>
@@ -94,10 +109,24 @@ class Application extends React.Component {
                 {/* <About /> */}
               </Route>
               <Route path={this.state.url}>
-                <LandingPage title={`Find your ${this.state.title} in Wrocław`} image={mate_landing} render_login_popup={this.state.displayLoginPopup} />
+                <LandingPage 
+                  title={`Find your ${this.state.title} in Wrocław`} 
+                  image={mate_landing} 
+                  renderLoginPopup={this.state.displayLoginPopup} 
+                  renderRegisterPopup={this.state.displayRegisterPopup} 
+                  handleLoginClosing={this.handleLoginClosing}
+                  handleRegisterClosing={this.handleLoginClosing} 
+                  handleSwitchVisibility={this.handleSwitchVisibility}/>
               </Route>
               <Route path="/">
-                <LandingPage title={`Find your ${this.state.title} in Wrocław`} image={room_landing} render_login_popup={this.state.displayLoginPopup} />
+                <LandingPage 
+                  title={`Find your ${this.state.title} in Wrocław`} 
+                  image={room_landing} 
+                  renderLoginPopup={this.state.displayLoginPopup}
+                  renderRegisterPopup={this.state.displayRegisterPopup} 
+                  handleLoginClosing={this.handleLoginClosing}
+                  handleRegisterClosing={this.handleLoginClosing} 
+                  handleSwitchVisibility={this.handleSwitchVisibility }/>
               </Route>
             </Switch>
           </NavContainer>

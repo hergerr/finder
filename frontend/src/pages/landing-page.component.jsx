@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { LoginPopup } from '../components/login-popup.component';
+import { RegisterPopup } from '../components/register-popup.component';
 import { MatePopup } from '../components/mate-popup.component';
 import { RoomPopup } from '../components/room-popup.component';
 
@@ -70,9 +71,22 @@ class LandingPage extends React.Component {
             <Container>
                 <Title>{this.props.title}</Title>
                 <Image src={this.props.image} alt="page background"/>
-                {this.props.render_login_popup &&
+                {this.props.renderLoginPopup &&
                     <PopupContainer>
-                        <LoginPopup/>
+                        <LoginPopup 
+                            handleLoginClosing={this.props.handleLoginClosing}
+                            handleRegisterClosing={this.props.handleRegisterClosing}
+                            handleSwitchVisibility={this.props.handleSwitchVisibility}
+                        />
+                    </PopupContainer>
+                }
+                {this.props.renderRegisterPopup &&
+                    <PopupContainer>
+                        <RegisterPopup 
+                            handleLoginClosing={this.props.handleLoginClosing}
+                            handleRegisterClosing={this.props.handleRegisterClosing}
+                            handleSwitchVisibility={this.props.handleSwitchVisibility}
+                        />
                     </PopupContainer>
                 }
                 <Button onClick={ e => {

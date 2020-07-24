@@ -56,18 +56,12 @@ const Feedback = styled.div`
 class RegisterPopup extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { visible: true, loginVisible: false };
     }
 
     render() {
-        let toRender = null;
-        if (this.state.visible) {
-            toRender = <Container>
-                <Cross onClick={e => {
-                    this.setState({
-                        visible: false
-                    })
-                }} />
+        return (
+            <Container>
+                <Cross onClick={this.props.handleRegisterClosing} />
 
                 {/* https://formik.org/docs/api/formik */}
                 <Formik
@@ -78,7 +72,7 @@ class RegisterPopup extends React.Component {
                         repeatedPassword: ''
                     }}
 
-                    validationSchema = {Yup.object({
+                    validationSchema={Yup.object({
                         username: Yup.string()
                             .required('required'),
                         email: Yup.string()
@@ -89,50 +83,38 @@ class RegisterPopup extends React.Component {
                         repeatedPassword: Yup.string()
                             .oneOf([Yup.ref('password'), null], 'passwords must match')
                     })}
-                
+
                     onSubmit={values => {
                         alert(JSON.stringify(values));
                     }}
-                
+
                 >
 
-                {props => (
-                    <FormWrapper onSubmit={props.handleSubmit}>
-                        <Title>Register</Title>
-                        <InputAndLabel label="username" name="username" id="username" onChange={props.handleChange} value={props.values.username} />
-                        {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
-                        <InputAndLabel label="email" name="email" id="email" onChange={props.handleChange} value={props.values.email} />
-                        {props.errors.email && <Feedback>{props.errors.email}</Feedback>}
-                        <InputAndLabel type="password" label="password" name="password" id="password" onChange={props.handleChange} value={props.values.password} />
-                        {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
-                        <InputAndLabel type="password" label="repeat password" name="repeatedPassword" id="repeatedPassword" onChange={props.handleChange} value={props.values.repeatedPassword} />
-                        {props.errors.repeatedPassword && <Feedback>{props.errors.repeatedPassword}</Feedback>}
+                    {props => (
+                        <FormWrapper onSubmit={props.handleSubmit}>
+                            <Title>Register</Title>
+                            <InputAndLabel label="username" name="username" id="username" onChange={props.handleChange} value={props.values.username} />
+                            {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
+                            <InputAndLabel label="email" name="email" id="email" onChange={props.handleChange} value={props.values.email} />
+                            {props.errors.email && <Feedback>{props.errors.email}</Feedback>}
+                            <InputAndLabel type="password" label="password" name="password" id="password" onChange={props.handleChange} value={props.values.password} />
+                            {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
+                            <InputAndLabel type="password" label="repeat password" name="repeatedPassword" id="repeatedPassword" onChange={props.handleChange} value={props.values.repeatedPassword} />
+                            {props.errors.repeatedPassword && <Feedback>{props.errors.repeatedPassword}</Feedback>}
 
-                        <Links>
-                            <Paragraph>Already have an account?</Paragraph>
-                            <LoginButton onClick={e => {
-                                this.setState({
-                                    loginVisible: true,
-                                    visible:false
-                                });
-                            }}>Log in</LoginButton>
-                        </Links>
-                        <ButtonWrapper>
-                            <PopupButton content="Register" />
-                        </ButtonWrapper>
-                    </FormWrapper>
-                )}
-                    
+                            <ButtonWrapper>
+                                <PopupButton content="Register" />
+                            </ButtonWrapper>
+                        </FormWrapper>
+                    )}
+
                 </Formik>
 
+                <Links>
+                    <Paragraph>Already have an account?</Paragraph>
+                    <LoginButton onClick={this.props.handleSwitchVisibility}>Log in</LoginButton>
+                </Links>
             </Container>
-        } else if (this.state.loginVisible) {
-            toRender = <LoginPopup />
-        }
-        return (
-            <div>
-                {toRender}
-            </div>
         )
     }
 }
