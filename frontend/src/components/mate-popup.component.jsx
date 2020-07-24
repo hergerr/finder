@@ -7,7 +7,8 @@ import { InputAndLabel } from './input-and-label.component';
 import { CheckboxAndLabel } from './checkbox-and-label.component';
 import { SearchButton } from './search-button.component';
 import { Cross } from './cross.component';
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 
 const Container = styled.div`
     max-width: 500px;
@@ -29,6 +30,7 @@ const ButtonWrapper = styled.div`
 `
 
 export const MatePopup = (props) => {
+    let history = useHistory();
 
     const formik = useFormik({
         initialValues: {
@@ -66,6 +68,7 @@ export const MatePopup = (props) => {
 
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
+            history.push('/mate/list');
         },
     });
 
@@ -99,9 +102,7 @@ export const MatePopup = (props) => {
                 <CheckboxAndLabel label="Pets" id="pets" name="pets" onChange={formik.handleChange} value={formik.values.pets} />
                 <CheckboxAndLabel label="Smoking" id="smoking" name="smoking" onChange={formik.handleChange} value={formik.values.smoking} />
                 <ButtonWrapper>
-                    <Link to="/mate/list">
-                        <SearchButton>Submit</SearchButton>
-                    </Link>
+                    <SearchButton>Submit</SearchButton>
                 </ButtonWrapper>
             </FormWrapper>
         </Container>
