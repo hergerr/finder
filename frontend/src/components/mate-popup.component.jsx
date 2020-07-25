@@ -15,8 +15,8 @@ const Container = styled.div`
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 10px;
-    opacity: 90;
     background-color: white;
+    padding: 30px 0px;
 `
 
 const FormWrapper = styled.form`

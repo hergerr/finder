@@ -13,7 +13,7 @@ const Container = styled.div`
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 10px;
-    opacity: 90;
+    padding: 30px 0px;
     background-color: white;
 `
 

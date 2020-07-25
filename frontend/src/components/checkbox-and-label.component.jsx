@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components'
 
 const Container = styled.div`
-    background-color: white;
+    margin: 0 auto;
 `
 const Label = styled.div`
-    font-size: 15px;
+    margin: 10px 0;
+    font-size: 10px;
 `
 
 const Input = styled.input`

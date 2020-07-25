@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component';
 import { InputAndLabel } from '../components/input-and-label.component';
 import { CheckboxAndLabel } from '../components/checkbox-and-label.component';
-import { SearchButton } from '../components/search-button.component';
+import { SmallInputAndLabel } from '../components/small-input-and-label';
 
 
 const Container = styled.div`
@@ -14,8 +14,21 @@ const Container = styled.div`
 `
 
 const FormWrapper = styled.form`
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+`
+
+const SearchButton = styled.button`
+    background-color: var(--color-orange);
+    color: white;
+    height: 20px;
+    padding: 5px 15px;
+    text-align: center;
+    border-radius: 5px;
 `
 
 class MateListPage extends React.Component {
@@ -90,11 +103,11 @@ class MateListPage extends React.Component {
                             {props.touched.bedTo && props.errors.bedTo ? (
                                 <div>{props.errors.bedTo}</div>
                             ) : null}
-                            <InputAndLabel label="District" id="district" name="district" onChange={props.handleChange} value={props.values.district} />
+                            <SmallInputAndLabel label="District" id="district" name="district" onChange={props.handleChange} value={props.values.district} />
                             <CheckboxAndLabel label="Pets" id="pets" name="pets" onChange={props.handleChange} value={props.values.pets} />
                             <CheckboxAndLabel label="Smoking" id="smoking" name="smoking" onChange={props.handleChange} value={props.values.smoking} />
-                            <InputAndLabel label="Personal features" id="features" name="features" onChange={props.handleChange} value={props.values.features} />
-                        
+                            <SmallInputAndLabel label="Personal features" id="features" name="features" onChange={props.handleChange} value={props.values.features} />
+                            
                             <SearchButton>Submit</SearchButton>
                         </FormWrapper>
                     )}
