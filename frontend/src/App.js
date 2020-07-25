@@ -12,15 +12,20 @@ import { LandingPage } from './pages/landing-page.component';
 import { MateListPage } from './pages/mate-list-page.component';
 
 const App = styled.div`
+  width: 100%;
 `
 
 const NavContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  padding-top: 10px;
+  z-index: 1;
 `
 
 const Nav = styled.nav`
-  position: absolute;
-  z-index: 2;
-  right: 20px;
+  /* width: 1200px;
+  margin: 0 auto;
+  height: 70px; */
 
   li {
     float: right;
@@ -43,12 +48,10 @@ const Nav = styled.nav`
 
 const Logo = styled.p`
   font-family: 'Nova Slim', cursive;
-  margin: 0;
   position: absolute;
-  z-index: 2;
-  top: 15px;
-  left: 15px;
   font-size: 35px;
+  margin: 0 20px;
+  float:left;
 `
 
 
@@ -77,9 +80,9 @@ class Application extends React.Component {
 
     return (
       <App>
-        <Logo>{this.state.title}Finder</Logo>
         <Router>
           <NavContainer>
+            <Logo>{this.state.title}Finder</Logo>
             <Nav>
               <ul>
                 <li>
@@ -102,36 +105,36 @@ class Application extends React.Component {
                 </li>
               </ul>
             </Nav>
-
-            <Switch>
-              <Route path="/mate/list">
-                <MateListPage />
-              </Route>
-              <Route path="/about">
-                <MateListPage />
-              </Route>
-              <Route path={this.state.url}>
-                <LandingPage
-                  title={`Find your ${this.state.title} in Wrocław`}
-                  image={mate_landing}
-                  renderLoginPopup={this.state.displayLoginPopup}
-                  renderRegisterPopup={this.state.displayRegisterPopup}
-                  handleLoginClosing={this.handleLoginClosing}
-                  handleRegisterClosing={this.handleLoginClosing}
-                  handleSwitchVisibility={this.handleSwitchVisibility} />
-              </Route>
-              <Route path="/">
-                <LandingPage
-                  title={`Find your ${this.state.title} in Wrocław`}
-                  image={room_landing}
-                  renderLoginPopup={this.state.displayLoginPopup}
-                  renderRegisterPopup={this.state.displayRegisterPopup}
-                  handleLoginClosing={this.handleLoginClosing}
-                  handleRegisterClosing={this.handleLoginClosing}
-                  handleSwitchVisibility={this.handleSwitchVisibility} />
-              </Route>
-            </Switch>
           </NavContainer>
+
+          <Switch>
+            <Route path="/mate/list">
+              <MateListPage />
+            </Route>
+            <Route path="/about">
+              <MateListPage />
+            </Route>
+            <Route path={this.state.url}>
+              <LandingPage
+                title={`Find your ${this.state.title} in Wrocław`}
+                image={mate_landing}
+                renderLoginPopup={this.state.displayLoginPopup}
+                renderRegisterPopup={this.state.displayRegisterPopup}
+                handleLoginClosing={this.handleLoginClosing}
+                handleRegisterClosing={this.handleLoginClosing}
+                handleSwitchVisibility={this.handleSwitchVisibility} />
+            </Route>
+            <Route path="/">
+              <LandingPage
+                title={`Find your ${this.state.title} in Wrocław`}
+                image={room_landing}
+                renderLoginPopup={this.state.displayLoginPopup}
+                renderRegisterPopup={this.state.displayRegisterPopup}
+                handleLoginClosing={this.handleLoginClosing}
+                handleRegisterClosing={this.handleLoginClosing}
+                handleSwitchVisibility={this.handleSwitchVisibility} />
+            </Route>
+          </Switch>
         </Router>
 
       </App>

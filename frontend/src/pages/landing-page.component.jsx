@@ -6,6 +6,10 @@ import { MatePopup } from '../components/mate-popup.component';
 import { RoomPopup } from '../components/room-popup.component';
 
 const Container = styled.div`
+    background-image: url(${props => props.image});
+    width: 100%;
+    height: 100vh;
+    margin-top: -60px;
 `
 
 const Title = styled.p`
@@ -20,7 +24,7 @@ const Image = styled.img`
     width: 100%;
     position: absolute;
     top: 0;
-    z-index: 1;
+    z-index: 0;
 `
 
 const Button = styled.button`
@@ -68,9 +72,9 @@ class LandingPage extends React.Component {
         }
 
         return (
-            <Container>
+            <Container image={this.props.image}>
                 <Title>{this.props.title}</Title>
-                <Image src={this.props.image} alt="page background"/>
+                {/* <Image src={this.props.image} alt="page background"/> */}
                 {this.props.renderLoginPopup &&
                     <PopupContainer>
                         <LoginPopup 
