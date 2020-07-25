@@ -3,33 +3,27 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component';
-import { InputAndLabel } from '../components/input-and-label.component';
 import { CheckboxAndLabel } from '../components/checkbox-and-label.component';
 import { SmallInputAndLabel } from '../components/small-input-and-label';
-
+import { SearchButton } from '../components/search-button.component';
+import { MateCard } from '../components/mate-card.component';
+import mate_landing from '../assets/images/mate_landing.jpg';
 
 const Container = styled.div`
-    background-color: red;
     width: 100%;
+
 `
 
 const FormWrapper = styled.form`
-    width: 60%;
-    margin: 0 auto;
+    width: 90%;
+    margin: 50px auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+` 
 
-`
-
-const SearchButton = styled.button`
-    background-color: var(--color-orange);
-    color: white;
-    height: 20px;
-    padding: 5px 15px;
-    text-align: center;
-    border-radius: 5px;
-`
 
 class MateListPage extends React.Component {
     // eslint-disable-next-line
@@ -108,12 +102,14 @@ class MateListPage extends React.Component {
                             <CheckboxAndLabel label="Smoking" id="smoking" name="smoking" onChange={props.handleChange} value={props.values.smoking} />
                             <SmallInputAndLabel label="Personal features" id="features" name="features" onChange={props.handleChange} value={props.values.features} />
                             
-                            <SearchButton>Submit</SearchButton>
+                            <SearchButton>Filter</SearchButton>
                         </FormWrapper>
                     )}
-
-
                 </Formik>
+                <MateCard src={mate_landing} title="Peaceful IT student" age="22" location="Krzyki" features="#peaceful #quiet #gaming #cycling"/>
+                <MateCard src={mate_landing} title="Peaceful IT student" age="22" location="Krzyki" features="#peaceful #quiet #gaming #cycling"/>
+                <MateCard src={mate_landing} title="Peaceful IT student" age="22" location="Krzyki" features="#peaceful #quiet #gaming #cycling"/>
+                <MateCard src={mate_landing} title="Peaceful IT student" age="22" location="Krzyki" features="#peaceful #quiet #gaming #cycling"/>
             </Container>
         )
     }

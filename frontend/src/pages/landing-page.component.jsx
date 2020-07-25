@@ -20,13 +20,6 @@ const Title = styled.p`
     left: 30%;
 `
 
-const Image = styled.img`
-    width: 100%;
-    position: absolute;
-    top: 0;
-    z-index: 0;
-`
-
 const Button = styled.button`
     color: white;
     font-size: 30px;
@@ -74,7 +67,6 @@ class LandingPage extends React.Component {
         return (
             <Container image={this.props.image}>
                 <Title>{this.props.title}</Title>
-                {/* <Image src={this.props.image} alt="page background"/> */}
                 {this.props.renderLoginPopup &&
                     <PopupContainer>
                         <LoginPopup 

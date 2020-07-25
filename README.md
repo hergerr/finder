@@ -11,15 +11,12 @@ App for finding student quarters and flatmates
 - **My account** - redirect to Login/Register, to panel when logged
 
 TODO:
-
-- scroll vs popup
+- overflow problem in list pages (possibly with redux?)
 - map?
 - captcha in register
 - detail - 'blurring' not active photos - like in https://www.immowelt.de/expose/2ubvz4y?bc=13
-- filter by features?
 - connection between sites - sugestion of rooms in flatmate app
 - common account panel for both sites
-- favourite section in user account
 - forgot password, mail verification?
 - drag and drop https://react-dnd.github.io/react-dnd/about
 
