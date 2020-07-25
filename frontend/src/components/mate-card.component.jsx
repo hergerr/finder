@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
 import { HeartOutline } from '@styled-icons/evaicons-outline';
+import { Heart } from '@styled-icons/evaicons-solid';
+
 
 const Container = styled.div`
     background-color: white;
@@ -16,6 +19,7 @@ const Image = styled.img `
     width: 240px;
     margin: 20px;
     object-fit: cover;
+    cursor: pointer;
 `
 
 const Description = styled.div`
@@ -27,6 +31,7 @@ const Description = styled.div`
 const Title = styled.h6`
     font-weight: 700;
     font-size: 24px;
+    cursor: pointer;
 `
 
 const Detail = styled.p`
@@ -35,24 +40,48 @@ const Detail = styled.p`
     font-size: 20px;
 `
 
-const Heart = styled(HeartOutline)`
+const EmptyHeart = styled(HeartOutline)`
     width: 40px;
     margin-left: 550px;
+    cursor: pointer;
 `
 
+const FilledHeart = styled(Heart)`
+    width: 40px;
+    margin-left: 550px;
+    cursor: pointer;
+`
 
 export const MateCard = (props) => {
+    let history = useHistory();
+    const [liked, setLiked] = useState(false);
+
+    const handleChange = event => {
+        setLiked(!liked);
+    }
+
+    const handleRedirect = event => {
+        history.push('/mate/detail')
+    }
+
+    let heart = null;
+    if (liked){
+        heart = <FilledHeart onClick={handleChange}/>
+    } else {
+        heart = <EmptyHeart onClick={handleChange}/>
+    }
 
     return (
         <Container>
-            <Image src={props.src}/>
+            <Image src={props.src} onClick={handleRedirect}/>
             <Description>
-                <Title>{props.title}</Title>
+                <Title onClick={handleRedirect}>{props.title}</Title>
                 <Detail>{props.age}</Detail>
                 <Detail>{props.location}</Detail>
                 <Detail>{props.features}</Detail>                
             </Description>
-            <Heart/>
+            {heart}
+           
         </Container>
     )
 }
