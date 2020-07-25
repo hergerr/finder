@@ -7,11 +7,12 @@
 html {
   --color-orange: #E46E00;
   --color-grey: #E5E5E5;
+  --color-dark-grey: #C4C4C4;
 }
 
 body {
   font-family: 'Lato', sans-serif;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #E5E5E5;
 }
 

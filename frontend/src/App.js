@@ -8,8 +8,9 @@ import {
 } from "react-router-dom";
 import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
-import { LandingPage } from './pages/landing-page.component';
-import { MateListPage } from './pages/mate-list-page.component';
+import { LandingPage } from './pages/landing.page';
+import { MateListPage } from './pages/mate-list.page';
+import { MateDetailPage } from './pages/mate-detail.page';
 
 const App = styled.div`
   width: 100%;
@@ -108,6 +109,9 @@ class Application extends React.Component {
           </NavContainer>
 
           <Switch>
+            <Route path="/mate/detail">
+              <MateDetailPage src={room_landing} />
+            </Route>
             <Route path="/mate/list">
               <MateListPage />
             </Route>
