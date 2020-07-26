@@ -11,6 +11,7 @@ import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing.page';
 import { MateListPage } from './pages/mate-list.page';
 import { MateDetailPage } from './pages/mate-detail.page';
+import { AccountPage } from './pages/account.page';
 
 const App = styled.div`
   width: 100%;
@@ -115,8 +116,8 @@ class Application extends React.Component {
             <Route path="/mate/list">
               <MateListPage />
             </Route>
-            <Route path="/about">
-              <MateListPage />
+            <Route path="/offer">
+              <AccountPage />
             </Route>
             <Route path={this.state.url}>
               <LandingPage
