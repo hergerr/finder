@@ -12,6 +12,7 @@ import { LandingPage } from './pages/landing.page';
 import { MateListPage } from './pages/mate-list.page';
 import { MateDetailPage } from './pages/mate-detail.page';
 import { AccountPage } from './pages/account.page';
+import { AddMatePage } from './pages/add-mate.page';
 
 const App = styled.div`
   width: 100%;
@@ -110,6 +111,9 @@ class Application extends React.Component {
           </NavContainer>
 
           <Switch>
+            <Route path="/mate/add">
+              <AddMatePage />
+            </Route>
             <Route path="/mate/detail">
               <MateDetailPage src={room_landing} />
             </Route>
