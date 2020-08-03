@@ -57,9 +57,9 @@ class LandingPage extends React.Component {
     render() {
         let popup;
         if(this.state.showSearchPopup && this.props.title.includes("mate")){
-            popup = <MatePopup closeHandler={this.handleClosing}/>
+            popup = <MatePopup closeHandler={this.handleClosing} />
         } else if (this.state.showSearchPopup && this.props.title.includes("room")){
-            popup = <RoomPopup/>
+            popup = <RoomPopup closeHandler={this.handleClosing} />
         } else {
             popup = null;
         }

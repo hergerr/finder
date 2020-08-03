@@ -42,13 +42,15 @@ const Detail = styled.p`
 
 const EmptyHeart = styled(HeartOutline)`
     width: 40px;
-    margin-left: 550px;
+    margin-left: auto;
+    margin-right: 30px;
     cursor: pointer;
 `
 
 const FilledHeart = styled(Heart)`
     width: 40px;
-    margin-left: 550px;
+    margin-left: auto;
+    margin-right: 30px;
     cursor: pointer;
 `
 

@@ -35,7 +35,7 @@ const TextContent = styled.p`
 `
 
 const IconWrapper = styled.div`
-    margin-left: 900px;
+    margin-left: auto;
 `
 
 export const OfferCard = (props) => {
