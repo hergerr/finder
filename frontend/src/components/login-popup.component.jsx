@@ -61,10 +61,6 @@ const Feedback = styled.div`
 `
 
 class LoginPopup extends React.Component {
-    // eslint-disable-next-line
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

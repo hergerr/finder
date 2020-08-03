@@ -59,9 +59,6 @@ const MessageInput = styled.textarea`
 `
 
 class ConversationPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

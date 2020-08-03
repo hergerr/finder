@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Formik } from 'formik';
 import { InputAndLabel } from '../components/input-and-label.component';
 import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component';
 import { CheckboxAndLabel } from '../components/checkbox-and-label.component';
@@ -56,9 +55,6 @@ const FormWrapper = styled.form`
 
 
 class AddMatePage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

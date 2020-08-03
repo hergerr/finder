@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Trash } from '@styled-icons/boxicons-regular/Trash';
 import { Edit } from '@styled-icons/boxicons-regular/Edit';

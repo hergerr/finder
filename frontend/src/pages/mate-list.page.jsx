@@ -26,10 +26,6 @@ const FormWrapper = styled.form`
 
 
 class MateListPage extends React.Component {
-    // eslint-disable-next-line
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

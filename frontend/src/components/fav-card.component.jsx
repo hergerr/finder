@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Checkbox, StyledTrash, StyledEdit } from './account-utils.component';
+import { StyledTrash } from './account-utils.component';
 import room_landing from '../assets/images/room_landing.jpg'
 
 const Container = styled.div`
