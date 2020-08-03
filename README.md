@@ -224,3 +224,6 @@ docker exec -it finder_db_1 psql -U finder -d finderdb
 ```sql
 select * from auth_user;
 ```
+### JWT
+- explanations:
+https://stackoverflow.com/a/40376819/12422260
