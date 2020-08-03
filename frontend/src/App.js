@@ -56,6 +56,11 @@ const Logo = styled.p`
   font-size: 35px;
   margin: 0 20px;
   float:left;
+
+  a {
+    text-decoration:none;
+    color: black;
+  }
 `
 
 
@@ -86,7 +91,12 @@ class Application extends React.Component {
       <App>
         <Router>
           <NavContainer>
-            <Logo>{this.state.title}Finder</Logo>
+            <Logo>
+              <Link to={this.state.url}>
+                {this.state.title}Finder
+            </Link>
+            </Logo>
+
             <Nav>
               <ul>
                 <li>
@@ -134,7 +144,7 @@ class Application extends React.Component {
                 renderLoginPopup={this.state.displayLoginPopup}
                 renderRegisterPopup={this.state.displayRegisterPopup}
                 handleLoginClosing={this.handleLoginClosing}
-                handleRegisterClosing={this.handleLoginClosing}
+                handleRegisterClosing={this.handleRegisterClosing}
                 handleSwitchVisibility={this.handleSwitchVisibility} />
             </Route>
             <Route path="/">
@@ -144,7 +154,7 @@ class Application extends React.Component {
                 renderLoginPopup={this.state.displayLoginPopup}
                 renderRegisterPopup={this.state.displayRegisterPopup}
                 handleLoginClosing={this.handleLoginClosing}
-                handleRegisterClosing={this.handleLoginClosing}
+                handleRegisterClosing={this.handleRegisterClosing}
                 handleSwitchVisibility={this.handleSwitchVisibility} />
             </Route>
           </Switch>
