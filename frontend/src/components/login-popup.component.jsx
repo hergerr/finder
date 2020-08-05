@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { Cross } from './cross.component';
@@ -62,8 +63,18 @@ const Feedback = styled.div`
 `
 
 class LoginPopup extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {redirect: false}
+    }
 
     render() {
+        const redirect = this.state.redirect; 
+
+        if (redirect) {
+            return <Redirect push to='/account' />
+        }
+
         return (
             <div>
                 <Container>
@@ -85,8 +96,8 @@ class LoginPopup extends React.Component {
                             axios.post(`http://127.0.0.1:8000/token/`, { username: values.username, password: values.password })
                             .then(res => {
                                 if (res.status === 200) {
-                                    console.log(res.data.access)
-                                    localStorage.setItem('access', res.data.access)
+                                    localStorage.setItem('account', res.data.access)
+                                    this.setState({redirect: true});
                                 }
                             })
                         }}

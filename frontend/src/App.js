@@ -11,7 +11,7 @@ import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing.page';
 import { MateListPage } from './pages/mate-list.page';
 import { MateDetailPage } from './pages/mate-detail.page';
-import { AccountPage } from './pages/account.page';
+import AccountPage from './pages/account.page';
 import { AddMatePage } from './pages/add-mate.page';
 import { ConversationPage } from './pages/conversation.page';
 
@@ -109,7 +109,7 @@ class Application extends React.Component {
                   }}>Find {this.state.buttonText}</Link>
                 </li>
                 <li>
-                  <Link to="/offer">Add offer</Link>
+                  <Link to="/account">Add offer</Link>
                 </li>
                 <li>
                   {/* pokaz lub schowaj dialog do rejestracji lub logowania */}
@@ -131,7 +131,7 @@ class Application extends React.Component {
             <Route path="/mate/list">
               <MateListPage />
             </Route>
-            <Route path="/offer">
+            <Route path="/account">
               <AccountPage />
             </Route>
             <Route path="/conversation">
