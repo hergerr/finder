@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { Cross } from './cross.component';
@@ -81,7 +82,12 @@ class RegisterPopup extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        alert(JSON.stringify(values));
+                        axios.post(`http://127.0.0.1:8000/register/`, { username: values.username, email: values.email, password: values.password })
+                        .then(res => {
+                            if (res.status === 201) {
+                                console.log(res.data)
+                            }
+                        })
                     }}
 
                 >

@@ -11,13 +11,11 @@ App for finding student quarters and flatmates
 - **My account** - redirect to Login/Register, to panel when logged
 
 TODO:
-- overflow problem in list pages (possibly with redux?)
 - map?
 - captcha in register
+- confirmation mail
 - detail - 'blurring' not active photos - like in https://www.immowelt.de/expose/2ubvz4y?bc=13
 - connection between sites - sugestion of rooms in flatmate app
-- common account panel for both sites
-- forgot password, mail verification?
 - drag and drop https://react-dnd.github.io/react-dnd/about
 
 ### CURL wiki
@@ -227,3 +225,7 @@ select * from auth_user;
 ### JWT
 - explanations:
 https://stackoverflow.com/a/40376819/12422260
+
+### Email
+finder.app.confirmation@gmail.com
+1GUGbRIJh3t+rrWAkes/MA==

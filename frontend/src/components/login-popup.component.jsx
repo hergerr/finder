@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { Cross } from './cross.component';
@@ -65,48 +66,54 @@ class LoginPopup extends React.Component {
     render() {
         return (
             <div>
-                    <Container>
-                        <Cross onClick={this.props.handleLoginClosing} />
-                        <Formik
-                            initialValues={{
-                                username: '',
-                                password: '',
-                            }}
+                <Container>
+                    <Cross onClick={this.props.handleLoginClosing} />
+                    <Formik
+                        initialValues={{
+                            username: '',
+                            password: '',
+                        }}
 
-                            validationSchema={Yup.object({
-                                username: Yup.string()
-                                    .required('required'),
-                                password: Yup.string()
-                                    .required("required")
-                            })}
+                        validationSchema={Yup.object({
+                            username: Yup.string()
+                                .required('required'),
+                            password: Yup.string()
+                                .required("required")
+                        })}
 
-                            onSubmit={values => {
-                                alert(JSON.stringify(values));
-                            }}
-                        >
-                            {props => (
-                                <FormWrapper onSubmit={props.handleSubmit}>
-                                    <Title>Log in</Title>
-                                    <InputAndLabel label="username" name="username" id="username" value={props.values.username} onChange={props.handleChange} />
-                                    {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
-                                    <InputAndLabel type="password" label="password" name="password" id="password" value={props.values.password} onChange={props.handleChange} />
-                                    {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
+                        onSubmit={values => {
+                            axios.post(`http://127.0.0.1:8000/token/`, { username: values.username, password: values.password })
+                            .then(res => {
+                                if (res.status === 200) {
+                                    console.log(res.data.access)
+                                    localStorage.setItem('access', res.data.access)
+                                }
+                            })
+                        }}
+                    >
+                        {props => (
+                            <FormWrapper onSubmit={props.handleSubmit}>
+                                <Title>Log in</Title>
+                                <InputAndLabel label="username" name="username" id="username" value={props.values.username} onChange={props.handleChange} />
+                                {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
+                                <InputAndLabel type="password" label="password" name="password" id="password" value={props.values.password} onChange={props.handleChange} />
+                                {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
 
-                                    <ButtonWrapper>
-                                        <PopupButton content="Log in" />
-                                    </ButtonWrapper>
-                                </FormWrapper>
-                            )}
+                                <ButtonWrapper>
+                                    <PopupButton content="Log in" />
+                                </ButtonWrapper>
+                            </FormWrapper>
+                        )}
 
-                        </Formik>
+                    </Formik>
 
-                        <Links>
-                            <Paragraph>No account?</Paragraph>
-                            <RegisterButton to="/register" onClick={this.props.handleSwitchVisibility}>Register</RegisterButton>
-                            <ForgotButton to="/forgot">Forgot password?</ForgotButton>
-                        </Links>
+                    <Links>
+                        <Paragraph>No account?</Paragraph>
+                        <RegisterButton to="/register" onClick={this.props.handleSwitchVisibility}>Register</RegisterButton>
+                        <ForgotButton to="/forgot">Forgot password?</ForgotButton>
+                    </Links>
 
-                    </Container>
+                </Container>
 
             </div>
 
