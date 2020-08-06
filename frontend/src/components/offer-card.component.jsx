@@ -45,10 +45,10 @@ export const OfferCard = (props) => {
             <Checkbox type="checkbox"/>
             <Image src={room_landing} />
             <TextWrapper>
-                <Title>Spacious room in city center</Title>
-                <TextContent>Dominicain square</TextContent>
-                <TextContent>13 m2</TextContent>
-                <TextContent>2 flatmates</TextContent>
+                <Title>{props.title}</Title>
+                <TextContent>{props.location}</TextContent>
+                <TextContent>{props.area}</TextContent>
+                <TextContent>{props.flatmates} flatmate(s)</TextContent>
             </TextWrapper>
 
             <IconWrapper>

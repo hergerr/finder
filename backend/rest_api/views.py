@@ -113,14 +113,11 @@ def get_liked_room_offers(request):
     data['owner'] = request.user.id
 
     try:
+        # https://stackoverflow.com/a/52068090
         current_user = User.objects.get(pk=data['owner'])
         data = current_user.liked_offer.room_offers.all()
-        serializer = RoomOfferListSerializer(data=data, many=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=200)
-        return JsonResponse(serializer.data, status=404, safe=False)
+        serializer = RoomOfferListSerializer(data, many=True)
+        return JsonResponse(serializer.data, status=200, safe=False)
     except:
         import traceback
         for line in traceback.format_exc().splitlines():
