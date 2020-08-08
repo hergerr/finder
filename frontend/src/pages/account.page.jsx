@@ -10,14 +10,9 @@ import axios from 'axios';
 import { MessageCard } from '../components/message-card.component';
 import { OfferCard } from '../components/offer-card.component';
 import { FavCard } from '../components/fav-card.component';
-import { MateDetailPage } from '../pages/mate-detail.page';
 
 const Container = styled.div`
     width: 100%;
-    a {
-        color: black;
-        text-decoration: none;
-    }
 `
 
 const MenuContainer = styled.div`
@@ -26,6 +21,8 @@ const MenuContainer = styled.div`
     margin-top: 150px;
 
     a {
+        color: black;
+        text-decoration: none;
         margin-left: 90px;
         font-size: 20px;
         font-weight: bold;
@@ -79,6 +76,39 @@ class AccountPage extends React.Component {
         })
     }
 
+    handleDelete = (type, id) => {
+        if (type === 'room') {
+            axios.delete('http://localhost:8000/delete_liked_room_offer/', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access')}`
+                },
+                data: {
+                    id: id
+                }
+            }
+            ).then(res => {
+                if (res.status === 200) {
+                    this.setState({ favsRooms: res.data })
+                }
+            })
+        } else if (type === 'mate') {
+            axios.delete('http://localhost:8000/delete_liked_mate_offer/', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access')}`
+                },
+                data: {
+                    id: id
+                }
+            }
+            ).then(res => {
+                if (res.status === 200) {
+                    this.setState({ favMates: res.data })
+                }
+            })
+        }
+
+    }
+
 
     render() {
 
@@ -114,19 +144,17 @@ class AccountPage extends React.Component {
                         {
                             this.state.favsRooms.map(
                                 (element) => (
-                                    <Link
-                                        to={`/rooms/${element.id}`}
-                                        key={element.id}>
-
-                                        <FavCard
-                                            key={element.id}
-                                            type="room"
-                                            title={element.title}
-                                            location={element.location}
-                                            area={element.area}
-                                            flatmates={element.number_of_flatmates}
-                                        />
-                                    </Link>
+                                    <FavCard
+                                        id={element.id}
+                                        key={element.id}
+                                        link_to={`/rooms/${element.id}`}
+                                        type="room"
+                                        title={element.title}
+                                        location={element.location}
+                                        area={element.area}
+                                        flatmates={element.number_of_flatmates}
+                                        handleDelete={this.handleDelete}
+                                    />
 
                                 ))
                         }
@@ -134,19 +162,17 @@ class AccountPage extends React.Component {
                         {
                             this.state.favMates.map(
                                 (element) => (
-                                    <Link
-                                        to={`/mates/${element.id}`}
-                                        key={element.id}>
-
-                                        <FavCard
-                                            key={element.id}
-                                            type="mate"
-                                            title={element.title}
-                                            age={element.age}
-                                            location={element.location}
-                                            features={element.features}
-                                        />
-                                    </Link>
+                                    <FavCard
+                                        id={element.id}
+                                        key={element.id}
+                                        link_to={`/mates/${element.id}`}
+                                        type="mate"
+                                        title={element.title}
+                                        age={element.age}
+                                        location={element.location}
+                                        features={element.features}
+                                        handleDelete={this.handleDelete}
+                                    />
 
                                 )
                             )

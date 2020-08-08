@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { StyledTrash } from './account-utils.component';
 import room_landing from '../assets/images/room_landing.jpg';
 
@@ -13,6 +14,12 @@ const Container = styled.div`
     padding: 20px 0;
     align-items: center;
     color: black;
+
+    a {
+        color: black;
+        text-decoration: none;
+        display: flex;
+    }
 `
 
 const Image = styled.img`
@@ -31,6 +38,7 @@ const Title = styled.h3`
 `
 
 const TextContent = styled.p`
+    margin-top: 5px;
     font-weight: lighter;
     font-size: 14px;
 `
@@ -60,12 +68,18 @@ export const FavCard = (props) => {
 
     return (
         <Container>
-            <Image src={room_landing} />
 
-            {content}
+            <Link to={props.link_to} >
+                <Image src={room_landing} />
+                {content}
+            </Link>
 
             <IconWrapper>
-                <StyledTrash />
+                <StyledTrash onClick={e => {
+                    console.log(props.type);
+                    console.log(props.id);
+                    props.handleDelete(props.type, props.id)
+                }} />
             </IconWrapper>
 
         </Container>

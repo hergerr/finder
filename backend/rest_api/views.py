@@ -124,6 +124,20 @@ def get_liked_room_offers(request):
             print(line)    
         return Response(status=400)
 
+@api_view(['DELETE'])
+def delete_liked_room_offer(request):
+    data = request.data
+    data['owner'] = request.user.id
+    print(data)
+
+    offers = get_object_or_404(LikedOffer, user=data['owner'])
+    offers.room_offers.remove(data['id'])
+    
+    current_user = User.objects.get(pk=data['owner'])
+    data = current_user.liked_offer.room_offers.all()
+    serializer = RoomOfferListSerializer(data, many=True)
+    return JsonResponse(serializer.data, status=200, safe=False)
+
 # -------------------- Mates section --------------------
 
 @api_view(['POST', 'PUT', 'DELETE'])
@@ -187,6 +201,21 @@ def get_liked_mate_offers(request):
         for line in traceback.format_exc().splitlines():
             print(line)    
         return Response(status=400)
+
+
+@api_view(['DELETE'])
+def delete_liked_mate_offer(request):
+    data = request.data
+    data['owner'] = request.user.id
+
+    offers = get_object_or_404(LikedOffer, user=data['owner'])
+    offers.mate_offers.remove(data['id'])
+
+    current_user = User.objects.get(pk=data['owner'])
+    data = current_user.liked_offer.mate_offers.all()
+    serializer = MateOfferListSerializer(data, many=True)
+    return JsonResponse(serializer.data, status=200, safe=False)
+
 
 @api_view(['POST'])
 def send_message(request):

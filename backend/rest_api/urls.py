@@ -15,11 +15,13 @@ urlpatterns = [
     path('user_room_list/', views.user_room_list),
     path('add_room_offer_to_liked/', views.add_room_offer_to_liked),
     path('get_liked_room_offers/', views.get_liked_room_offers),
+    path('delete_liked_room_offer/', views.delete_liked_room_offer),
 
     path('user_mate_detail/', views.user_mate_detail),
     path('user_mate_list/', views.user_mate_list),
     path('add_mate_offer_to_liked/', views.add_mate_offer_to_liked),
     path('get_liked_mate_offers/', views.get_liked_mate_offers),
+    path('delete_liked_mate_offer/', views.delete_liked_mate_offer),
 
     path('send_message/', views.send_message),
     path('get_conversation/', views.get_conversation),

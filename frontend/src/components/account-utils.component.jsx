@@ -9,9 +9,11 @@ export const Checkbox = styled.input`
 export const StyledTrash = styled(Trash)`
     height: 30px;
     margin-right: 30px;
+    cursor: pointer;
 `
 
 export const StyledEdit = styled(Edit)`
     height: 30px;
     margin-right: 15px;
+    cursor: pointer;
 `
