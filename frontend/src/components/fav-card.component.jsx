@@ -39,16 +39,29 @@ const IconWrapper = styled.div`
 `
 
 export const FavCard = (props) => {
+    let content;
+    if (props.type === 'room') {
+        content = <TextWrapper>
+            <Title>{props.title}</Title>
+            <TextContent>{props.location}</TextContent>
+            <TextContent>{props.area}</TextContent>
+            <TextContent>{props.flatmates} flatmate(s)</TextContent>
+        </TextWrapper>
+    } else if (props.type === 'mate') {
+        content = <TextWrapper>
+            <Title>{props.title}</Title>
+            <TextContent>{props.age}</TextContent>
+            <TextContent>{props.location}</TextContent>
+            <TextContent>{props.features}</TextContent>
+        </TextWrapper>
+    }
+
 
     return (
         <Container>
             <Image src={room_landing} />
-            <TextWrapper>
-                <Title>{props.title}</Title>
-                <TextContent>{props.location}</TextContent>
-                <TextContent>{props.area}</TextContent>
-                <TextContent>{props.flatmates} flatmate(s)</TextContent>
-            </TextWrapper>
+
+            {content}
 
             <IconWrapper>
                 <StyledTrash />

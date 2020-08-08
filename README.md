@@ -21,6 +21,7 @@ TODO:
 - theme
 - language
 - admin account
+- divide backend on applications
 
 ### CURL wiki
 #### Guest available endpoints

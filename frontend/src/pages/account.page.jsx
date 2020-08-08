@@ -10,6 +10,7 @@ import axios from 'axios';
 import { MessageCard } from '../components/message-card.component';
 import { OfferCard } from '../components/offer-card.component';
 import { FavCard } from '../components/fav-card.component';
+import { MateDetailPage } from '../pages/mate-detail.page';
 
 const Container = styled.div`
     width: 100%;
@@ -35,7 +36,7 @@ class AccountPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { offers: [], favsRooms: [], favMates:[], messages: [] }
+        this.state = { offers: [], favsRooms: [], favMates: [], messages: [] }
     }
 
     componentDidMount() {
@@ -60,12 +61,20 @@ class AccountPage extends React.Component {
             }
         })
 
+        axios.get('http://localhost:8000/get_liked_mate_offers/',
+            config
+        ).then(res => {
+            if (res.status === 200) {
+                this.setState({ favMates: res.data });
+                console.log(this.state.favMates);
+            }
+        })
+
         axios.get('http://localhost:8000/get_user_conversations/',
             config
         ).then(res => {
             if (res.status === 200) {
                 this.setState({ messages: res.data });
-                console.log(this.state.messages)
             }
         })
     }
@@ -86,36 +95,69 @@ class AccountPage extends React.Component {
                     <Route path={`${this.props.match.url}/offers`}>
                         {
                             this.state.offers.map(
-                                (element, index) => (
-                                    <OfferCard
-                                        key={index}
-                                        title={element.title}
-                                        location={element.location}
-                                        area={element.area}
-                                        flatmates={element.number_of_flatmates} />
+                                (element) => (
+                                    <Link
+                                        to={`${this.props.match.url}/my_offers/${element.id}`}
+                                        key={element.id}>
+
+                                        <OfferCard
+                                            key={element.id}
+                                            title={element.title}
+                                            location={element.location}
+                                            area={element.area}
+                                            flatmates={element.number_of_flatmates} />
+                                    </Link>
                                 ))
                         }
                     </Route>
                     <Route path={`${this.props.match.url}/favs`}>
                         {
                             this.state.favsRooms.map(
-                                (element, index) => (
-                                    <FavCard
-                                        key={index}
-                                        title={element.title}
-                                        location={element.location}
-                                        area={element.area}
-                                        flatmates={element.number_of_flatmates}
-                                    />
-                            ))
+                                (element) => (
+                                    <Link
+                                        to={`/rooms/${element.id}`}
+                                        key={element.id}>
+
+                                        <FavCard
+                                            key={element.id}
+                                            type="room"
+                                            title={element.title}
+                                            location={element.location}
+                                            area={element.area}
+                                            flatmates={element.number_of_flatmates}
+                                        />
+                                    </Link>
+
+                                ))
+                        }
+
+                        {
+                            this.state.favMates.map(
+                                (element) => (
+                                    <Link
+                                        to={`/mates/${element.id}`}
+                                        key={element.id}>
+
+                                        <FavCard
+                                            key={element.id}
+                                            type="mate"
+                                            title={element.title}
+                                            age={element.age}
+                                            location={element.location}
+                                            features={element.features}
+                                        />
+                                    </Link>
+
+                                )
+                            )
                         }
                     </Route>
                     <Route path={`${this.props.match.url}/messages`}>
                         {
                             this.state.messages.map(
-                                (element, index) => (
-                                    <MessageCard 
-                                        key={index}
+                                (element) => (
+                                    <MessageCard
+                                        key={element.id}
                                         subject={element.subject}
                                         last_message={element.message[this.state.messages[0].message.length - 1].content}
                                         email={element.members[1].email}

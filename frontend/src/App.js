@@ -10,7 +10,8 @@ import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing.page';
 import { MateListPage } from './pages/mate-list.page';
-import { MateDetailPage } from './pages/mate-detail.page';
+import MateDetailPage from './pages/mate-detail.page';
+import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
 import { AddMatePage } from './pages/add-mate.page';
 import { ConversationPage } from './pages/conversation.page';
@@ -122,11 +123,17 @@ class Application extends React.Component {
           </NavContainer>
 
           <Switch>
+            <Route path={'/rooms/:offerId'}>
+              <MateDetailPage/>
+            </Route>
+            <Route path={'/mates/:offerId'}>
+              {/* <RoomDetailPage/> */}
+            </Route>
             <Route path="/mate/add">
               <AddMatePage />
             </Route>
-            <Route path="/mate/detail">
-              <MateDetailPage src={room_landing} />
+            <Route path="/roomdetail">
+                <RoomDetailPage/>
             </Route>
             <Route path="/mate/list">
               <MateListPage />

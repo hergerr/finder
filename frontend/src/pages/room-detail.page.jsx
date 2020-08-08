@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
+import { Coins } from '@styled-icons/fa-solid';
+import { Area } from '@styled-icons/boxicons-regular';
 import { LocationPin } from '@styled-icons/entypo';
-import { Books } from '@styled-icons/icomoon/Books';
-import { Calendar } from '@styled-icons/boxicons-regular/Calendar';
-import { ContactBox } from '../components/contact-box.component'; 
+import { ContactBox } from '../components/contact-box.component';
 import { DetailBlock, WhiteBorder} from '../components/detail-block.component';
 
 const Container = styled.div`
@@ -28,13 +28,6 @@ const PhotoWrapper = styled.div`
     display: flex;
 `
 
-const Photo = styled.img`
-
-    margin: 0 auto;
-    height: 400px;
-    object-fit: cover;
-`
-
 const Essentials = styled.div`
     width: 100%;
     height: 200px;
@@ -53,74 +46,62 @@ const IconAndDescContainer = styled.div`
     display: flex;
 `
 
+const StyledCoin = styled(Coins)`
+    color: black;
+    height: 30px;
+`
+
+const StyledArea = styled(Area)`
+    color: black;
+    height: 30px;
+`
 const Location = styled(LocationPin)`
     color: black;
     height: 30px;
 `
 
-const Study = styled(Books)`
-    color: black;
-    height: 30px;
-`
 
-const Birth = styled(Calendar)`
-    color: black;
-    height: 30px;
-`
-
-
-class MateDetailPage extends React.Component {
+class RoomDetailPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {data: {}}
-    }
 
-    componentDidMount(){
-
-        axios.get(`http://localhost:8000/room_offer_detail/${this.props.match.params.offerId}`).then(res => {
-            if (res.status === 200) {
-                this.setState({ data: res.data });
-                console.log(this.state.data);
-            }
-        })
     }
 
     render() {
         return (
             <Container>
-
-                <Title>Peacuful IT student</Title>
+                <Title>Spacious room in city</Title>
                 <PhotoWrapper>
-                    <Photo src={this.state.src} />
+
                 </PhotoWrapper>
-
                 <Essentials>
-
                     <IconAndDescContainer>
-                        <Birth />
-                        <p>22</p>
+                        <StyledCoin/>
+                        <p>1000PLN/month</p>
                     </IconAndDescContainer>
-
                     <IconAndDescContainer>
-                        <Location />
-                        <p>Krzyki</p>
+                        <StyledArea />
+                        <p>13 m2</p>
                     </IconAndDescContainer>
-
                     <IconAndDescContainer>
-                        <Study />
-                        <p>Computer Science</p>
+                        <Location/>
+                        <p>Dominicain Square</p>
                     </IconAndDescContainer>
                 </Essentials>
 
-                <DetailBlock title="Features" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+               
+                <DetailBlock title="Building" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
                 <WhiteBorder/>
-                <DetailBlock title="Customs" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+                <DetailBlock title="Flat" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+                <WhiteBorder/>
+                <DetailBlock title="Flatmates" features={['peacuful','peacuful']}/>
+                <WhiteBorder/>
+                <DetailBlock title="Rules" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
 
                 <ContactBox/>
             </Container>
         )
     }
-
 }
 
-export default withRouter(MateDetailPage);
+export default withRouter(RoomDetailPage)

@@ -49,6 +49,7 @@ class MessageSerializer(serializers.ModelSerializer):
         fields = ['owner', 'content', 'datetime']
 
 
+# https://www.django-rest-framework.org/api-guide/relations/#nested-relationships
 class ConversationSerializer(serializers.ModelSerializer):
     message = MessageSerializer(many=True, read_only=True)
     members = UserSerializer(many=True, read_only=True)

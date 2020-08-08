@@ -180,12 +180,8 @@ def get_liked_mate_offers(request):
     try:
         current_user = User.objects.get(pk=data['owner'])
         data = current_user.liked_offer.mate_offers.all()
-        serializer = MateOfferListSerializer(data=data, many=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=200)
-        return JsonResponse(serializer.data, status=404, safe=False)
+        serializer = MateOfferListSerializer(data, many=True)
+        return JsonResponse(serializer.data, status=200, safe=False)
     except:
         import traceback
         for line in traceback.format_exc().splitlines():
