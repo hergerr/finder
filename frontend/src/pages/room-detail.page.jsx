@@ -64,41 +64,69 @@ const Location = styled(LocationPin)`
 class RoomDetailPage extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {data: []};
+    }
+
+    componentDidMount(){
+        axios.get(`http://localhost:8000/room_offer_detail/${this.props.match.params.offerId}`).then(res => {
+            if (res.status === 200) {
+                this.setState({ data: res.data });
+            }
+        })
 
     }
 
     render() {
+
+        // TODO
+        // cannot fetch before loading
+        let building = this.state.data.building_features;
+        let flat = this.state.data.flat_features;
+        let flatmates = this.state.data.flatmates_features;
+        let rules = this.state.data.rules;
+        if (flat && building && flatmates && rules){
+            building = building.split(';');
+            flat = flat.split(';');
+            flatmates = flatmates.split(';');
+            rules = rules.split(';');
+        } else {
+            building = [];
+            flat = [];
+            flatmates = [];
+            rules = [];
+        }
+
         return (
             <Container>
-                <Title>Spacious room in city</Title>
+                <Title>{this.state.data.title}</Title>
                 <PhotoWrapper>
 
                 </PhotoWrapper>
                 <Essentials>
                     <IconAndDescContainer>
                         <StyledCoin/>
-                        <p>1000PLN/month</p>
+                        <p>{this.state.data.price}PLN/month</p>
                     </IconAndDescContainer>
                     <IconAndDescContainer>
                         <StyledArea />
-                        <p>13 m2</p>
+                        <p>{this.state.data.area} m2</p>
                     </IconAndDescContainer>
                     <IconAndDescContainer>
                         <Location/>
-                        <p>Dominicain Square</p>
+                        <p>{this.state.data.location}</p>
                     </IconAndDescContainer>
                 </Essentials>
 
                
-                <DetailBlock title="Building" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+                <DetailBlock title="Building" features={building}/>
                 <WhiteBorder/>
-                <DetailBlock title="Flat" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+                <DetailBlock title="Flat" features={flat}/>
                 <WhiteBorder/>
-                <DetailBlock title="Flatmates" features={['peacuful','peacuful']}/>
+                <DetailBlock title="Flatmates" features={flatmates}/>
                 <WhiteBorder/>
-                <DetailBlock title="Rules" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+                <DetailBlock title="Rules" features={rules}/>
 
-                <ContactBox/>
+                <ContactBox phone={this.state.data.phone}/>
             </Container>
         )
     }

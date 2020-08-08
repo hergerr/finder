@@ -54,7 +54,7 @@ export const ContactBox = (props) => (
         <ContactTitle>Contact</ContactTitle>
 
         <ContactContentWrapper>
-            <Phone>645 564 ***</Phone>
+            <Phone>{props.phone}</Phone>
             <FormWrapper>
                 <TextArea />
                 <SearchButton>Send</SearchButton>

@@ -67,7 +67,6 @@ class AccountPage extends React.Component {
         ).then(res => {
             if (res.status === 200) {
                 this.setState({ favMates: res.data });
-                console.log(this.state.favMates);
             }
         })
 
