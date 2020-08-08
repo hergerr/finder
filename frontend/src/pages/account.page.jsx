@@ -65,6 +65,7 @@ class AccountPage extends React.Component {
         ).then(res => {
             if (res.status === 200) {
                 this.setState({ messages: res.data });
+                console.log(this.state.messages)
             }
         })
     }
@@ -110,7 +111,19 @@ class AccountPage extends React.Component {
                         }
                     </Route>
                     <Route path={`${this.props.match.url}/messages`}>
-                        {/* <MessageCard /> */}
+                        {
+                            this.state.messages.map(
+                                (element, index) => (
+                                    <MessageCard 
+                                        key={index}
+                                        subject={element.subject}
+                                        last_message={element.message[this.state.messages[0].message.length - 1].content}
+                                        email={element.members[1].email}
+                                    />
+
+                                )
+                            )
+                        }
                     </Route>
                 </Switch>
 

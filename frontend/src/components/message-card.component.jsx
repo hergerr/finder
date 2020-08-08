@@ -50,13 +50,13 @@ export const MessageCard = (props) => {
         <Container>
             <FromSection>
                 <Title>from</Title>
-                <Email>john.magorty@deere.com</Email>
+                <Email>{props.email}</Email>
             </FromSection>
 
             <ToSection>
                 <Title>message</Title>
-                <Subject>Cabin on city outskirts</Subject>
-                <LastMessage>Hello, I am interesested in that offer, could you send me more photos of living room and ...</LastMessage>
+                <Subject>{props.subject}</Subject>
+                <LastMessage>{props.last_message}</LastMessage>
             </ToSection>
         </Container>
 

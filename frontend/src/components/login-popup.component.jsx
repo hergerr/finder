@@ -96,7 +96,7 @@ class LoginPopup extends React.Component {
                             axios.post(`http://127.0.0.1:8000/token/`, { username: values.username, password: values.password })
                             .then(res => {
                                 if (res.status === 200) {
-                                    localStorage.setItem('account', res.data.access)
+                                    localStorage.setItem('access', res.data.access)
                                     this.setState({redirect: true});
                                 }
                             })
