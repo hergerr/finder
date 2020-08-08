@@ -124,16 +124,13 @@ class Application extends React.Component {
 
           <Switch>
             <Route path={'/rooms/:offerId'}>
-              <MateDetailPage/>
+              <RoomDetailPage/>
             </Route>
             <Route path={'/mates/:offerId'}>
-              {/* <RoomDetailPage/> */}
+              <MateDetailPage/>
             </Route>
             <Route path="/mate/add">
               <AddMatePage />
-            </Route>
-            <Route path="/roomdetail">
-                <RoomDetailPage/>
             </Route>
             <Route path="/mate/list">
               <MateListPage />

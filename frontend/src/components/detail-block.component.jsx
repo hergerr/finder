@@ -47,8 +47,8 @@ export const DetailBlock = (props) => (
             <ul>
                 {
                     props.features.map(
-                        (element) => (
-                            <li>{element}</li>
+                        (element, index) => (
+                            <li key={index}>{element}</li>
                         )
                     )
                 }

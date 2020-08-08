@@ -77,7 +77,7 @@ class MateDetailPage extends React.Component {
 
     componentDidMount(){
 
-        axios.get(`http://localhost:8000/room_offer_detail/${this.props.match.params.offerId}`).then(res => {
+        axios.get(`http://localhost:8000/mate_offer_detail/${this.props.match.params.offerId}`).then(res => {
             if (res.status === 200) {
                 this.setState({ data: res.data });
                 console.log(this.state.data);
@@ -86,35 +86,47 @@ class MateDetailPage extends React.Component {
     }
 
     render() {
+        // TODO
+        // cannot fetch before loading
+        let features = this.state.data.features;
+        let customs = this.state.data.customs
+        if (features && customs){
+            features = features.split(';')
+            customs = customs.split(';')
+        } else {
+            features = [];
+            customs = [];
+        }
+
         return (
             <Container>
 
-                <Title>Peacuful IT student</Title>
+                <Title>{this.state.data.title}t</Title>
                 <PhotoWrapper>
-                    <Photo src={this.state.src} />
+                    <Photo src={this.state.data.src} />
                 </PhotoWrapper>
 
                 <Essentials>
 
                     <IconAndDescContainer>
                         <Birth />
-                        <p>22</p>
+                        <p>{this.state.data.age}</p>
                     </IconAndDescContainer>
 
                     <IconAndDescContainer>
                         <Location />
-                        <p>Krzyki</p>
+                        <p>{this.state.data.location}</p>
                     </IconAndDescContainer>
 
                     <IconAndDescContainer>
                         <Study />
-                        <p>Computer Science</p>
+                        <p>{this.state.data.field_of_study}</p>
                     </IconAndDescContainer>
                 </Essentials>
 
-                <DetailBlock title="Features" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+                <DetailBlock title="Features" features={features}/>
                 <WhiteBorder/>
-                <DetailBlock title="Customs" features={['peacuful','peacuful','peacuful','peacuful','peacuful','peacuful']}/>
+                <DetailBlock title="Customs" features={customs}/>
 
                 <ContactBox/>
             </Container>

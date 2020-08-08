@@ -14,6 +14,10 @@ import { MateDetailPage } from '../pages/mate-detail.page';
 
 const Container = styled.div`
     width: 100%;
+    a {
+        color: black;
+        text-decoration: none;
+    }
 `
 
 const MenuContainer = styled.div`
@@ -22,8 +26,6 @@ const MenuContainer = styled.div`
     margin-top: 150px;
 
     a {
-        color: black;
-        text-decoration: none;
         margin-left: 90px;
         font-size: 20px;
         font-weight: bold;
@@ -40,7 +42,6 @@ class AccountPage extends React.Component {
     }
 
     componentDidMount() {
-        // TODO fav mate
         const config = {
             headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
         };

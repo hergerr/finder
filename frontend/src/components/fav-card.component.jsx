@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { StyledTrash } from './account-utils.component';
-import room_landing from '../assets/images/room_landing.jpg'
+import room_landing from '../assets/images/room_landing.jpg';
 
 const Container = styled.div`
     width: 80%;
@@ -12,6 +12,7 @@ const Container = styled.div`
     border-radius: 10px;
     padding: 20px 0;
     align-items: center;
+    color: black;
 `
 
 const Image = styled.img`
@@ -52,7 +53,7 @@ export const FavCard = (props) => {
             <Title>{props.title}</Title>
             <TextContent>{props.age}</TextContent>
             <TextContent>{props.location}</TextContent>
-            <TextContent>{props.features}</TextContent>
+            <TextContent>{props.features.replace(/;/g, ' #')}</TextContent>
         </TextWrapper>
     }
 
