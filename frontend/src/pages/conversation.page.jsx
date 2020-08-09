@@ -21,6 +21,7 @@ const Title = styled.h3`
 
 const Window = styled.div`
     height: 500px;
+    overflow: auto;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
@@ -55,7 +56,6 @@ class ConversationPage extends React.Component {
         ).then(res => {
             if (res.status === 200) {
                 this.setState({ data: res.data });
-                console.log(this.state.data);
             }
         })
 
@@ -63,10 +63,19 @@ class ConversationPage extends React.Component {
             config).then(res => {
                 if (res.status === 200) {
                     this.setState({ id: res.data });
-                    console.log(this.state.id);
                 }
             })
 
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
+    // https://stackoverflow.com/a/45905418
+    scrollToBottom() {
+        this.el.scrollIntoView({ behavior: 'smooth' });
     }
 
 
@@ -88,32 +97,34 @@ class ConversationPage extends React.Component {
                             }
                         }) : null
                     }
+                    <div ref={el => { this.el = el; }} />
                 </Window>
                 <Formik
                     initialValues={{
-                        message: ''
+                        message: '',
                     }}
 
                     validationSchema={Yup.object({
                         message: Yup.string()
-                            .min(0, 'field cannot be empty')
+                            .required('cannot be empty'),
                     })}
 
                     onSubmit={values => {
                         axios.post(`http://localhost:8000/send_message_conv_id/`, { content: values.message, id: this.state.data.id }, {
                             headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
                         }).then(res => {
-                                if (res.status === 200) {
-                                    this.setState({ data: res.data })
-                                    console.log(res.data)
-                                }
-                            })
+                            if (res.status === 200) {
+                                this.setState({ data: res.data })
+                                console.log(res.data)
+                            }
+                        })
                     }}>
 
 
                     {props => (
                         <FormWrapper onSubmit={props.handleSubmit}>
-                            <MessageInput />
+                            <MessageInput label="message" name="message" id="message" onChange={props.handleChange} value={props.values.message} />
+                            {props.errors.message}
                             <SearchButton>Send</SearchButton>
                         </FormWrapper>
                     )}
