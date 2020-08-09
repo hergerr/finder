@@ -83,9 +83,12 @@ def user_room_detail(request):
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        offer = get_object_or_404(RoomOffer,  id=data['id'], owner=data['owner'])
+        offer = get_object_or_404(RoomOffer, id=data['id'])
         offer.delete()
-        return Response(status=200)
+        data = RoomOffer.objects.filter(owner=request.user)
+        serializer = RoomOfferListSerializer(data, many=True)
+        return Response(serializer.data)
+
 
 @api_view(['GET'])
 def user_room_list(request):
@@ -161,9 +164,12 @@ def user_mate_detail(request):
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        offer = get_object_or_404(MateOffer,  id=data['id'], owner=data['owner'])
+        offer = get_object_or_404(MateOffer,  id=data['id'])
         offer.delete()
-        return Response(status=200)
+
+        data = MateOffer.objects.filter(owner=request.user)
+        serializer = MateOfferListSerializer(data, many=True)
+        return Response(serializer.data)
 
 @api_view(['GET'])
 def user_mate_list(request):
@@ -184,6 +190,9 @@ def add_mate_offer_to_liked(request):
         user_liked_offers.mate_offers.add(liked_offer)
         return Response(status=200)
     except:    
+        import traceback
+        for line in traceback.format_exc().splitlines():
+            print(line)    
         return Response(status=400)
 
 @api_view(['GET'])

@@ -76,8 +76,6 @@ export const FavCard = (props) => {
 
             <IconWrapper>
                 <StyledTrash onClick={e => {
-                    console.log(props.type);
-                    console.log(props.id);
                     props.handleDelete(props.type, props.id)
                 }} />
             </IconWrapper>

@@ -38,7 +38,7 @@ class AccountPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { offers: [], favsRooms: [], favMates: [], messages: [] }
+        this.state = { roomOffers: [], mateOffers: [], favsRooms: [], favMates: [], messages: [] }
     }
 
     componentDidMount() {
@@ -50,7 +50,15 @@ class AccountPage extends React.Component {
             config
         ).then(res => {
             if (res.status === 200) {
-                this.setState({ offers: res.data });
+                this.setState({ roomOffers: res.data });
+            }
+        })
+
+        axios.get('http://localhost:8000/user_mate_list/',
+            config
+        ).then(res => {
+            if (res.status === 200) {
+                this.setState({ mateOffers: res.data });
             }
         })
 
@@ -75,12 +83,11 @@ class AccountPage extends React.Component {
         ).then(res => {
             if (res.status === 200) {
                 this.setState({ messages: res.data });
-                console.log(this.state.messages);
             }
         })
     }
 
-    handleDelete = (type, id) => {
+    handleFavDelete = (type, id) => {
         if (type === 'room') {
             axios.delete('http://localhost:8000/delete_liked_room_offer/', {
                 headers: {
@@ -113,6 +120,40 @@ class AccountPage extends React.Component {
 
     }
 
+    handleOfferDelete = (type, id) => {
+        if (type === 'room') {
+
+            axios.delete('http://localhost:8000/user_room_detail/', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access')}`
+                },
+                data: {
+                    id: id
+                }
+            }
+            ).then(res => {
+                if (res.status === 200) {
+                    this.setState({ roomOffers: res.data })
+                }
+            })
+        } else if (type === 'mate') {
+
+            axios.delete('http://localhost:8000/user_mate_detail/', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('access')}`
+                },
+                data: {
+                    id: id
+                }
+            }
+            ).then(res => {
+                if (res.status === 200) {
+                    this.setState({ mateOffers: res.data })
+                }
+            })
+        }
+    }
+
 
     render() {
 
@@ -127,21 +168,41 @@ class AccountPage extends React.Component {
 
                 <Switch>
                     <Route path={`${this.props.match.url}/offers`}>
-                        {
-                            this.state.offers.map(
+                    {
+                            this.state.roomOffers.map(
                                 (element) => (
-                                    <Link
-                                        to={`${this.props.match.url}/my_offers/${element.id}`}
-                                        key={element.id}>
+                                    <OfferCard
+                                        id={element.id}
+                                        key={element.id}
+                                        link_to={`/rooms/${element.id}`}
+                                        type="room"
+                                        title={element.title}
+                                        location={element.location}
+                                        area={element.area}
+                                        flatmates={element.number_of_flatmates}
+                                        handleDelete={this.handleOfferDelete}
+                                    />
 
-                                        <OfferCard
-                                            key={element.id}
-                                            title={element.title}
-                                            location={element.location}
-                                            area={element.area}
-                                            flatmates={element.number_of_flatmates} />
-                                    </Link>
                                 ))
+                        }
+
+                        {
+                            this.state.mateOffers.map(
+                                (element) => (
+                                    <OfferCard
+                                        id={element.id}
+                                        key={element.id}
+                                        link_to={`/mates/${element.id}`}
+                                        type="mate"
+                                        title={element.title}
+                                        age={element.age}
+                                        location={element.location}
+                                        features={element.features}
+                                        handleDelete={this.handleOfferDelete}
+                                    />
+
+                                )
+                            )
                         }
                     </Route>
                     <Route path={`${this.props.match.url}/favs`}>
@@ -157,7 +218,7 @@ class AccountPage extends React.Component {
                                         location={element.location}
                                         area={element.area}
                                         flatmates={element.number_of_flatmates}
-                                        handleDelete={this.handleDelete}
+                                        handleDelete={this.handleFavDelete}
                                     />
 
                                 ))
@@ -175,7 +236,7 @@ class AccountPage extends React.Component {
                                         age={element.age}
                                         location={element.location}
                                         features={element.features}
-                                        handleDelete={this.handleDelete}
+                                        handleDelete={this.handleFavDelete}
                                     />
 
                                 )

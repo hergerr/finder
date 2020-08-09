@@ -71,7 +71,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"title": "Room in city center", "price": "900", "area": "30", "location": "Dominikanski Square", "building_features": "modern building;2nd floor;elevator available;peaceful neigborhood", "flat_features": "fully furnitured;two bathrooms;kitchen;living room", "flatmates_features": "2 students;parties on weekend;interested in electrical engeneering", "rules":"No smoking;No pets", "phone":"123456789"}' \
   http://localhost:8000/user_room_detail/
 ```
@@ -80,7 +80,7 @@ curl \
 curl \
   -X DELETE \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id":"2"}' \
   http://localhost:8000/user_room_detail/
 ```
@@ -89,7 +89,7 @@ curl \
 curl \
   -X PUT \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id": "2", "title": "Room in city center", "price": "1900", "area": "30", "location": "Dominikanski Square", "building_features": "modern building;2nd floor;elevator available;peaceful neigborhood", "flat_features": "fully furnitured;two bathrooms;kitchen;living room", "flatmates_features": "2 students;parties on weekend;interested in electrical engeneering", "rules":"No smoking;No pets", "phone":"123456789"}' \
   http://localhost:8000/user_room_detail/
 ```
@@ -98,7 +98,7 @@ curl \
 curl \
   -X GET \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   http://localhost:8000/user_room_list/
 ```
 
@@ -107,7 +107,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id": "1"}' \
   http://localhost:8000/add_room_offer_to_liked/ -v
 ```
@@ -116,7 +116,7 @@ curl \
 ```bash
 curl \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   http://localhost:8000/get_liked_room_offers/ -v
 ```
 
@@ -125,7 +125,7 @@ curl \
  curl \
   -X DELETE \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id": "1"}' \
   http://localhost:8000/delete_liked_room_offer/ -v
 ```
@@ -135,7 +135,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"title": "Peaceful IT student", "age": "22", "location": "Grunwaldzki Square", "field_of_study": "Computer science", "features":"peaceful;quiet;gaming;cycling", "customs": "no smoking;no partying;wakes up at 11-12;goes to bed 23-24", "phone":"123456789"}' \
   http://localhost:8000/user_mate_detail/
 ```
@@ -144,7 +144,7 @@ curl \
 curl \
   -X DELETE \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id":"1"}' \
   http://localhost:8000/user_mate_detail/
 ```
@@ -153,7 +153,7 @@ curl \
 curl \
   -X PUT \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id":"3", "title": "Peaceful IT student", "age": "20", "location": "Grunwaldzki Square", "field_of_study": "Computer science", "features":"peaceful;quiet;gaming;cycling", "customs": "no smoking;no partying;wakes up at 11-12;goes to bed 23-24", "phone":"123456789"}' \
   http://localhost:8000/user_mate_detail/
 ```
@@ -163,7 +163,7 @@ curl \
 curl \
   -X GET \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   http://localhost:8000/user_mate_list/
 ```
 
@@ -172,7 +172,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id": "1"}' \
   http://localhost:8000/add_mate_offer_to_liked/ -v
 ```
@@ -181,7 +181,7 @@ curl \
 ```bash
 curl \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   http://localhost:8000/get_liked_mate_offers/ -v
 ```
 
@@ -190,7 +190,7 @@ curl \
  curl \
   -X DELETE \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id": "1"}' \
   http://localhost:8000/delete_liked_mate_offer/ -v
 ```
@@ -201,7 +201,7 @@ curl \
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"receiver": "3", "subject": "Room in city center", "content": "Hi. Can I see that room tomorrow?"}' \
   http://localhost:8000/send_message/
 
@@ -212,7 +212,7 @@ curl \
 curl \
     -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id": "1", "content": "Hi. Can I see that room tomorrow?"}' \
   http://localhost:8000/send_message_conv_id/
 ```
@@ -222,7 +222,7 @@ curl \
 curl \
   -X GET \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   http://localhost:8000/get_conversation/1
 ```
 
@@ -231,7 +231,7 @@ curl \
 curl \
   -X GET \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   http://localhost:8000/get_user_conversations/
 ```
 
@@ -240,7 +240,7 @@ curl \
 curl \
   -X DELETE \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   http://localhost:8000/delete_conversation/6/
 ```
 
