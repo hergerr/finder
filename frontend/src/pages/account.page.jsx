@@ -13,6 +13,11 @@ import { FavCard } from '../components/fav-card.component';
 
 const Container = styled.div`
     width: 100%;
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
 `
 
 const MenuContainer = styled.div`
@@ -21,8 +26,6 @@ const MenuContainer = styled.div`
     margin-top: 150px;
 
     a {
-        color: black;
-        text-decoration: none;
         margin-left: 90px;
         font-size: 20px;
         font-weight: bold;
@@ -72,6 +75,7 @@ class AccountPage extends React.Component {
         ).then(res => {
             if (res.status === 200) {
                 this.setState({ messages: res.data });
+                console.log(this.state.messages);
             }
         })
     }
@@ -182,13 +186,15 @@ class AccountPage extends React.Component {
                         {
                             this.state.messages.map(
                                 (element) => (
-                                    <MessageCard
-                                        key={element.id}
-                                        subject={element.subject}
-                                        last_message={element.message[this.state.messages[0].message.length - 1].content}
-                                        email={element.members[1].email}
-                                    />
-
+                                    <Link to={`/conversations/${element.id}`} key={element.id}>
+                                        <MessageCard
+                                            id={element.id}
+                                            key={element.id}
+                                            subject={element.subject}
+                                            last_message={element.message[this.state.messages[0].message.length - 1].content}
+                                            email={element.members[1].email}
+                                        />
+                                    </Link>
                                 )
                             )
                         }

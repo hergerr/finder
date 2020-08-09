@@ -14,7 +14,7 @@ import MateDetailPage from './pages/mate-detail.page';
 import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
 import { AddMatePage } from './pages/add-mate.page';
-import { ConversationPage } from './pages/conversation.page';
+import ConversationPage from './pages/conversation.page';
 
 const App = styled.div`
   width: 100%;
@@ -138,7 +138,7 @@ class Application extends React.Component {
             <Route path="/account">
               <AccountPage />
             </Route>
-            <Route path="/conversation">
+            <Route path="/conversations/:conversationId">
               <ConversationPage />
             </Route>
             <Route path={this.state.url}>

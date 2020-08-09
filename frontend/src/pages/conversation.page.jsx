@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { withRouter } from 'react-router-dom';
 import { SearchButton } from '../components/search-button.component';
+import { ChatMessage } from '../components/chat-message.component';
 
 const Container = styled.div`
     width: 70%;
@@ -23,29 +26,6 @@ const Window = styled.div`
     border-radius: 10px;
 `
 
-const ReceivedMessage = styled.div`
-    width: 400px;
-    margin: 60px;
-    border: 1px solid black;
-    border-radius: 5px;
-
-    p {
-        padding: 10px;
-    }
-`
-
-const SendMessage = styled.div`
-    width: 400px;
-    margin: 60px;
-    margin-left: auto;
-    border: 1px solid var(--color-orange);
-    border-radius: 5px;
-
-    p {
-        padding: 10px;
-    }
-`
-
 const FormWrapper = styled.form`
     display: flex;
     margin-top: 10px;
@@ -59,61 +39,84 @@ const MessageInput = styled.textarea`
 `
 
 class ConversationPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { data: {}, id: 'x' };
+    }
+
+
+    componentDidMount() {
+        const config = {
+            headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
+        };
+
+        axios.get(`http://localhost:8000/get_conversation/${this.props.match.params.conversationId}`,
+            config
+        ).then(res => {
+            if (res.status === 200) {
+                this.setState({ data: res.data });
+                console.log(this.state.data);
+            }
+        })
+
+        axios.get('http://localhost:8000/get_user_id/',
+            config).then(res => {
+                if (res.status === 200) {
+                    this.setState({ id: res.data });
+                    console.log(this.state.id);
+                }
+            })
+
+    }
+
 
     render() {
+        const data = this.state.data;
+
         return (
             <Container>
 
-                <Title>Conversation with nad@mail.ru</Title>
+                <Title>Conversation with {data.members ? data.members[1].email : ''} - <b>{data.subject}</b> </Title>
                 <Window>
-                    <ReceivedMessage>
-                        <p>
-                            Hello, what is actual price?
-                        </p>
-                    </ReceivedMessage>
-                    
-                    <SendMessage>
-                        <p>
-                        1100PLN, but you need to take into account costs like parking, bike parking, cleaning costs, an so on...
-                        </p>
-                    </SendMessage>
 
-                    <ReceivedMessage>
-                        <p>
-                            Ok. Thanks, I will consider.
-                        </p>
-                    </ReceivedMessage>
+                    {
+                        data.message ? data.message.map(element => {
+                            if(element.owner == this.state.id) 
+                                return <ChatMessage type="send" key={element.datetime} content={element.content} />
+                            else {
+                                return <ChatMessage type="receive" key={element.datetime} content={element.content} />
+                            }
+                        }) : null
+                    }
                 </Window>
-                <FormWrapper>
-                    <Formik
-                        initialValues={{
-                            message: 0
-                        }}
+                <Formik
+                    initialValues={{
+                        message: 0
+                    }}
 
-                        validationSchema={Yup.object({
-                            message: Yup.string()
-                                .min(0, 'field cannot be empty')
-                        })}
+                    validationSchema={Yup.object({
+                        message: Yup.string()
+                            .min(0, 'field cannot be empty')
+                    })}
 
-                        onSubmit={values => {
-                            alert(JSON.stringify(values, null, 2));
-                        }}
-                    >
+                    onSubmit={values => {
+                        alert(JSON.stringify(values, null, 2));
+                    }}
+                >
 
 
-                        {props => (
-                            <FormWrapper onSubmit={props.handleSubmit}>
-                                <MessageInput />
-                                <SearchButton>Send</SearchButton>
-                            </FormWrapper>
-                        )}
-                    </Formik>
+                    {props => (
+                        <FormWrapper onSubmit={props.handleSubmit}>
+                            <MessageInput />
+                            <SearchButton>Send</SearchButton>
+                        </FormWrapper>
+                    )}
+                </Formik>
 
-                </FormWrapper>
             </Container>
         )
     }
 
 }
 
-export { ConversationPage }
+export default withRouter(ConversationPage)

@@ -24,7 +24,9 @@ urlpatterns = [
     path('delete_liked_mate_offer/', views.delete_liked_mate_offer),
 
     path('send_message/', views.send_message),
-    path('get_conversation/', views.get_conversation),
+    path('get_conversation/<int:conversation_id>', views.get_conversation),
     path('get_user_conversations/', views.get_user_conversations),
-    path('delete_conversation/<int:id>/', views.delete_conversation)
+    path('delete_conversation/<int:id>/', views.delete_conversation),
+
+    path('get_user_id/', views.get_user_id),
 ]

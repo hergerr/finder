@@ -207,14 +207,13 @@ curl \
 
 ```
 
-- get conversation with given user and subcject
+- get conversation
 ```bash
 curl \
   -X GET \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
-  -d '{"second_member": "3", "subject": "Room in city center"}' \
-  http://localhost:8000/get_conversation/
+  http://localhost:8000/get_conversation/1
 ```
 
 - get user's conversations
@@ -256,3 +255,9 @@ https://stackoverflow.com/a/40376819/12422260
 ### Email
 finder.app.confirmation@gmail.com
 1GUGbRIJh3t+rrWAkes/MA==
+
+### Maybe useful next time
+```python
+https://stackoverflow.com/questions/2218327/django-manytomany-filter
+data = Conversation.objects.filter(members__in=[owner, second_member], subject=request.data['subject']).distinct().first()
+```

@@ -247,13 +247,11 @@ def send_message(request):
 
 
 @api_view(['GET'])
-def get_conversation(request):
+def get_conversation(request, conversation_id):
     try:
         owner = request.user
-        second_member = User.objects.get(pk=request.data['second_member'])
-        # https://stackoverflow.com/questions/2218327/django-manytomany-filter
-        data = Conversation.objects.filter(members__in=[owner, second_member], subject=request.data['subject']).distinct().first()
-        serializer = ConversationSerializer(instance=data)
+        data = Conversation.objects.get(pk=conversation_id)
+        serializer = ConversationSerializer(data)
         return Response(serializer.data, status=200)
     except:
         import traceback
@@ -281,3 +279,9 @@ def delete_conversation(request, id):
         for line in traceback.format_exc().splitlines():
             print(line)    
         return Response(status=400)
+
+
+@api_view(['GET'])
+def get_user_id(request):
+    print(request.user.id)
+    return Response(request.user.id)
