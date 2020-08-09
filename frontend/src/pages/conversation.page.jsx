@@ -81,7 +81,7 @@ class ConversationPage extends React.Component {
 
                     {
                         data.message ? data.message.map(element => {
-                            if(element.owner == this.state.id) 
+                            if (element.owner === this.state.id)
                                 return <ChatMessage type="send" key={element.datetime} content={element.content} />
                             else {
                                 return <ChatMessage type="receive" key={element.datetime} content={element.content} />
@@ -91,7 +91,7 @@ class ConversationPage extends React.Component {
                 </Window>
                 <Formik
                     initialValues={{
-                        message: 0
+                        message: ''
                     }}
 
                     validationSchema={Yup.object({
@@ -100,9 +100,15 @@ class ConversationPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        alert(JSON.stringify(values, null, 2));
-                    }}
-                >
+                        axios.post(`http://localhost:8000/send_message_conv_id/`, { content: values.message, id: this.state.data.id }, {
+                            headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
+                        }).then(res => {
+                                if (res.status === 200) {
+                                    this.setState({ data: res.data })
+                                    console.log(res.data)
+                                }
+                            })
+                    }}>
 
 
                     {props => (

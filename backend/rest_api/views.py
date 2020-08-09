@@ -246,6 +246,16 @@ def send_message(request):
     return Response(status=400)
 
 
+@api_view(['POST'])
+def send_message_conv_id(request):
+    sender = request.user
+    conv = Conversation.objects.get(pk=request.data['id'])
+    new_message = Message(owner=sender, conversation=conv, datetime=timezone.now(), content=request.data['content'])
+    new_message.save()
+    serializer = ConversationSerializer(conv)
+    return Response(serializer.data, status=200)
+
+
 @api_view(['GET'])
 def get_conversation(request, conversation_id):
     try:

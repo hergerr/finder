@@ -207,6 +207,16 @@ curl \
 
 ```
 
+- send message using id
+```bash
+curl \
+    -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI2MTA1ODk5LCJqdGkiOiIzNGYxZjUxODc1NDY0NGQ5OGQxOTQ1Y2I5ZGIyYjFkNiIsInVzZXJfaWQiOjJ9.frlIciCMHygIGOiWDEeYkhJCzJLnbO2vAqae-ZgO72c" \
+  -d '{"id": "1", "content": "Hi. Can I see that room tomorrow?"}' \
+  http://localhost:8000/send_message_conv_id/
+```
+
 - get conversation
 ```bash
 curl \
