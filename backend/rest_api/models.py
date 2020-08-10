@@ -19,6 +19,10 @@ class RoomOffer(models.Model):
     def __str__(self):
         return f'{self.area}: {self.title}'
 
+class RoomPhotos(models.Model):
+    offer = models.ForeignKey(RoomOffer, related_name='photos', on_delete=models.CASCADE, null=True)
+    image = models.ImageField()
+
 class MateOffer(models.Model):
     owner = models.ForeignKey(User, related_name='mate_offer', on_delete=models.CASCADE, null=False, blank=False)
     title = models.CharField(max_length=100)
@@ -28,6 +32,7 @@ class MateOffer(models.Model):
     features = models.TextField()
     customs = models.TextField()
     phone = models.CharField(max_length=20)
+    image = models.ImageField(null=True)
 
     def __str__(self):
         return f'{self.location}: {self.title}'
