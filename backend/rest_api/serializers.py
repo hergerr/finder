@@ -40,7 +40,7 @@ class MateOfferDetailSerializer(serializers.ModelSerializer):
 class MateOfferListSerializer(serializers.ModelSerializer):
     class Meta:
         model = MateOffer
-        fields = ['id', 'title', 'age', 'location', 'features']
+        fields = ['id', 'title', 'age', 'location', 'features', 'image']
 
 
 class MessageSerializer(serializers.ModelSerializer):

@@ -198,6 +198,7 @@ class AccountPage extends React.Component {
                                         age={element.age}
                                         location={element.location}
                                         features={element.features}
+                                        image={element.image}
                                         handleDelete={this.handleOfferDelete}
                                     />
 

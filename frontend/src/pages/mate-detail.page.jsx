@@ -7,6 +7,7 @@ import { Books } from '@styled-icons/icomoon/Books';
 import { Calendar } from '@styled-icons/boxicons-regular/Calendar';
 import { ContactBox } from '../components/contact-box.component'; 
 import { DetailBlock, WhiteBorder} from '../components/detail-block.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 100%;
@@ -102,7 +103,7 @@ class MateDetailPage extends React.Component {
 
                 <Title>{this.state.data.title}t</Title>
                 <PhotoWrapper>
-                    <Photo src={this.state.data.src} />
+                    <Photo src={`${static_host}${this.state.data.image}`} />
                 </PhotoWrapper>
 
                 <Essentials>

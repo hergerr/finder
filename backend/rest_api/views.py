@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.parsers import FileUploadParser
+from rest_framework.decorators import api_view, permission_classes, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from datetime import datetime
@@ -144,6 +144,7 @@ def delete_liked_room_offer(request):
 # -------------------- Mates section --------------------
 
 @api_view(['POST', 'PUT', 'DELETE'])
+@parser_classes([MultiPartParser,FormParser,JSONParser])
 def user_mate_detail(request):
     data = request.data
     data['owner'] = request.user.id
@@ -172,6 +173,7 @@ def user_mate_detail(request):
         return Response(serializer.data)
 
 @api_view(['GET'])
+@parser_classes([MultiPartParser, FormParser, JSONParser])
 def user_mate_list(request):
     data = MateOffer.objects.filter(owner=request.user)
     serializer = MateOfferListSerializer(data, many=True)

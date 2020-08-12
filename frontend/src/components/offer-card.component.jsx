@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { StyledTrash, StyledEdit } from './account-utils.component';
-import room_landing from '../assets/images/room_landing.jpg'
+import {static_host} from '../assets/global-settings';
 
 const Container = styled.div`
     width: 80%;
@@ -69,7 +69,7 @@ export const OfferCard = (props) => {
         <Container>
 
             <Link to={props.link_to} >
-                <Image src={room_landing} />
+                <Image src={`${static_host}${props.image}`} />
                 {content}
             </Link>
 

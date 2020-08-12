@@ -148,3 +148,4 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
+MEDIA_ROOT = f'{BASE_DIR}/static/images/'

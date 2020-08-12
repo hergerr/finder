@@ -5,6 +5,7 @@ backend/backend/__pycache__/
 backend/__pycache__/
 backend/rest_api/__pycache__/
 backend/rest_api/migrations/__pycache__/
+backend/static/*
 
 # dependencies
 frontend/node_modules
