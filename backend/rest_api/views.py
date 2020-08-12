@@ -166,6 +166,10 @@ def user_mate_detail(request):
 
     elif request.method == 'DELETE':
         offer = get_object_or_404(MateOffer,  id=data['id'])
+
+        # delete image file
+        if offer.image:
+            offer.image.delete()
         offer.delete()
 
         data = MateOffer.objects.filter(owner=request.user)
