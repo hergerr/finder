@@ -22,6 +22,7 @@ TODO:
 - language
 - admin account
 - divide backend on applications
+- start page? https://github.com/rcaferati/react-awesome-slider
 
 ### CURL wiki
 #### Guest available endpoints

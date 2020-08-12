@@ -110,7 +110,7 @@ class Application extends React.Component {
                   }}>Find {this.state.buttonText}</Link>
                 </li>
                 <li>
-                  <Link to="/account">Add offer</Link>
+                <Link to={`/add${this.state.url}`}>Add {this.state.url.slice(1, -1)}</Link>
                 </li>
                 <li>
                   {/* pokaz lub schowaj dialog do rejestracji lub logowania */}
@@ -129,7 +129,7 @@ class Application extends React.Component {
             <Route path={'/mates/:offerId'}>
               <MateDetailPage/>
             </Route>
-            <Route path="/mate/add">
+            <Route path="/add/mates">
               <AddMatePage />
             </Route>
             <Route path="/mate/list">
