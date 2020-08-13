@@ -158,7 +158,7 @@ def user_mate_detail(request):
 
 
     elif request.method == 'PUT':
-        offer = get_object_or_404(MateOffer,  id=data['id'], owner=data['owner'])
+        offer = get_object_or_404(MateOffer,  id=data['id'])
         serializer = MateOfferDetailSerializer(offer, data=data)
         if serializer.is_valid():
             serializer.save()
@@ -166,7 +166,7 @@ def user_mate_detail(request):
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        offer = get_object_or_404(MateOffer,  id=data['id'])
+        offer = get_object_or_404(MateOffer, id=data['id'])
 
         # delete image file
         if offer.image:

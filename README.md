@@ -14,6 +14,7 @@ TODO:
 - map?
 - captcha in register
 - confirmation mail
+- creation/edit confirmation screen
 - detail - 'blurring' not active photos - like in https://www.immowelt.de/expose/2ubvz4y?bc=13
 - connection between sites - sugestion of rooms in flatmate app
 - drag and drop https://react-dnd.github.io/react-dnd/about

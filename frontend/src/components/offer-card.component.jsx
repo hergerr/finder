@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { StyledTrash, StyledEdit } from './account-utils.component';
-import {static_host} from '../assets/global-settings';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 80%;
@@ -48,6 +48,8 @@ const IconWrapper = styled.div`
 
 export const OfferCard = (props) => {
 
+    let history = useHistory();
+
     let content;
     if (props.type === 'room') {
         content = <TextWrapper>
@@ -61,7 +63,7 @@ export const OfferCard = (props) => {
             <Title>{props.title}</Title>
             <TextContent>{props.age}</TextContent>
             <TextContent>{props.location}</TextContent>
-            <TextContent>{props.features.replace(/;/g, ' #')}</TextContent>
+            <TextContent>#{props.features.replace(/;/g, ' #')}</TextContent>
         </TextWrapper>
     }
 
@@ -74,7 +76,9 @@ export const OfferCard = (props) => {
             </Link>
 
             <IconWrapper>
-                <StyledEdit />
+                <StyledEdit onClick={e=>{
+                    history.push(`/edit/mates/${props.id}`)
+                }}/>
                 <StyledTrash onClick={e => {
                     props.handleDelete(props.type, props.id)
                 }} />

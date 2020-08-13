@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import FormData from 'form-data';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import { Formik } from "formik";
 import { InputAndLabel } from '../components/input-and-label.component';
-import { CheckboxAndLabel } from '../components/checkbox-and-label.component';
 import { SmallInputAndLabel } from '../components/small-input-and-label';
 import { SearchButton } from '../components/search-button.component';
 import { FileInput } from '../components/file-input.component';
@@ -68,21 +68,40 @@ const Feedback = styled.div`
 
 
 class AddMatePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { data: [] };
+    }
+
+    componentDidMount() {
+        if (this.props.match.url.includes('edit')) {
+            axios.get(`http://localhost:8000/mate_offer_detail/${this.props.match.params.offerId}`).then(res => {
+                if (res.status === 200) {
+                    this.setState({ data: res.data });
+                }
+            })
+        }
+    }
 
     render() {
+        const data = this.state.data;
+
         return (
             <Container>
                 <Formik
+                    // https://stackoverflow.com/questions/53920132/how-to-pass-state-values-to-initial-values-in-formik-in-react-js
+                    enableReinitialize
+
+                    // TODO warning
                     initialValues={{
-                        title: '',
-                        field_of_study: '',
-                        age: '',
-                        pets: false,
-                        parties: false,
-                        features: '',
-                        customs: '',
-                        location: '',
-                        phone: '',
+                        title: data.title,
+                        field_of_study: data.field_of_study,
+                        age: data.age,
+                        features: data.features,
+                        customs: data.customs,
+                        location: data.location,
+                        phone: data.phone,
+                        file: data.image,
                     }}
 
                     validationSchema={Yup.object({
@@ -108,6 +127,8 @@ class AddMatePage extends React.Component {
                     })}
 
                     onSubmit={values => {
+
+                        // TODO image in edit
                         // https://stackoverflow.com/questions/39663961/how-do-you-send-images-to-node-js-with-axios
                         let data = new FormData();
                         data.append('image', values.file, values.file.fileName);
@@ -119,19 +140,18 @@ class AddMatePage extends React.Component {
                         data.append('customs', values.customs);
                         data.append('phone', values.phone);
 
-                        axios.post('http://localhost:8000/user_mate_detail/', data, {
-                            headers: {
-                                'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-                                'Authorization': `Bearer ${localStorage.getItem('access')}`
-                            }
-                        })
+                        const headers = {
+                            'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+                            'Authorization': `Bearer ${localStorage.getItem('access')}`
+                        }
 
-                        console.log({
-                            fileName: values.file.name,
-                            type: values.file.type,
-                            size: `${values.file.size} bytes`
-                        })
-                        console.log(values);
+                        if (this.props.match.url.includes('edit')) {
+                            data.append('id', this.props.match.params.offerId)
+                            axios.put('http://localhost:8000/user_mate_detail/', data, { headers });
+                        } else {
+                            axios.post('http://localhost:8000/user_mate_detail/', data, headers);
+                        }
+
                     }}
                 >
                     {props => (
@@ -160,9 +180,6 @@ class AddMatePage extends React.Component {
                                     {props.errors.location && <Feedback>{props.errors.location}</Feedback>}
                                 </div>
                             </SecondRow>
-
-                            {/* <ThirdRow>
-                            </ThirdRow> */}
 
                             <ThirdRow>
                                 <InputAndLabel label="Personal features. Separtate with semicolon" id="features" name="features" value={props.values.features} onChange={props.handleChange} />
@@ -205,4 +222,4 @@ class AddMatePage extends React.Component {
 
 }
 
-export { AddMatePage }
+export default withRouter(AddMatePage)

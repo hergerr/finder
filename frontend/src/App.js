@@ -13,7 +13,7 @@ import { MateListPage } from './pages/mate-list.page';
 import MateDetailPage from './pages/mate-detail.page';
 import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
-import { AddMatePage } from './pages/add-mate.page';
+import AddMatePage from './pages/add-mate.page';
 import ConversationPage from './pages/conversation.page';
 
 const App = styled.div`
@@ -130,6 +130,9 @@ class Application extends React.Component {
               <MateDetailPage/>
             </Route>
             <Route path="/add/mates">
+              <AddMatePage />
+            </Route>
+            <Route path="/edit/mates/:offerId">
               <AddMatePage />
             </Route>
             <Route path="/mate/list">
