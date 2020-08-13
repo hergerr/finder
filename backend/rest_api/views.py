@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -55,6 +56,24 @@ def get_all_mate_list_offers(request):
 def get_mate_offer_detail(request, mate_offer_id):
     data = get_object_or_404(MateOffer, id=mate_offer_id)
     serializer = MateOfferDetailSerializer(data)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def search_mates(request, age_from, age_to, district, features, customs):
+    data = MateOffer.objects.filter(age__gte=age_from, age__lte=age_to)
+
+    if district:
+        data = Mateoffer.objects.filter(district=district)
+    
+    if features:
+        data = MateOffer.objects.filter(Q(features__icontains=feaures))
+    
+    if customs:
+        data = MateOffer.objects.filter(Q(customs__icontains=customs))
+
+    serializer = MateOfferListSerializer(data, many=True)
     return Response(serializer.data)
 
 

@@ -9,7 +9,7 @@ import {
 import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing.page';
-import { MateListPage } from './pages/mate-list.page';
+import MateListPage from './pages/mate-list.page';
 import MateDetailPage from './pages/mate-detail.page';
 import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
@@ -135,7 +135,8 @@ class Application extends React.Component {
             <Route path="/edit/mates/:offerId">
               <AddMatePage />
             </Route>
-            <Route path="/mate/list">
+            {/* https://www.digitalocean.com/community/tutorials/react-react-router-optional-parameters */}
+            <Route path="/mate/list/:ageFrom/:ageTo/:district?/:features?/:customs?">
               <MateListPage />
             </Route>
             <Route path="/account">

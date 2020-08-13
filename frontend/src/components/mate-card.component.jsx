@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useHistory } from "react-router-dom";
 import { HeartOutline } from '@styled-icons/evaicons-outline';
 import { Heart } from '@styled-icons/evaicons-solid';
+import { static_host } from '../assets/global-settings';
 
 
 const Container = styled.div`
@@ -75,7 +76,7 @@ export const MateCard = (props) => {
 
     return (
         <Container>
-            <Image src={props.src} onClick={handleRedirect}/>
+            <Image src={`${static_host}${props.src}`} onClick={handleRedirect}/>
             <Description>
                 <Title onClick={handleRedirect}>{props.title}</Title>
                 <Detail>{props.age}</Detail>
