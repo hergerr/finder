@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    margin: 0 auto;
+    margin: 0 ${props => props.pos === "left" ? "0" : "auto"} ;
 `
 
 const Label = styled.div`
@@ -21,7 +21,7 @@ const Input = styled.input`
 `
 
 export const SmallInputAndLabel = (props) => (
-    <Container>
+    <Container pos={props.pos}>
         <Label>{props.label}</Label>
         <Input type={props.type} id={props.id} onChange={props.onChange} value={props.value}></Input>
     </Container>

@@ -114,7 +114,7 @@ class Application extends React.Component {
                 </li>
                 <li>
                   {/* pokaz lub schowaj dialog do rejestracji lub logowania */}
-                  <Link to="/" onClick={e => {
+                  <Link to="/account" onClick={e => {
                     this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
                   }}>My account</Link>
                 </li>

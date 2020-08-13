@@ -5,12 +5,10 @@ import FormData from 'form-data';
 import axios from 'axios';
 import { Formik } from "formik";
 import { InputAndLabel } from '../components/input-and-label.component';
-import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component';
 import { CheckboxAndLabel } from '../components/checkbox-and-label.component';
 import { SmallInputAndLabel } from '../components/small-input-and-label';
-import { FeatureBox } from '../components/feature-box.component';
-import { AddButton } from '../components/add-button.component';
 import { SearchButton } from '../components/search-button.component';
+import { FileInput } from '../components/file-input.component';
 
 const Container = styled.div`
     width: 70%;
@@ -21,6 +19,7 @@ const Container = styled.div`
 
 const SecondRow = styled.div`
     display: flex;
+    justify-content: space-between;
 `
 
 const ThirdRow = styled.div`
@@ -29,35 +28,46 @@ const ThirdRow = styled.div`
 `
 
 const ForthRow = styled.div`
-    width: 200px;
 `
 
-const Features = styled.div`
-    margin-top: 70px;
-    display: flex;
-    flex-direction: column;
+const FifthRow = styled.div`
 `
 
-const Title = styled.h3`
-    font-size: 25px;
-`
+// const Features = styled.div`
+//     margin-top: 70px;
+//     display: flex;
+//     flex-direction: column;
+// `
 
-const Description = styled.p`
-    font-size: 15px;
-`
+// const Title = styled.h3`
+//     font-size: 25px;
+// `
 
-const BoxesWrapper = styled.div`
-    display:flex;
-`
+// const Description = styled.p`
+//     font-size: 15px;
+// `
 
-const FormWrapper = styled.form`
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 500px;
-`
+// const BoxesWrapper = styled.div`
+//     display:flex;
+// `
+
+// const FormWrapper = styled.form`
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+//     width: 500px;
+// `
 
 const BigForm = styled.form`
+`
+
+const ButtonWrapper = styled.div`
+    text-align: center;
+    margin: 10px 0;
+`
+
+const Feedback = styled.div`
+    color: red;
 `
 
 
@@ -68,26 +78,37 @@ class AddMatePage extends React.Component {
             <Container>
                 <Formik
                     initialValues={{
-                        title: 'adsdasd',
-                        age: 0,
-                        field_of_study: 'a',
-                        goes_to_bed: 0,
-                        wakes_up: 0,
+                        title: '',
+                        field_of_study: '',
+                        age: '',
                         pets: false,
                         parties: false,
+                        features: '',
+                        customs: '',
+                        location: '',
+                        phone: '',
                     }}
 
                     validationSchema={Yup.object({
+                        title: Yup.string()
+                            .required('cannot be empty'),
                         age: Yup.number()
-                            .min(0, 'Must be greater or equal 0'),
+                            .min(0, 'Must be greater or equal 0')
+                            .required('cannot be empty'),
                         goes_to_bed: Yup.number()
                             .min(0, 'Must be greater or equal 0'),
                         wakes_up: Yup.number()
                             .min(0, 'Must be greater or equal 0'),
                         field_of_study: Yup.string()
                             .required('cannot be empty'),
-                        title: Yup.string()
+                        location: Yup.string()
                             .required('cannot be empty'),
+                        phone: Yup.string()
+                            .required('cannot be empty'),
+                        features: Yup.string()
+                            .required('cannot be empty'),
+                        customs: Yup.string()
+                            .required('cannot be empty')
                     })}
 
                     onSubmit={values => {
@@ -100,13 +121,13 @@ class AddMatePage extends React.Component {
                         data.append('location', 'Plac');
                         data.append('features', 'peaceful;quiet;gaming;cycling');
                         data.append('customs', 'no smoking;no partying;wakes up at 11-12;goes to bed 23-24');
-                        data.append('phone', '123456789');
-                        
+                        data.append('phone', values.phone);
+
                         axios.post('http://localhost:8000/user_mate_detail/', data, {
                             headers: {
                                 'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
                                 'Authorization': `Bearer ${localStorage.getItem('access')}`
-                              }
+                            }
                         })
 
                         console.log({
@@ -121,33 +142,46 @@ class AddMatePage extends React.Component {
                         <BigForm onSubmit={props.handleSubmit}>
 
                             <InputAndLabel label="Title" id="title" name="title" value={props.values.title} onChange={props.handleChange} />
-
-                            <input id="file" name="file" type="file" onChange={(event) => {
-                                props.setFieldValue("file", event.currentTarget.files[0]);
-                            }} />
+                            {props.errors.title && <Feedback>{props.errors.title}</Feedback>}
+                            <FileInput setFieldValue={props.setFieldValue} />
 
                             <SecondRow>
-                                <SmallInputAndLabel label="Age" id="age" name="age" value={props.values.age} onChange={props.handleChange} />
-                                <SmallInputAndLabel label="Field of study" id="field_of_study" name="field_of_study" value={props.values.field_of_study} onChange={props.handleChange} />
+                                <SmallInputAndLabel pos="left" label="Age" id="age" name="age" value={props.values.age} onChange={props.handleChange} />
+                                {props.errors.age && <Feedback>{props.errors.age}</Feedback>}
+                                <SmallInputAndLabel pos="left" label="Field of study" id="field_of_study" name="field_of_study" value={props.values.field_of_study} onChange={props.handleChange} />
+                                {props.errors.field_of_study && <Feedback>{props.errors.field_of_study}</Feedback>}
+                                <SmallInputAndLabel pos="left" label="Phone" id="phone" name="phone" value={props.values.phone} onChange={props.handleChange} />
+                                {props.errors.phone && <Feedback>{props.errors.phone}</Feedback>}
+                                <SmallInputAndLabel pos="left" label="Location" id="location" name="location" value={props.values.location} onChange={props.handleChange} />
+                                {props.errors.location && <Feedback>{props.errors.location}</Feedback>}
                             </SecondRow>
 
                             <ThirdRow>
-                                <TwoInputsAndLabel label="Goes to bed" id="goes_to_bed" name="goes_to_bed" value={props.values.goes_to_bed} onChange={props.handleChange} />
-                                <TwoInputsAndLabel label="Wakes up" id="wakes_up" name="wakes_up" value={props.values.wakes_up} onChange={props.handleChange} />
+                                <CheckboxAndLabel label="Pets" id="pets" name="pets" value={props.values.pets} onChange={props.handleChange} />
+                                {props.errors.pets && <Feedback>{props.errors.pets}</Feedback>}
+                                <CheckboxAndLabel label="Parties" id="parties" name="parties" value={props.values.parties} onChange={props.handleChange} />
+                                {props.errors.parties && <Feedback>{props.errors.parties}</Feedback>}
                             </ThirdRow>
 
                             <ForthRow>
-                                <CheckboxAndLabel label="Pets" id="pets" name="pets" value={props.values.pets} onChange={props.handleChange} />
-                                <CheckboxAndLabel label="Parties" id="parties" name="parties" value={props.values.parties} onChange={props.handleChange} />
+                                <InputAndLabel label="Personal features. Separtate with semicolon" id="features" name="features" value={props.values.features} onChange={props.handleChange} />
+                                {props.errors.features && <Feedback>{props.errors.features}</Feedback>}
                             </ForthRow>
 
-                            <SearchButton>Submit</SearchButton>
+                            <FifthRow>
+                                <InputAndLabel label="Customs. Separtate with semicolon" id="customs" name="customs" value={props.values.customs} onChange={props.handleChange} />
+                                {props.errors.customs && <Feedback>{props.errors.customs}</Feedback>}
+                            </FifthRow>
+
+                            <ButtonWrapper>
+                                <SearchButton>Submit</SearchButton>
+                            </ButtonWrapper>
                         </BigForm>
                     )}
                 </Formik>
 
 
-                <Features>
+                {/* <Features>
                     <Title>Personal features</Title>
                     <Description>Write your features or things you enjoy</Description>
 
@@ -162,7 +196,7 @@ class AddMatePage extends React.Component {
                 <FormWrapper>
                     <SmallInputAndLabel label="Add" />
                     <AddButton content="OK" />
-                </FormWrapper>
+                </FormWrapper> */}
 
             </Container>
         )
