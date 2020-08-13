@@ -139,6 +139,13 @@ curl \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"title": "Peaceful IT student", "age": "22", "location": "Grunwaldzki Square", "field_of_study": "Computer science", "features":"peaceful;quiet;gaming;cycling", "customs": "no smoking;no partying;wakes up at 11-12;goes to bed 23-24", "phone":"123456789"}' \
   http://localhost:8000/user_mate_detail/
+
+  # with photo
+
+  curl \
+  -X POST \
+  -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk"  \
+  -F "title=Peaceful IT student" -F "age=22" -F "location=Grunwaldzki Square" -F "field_of_study=Computer science" -F "features=peaceful;quiet;gaming;cycling" -F "customs=no smoking;no partying;wakes up at 11-12;goes to bed 23-24" -F "phone=123456789" -F "image=@/home/tymek/Downloads/117423304_2349618858677882_3226012051360263266_n.jpg" http://localhost:8000/user_mate_detail/
 ```
 - delete mate offer
 ```bash
@@ -157,13 +164,6 @@ curl \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9.vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk" \
   -d '{"id":"3", "title": "Peaceful IT student", "age": "20", "location": "Grunwaldzki Square", "field_of_study": "Computer science", "features":"peaceful;quiet;gaming;cycling", "customs": "no smoking;no partying;wakes up at 11-12;goes to bed 23-24", "phone":"123456789"}' \
   http://localhost:8000/user_mate_detail/
-
-  # with photo
-
-  curl \
-  -X POST \
-  -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NDI3MDg3LCJqdGkiOiI1ZWM4N2E4YWY3NWM0ZDZkYjE3YWJlNzY4ODIwM2YyMCIsInVzZXJfaWQiOjF9vZ61ur3AYGDt3zHhg1c62FKTBDiOSE-U6pRXFL5AIAk"  \
-  -F "title=Peaceful IT student" -F "age=22" -F "location=Grunwaldzki Square" -F "field_of_study=Computer science" -F "features=peaceful;quiet;gaming;cycling" -F "customs=no smoking;no partying;wakes up at 11-12;goes to bed 23-24" -F "phone=123456789" -F "image=@/home/tymek/Downloads/117423304_2349618858677882_3226012051360263266_n.jpg" http://localhost:8000/user_mate_detail/
 ```
 
 - get user's mate offers

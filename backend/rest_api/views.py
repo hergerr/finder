@@ -150,11 +150,19 @@ def user_mate_detail(request):
     data['owner'] = request.user.id
 
     if request.method == 'POST':
-        serializer = MateOfferDetailSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+        print(request.data)
+        try:
+            serializer = MateOfferDetailSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=201)
+            return JsonResponse(serializer.errors, status=400)
+        except:    
+            import traceback
+            for line in traceback.format_exc().splitlines():
+                print(line)    
+            return Response(status=400)
+
 
     elif request.method == 'PUT':
         offer = get_object_or_404(MateOffer,  id=data['id'], owner=data['owner'])
