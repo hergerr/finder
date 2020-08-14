@@ -11,19 +11,23 @@ import { MateCard } from '../components/mate-card.component';
 
 const Container = styled.div`
     width: 100%;
-
 `
 
 const FormWrapper = styled.form`
-    width: 90%;
+    width: 70%;
+    margin-bottom: 50px;
     margin: 50px auto;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: flex-start;
+
+    button {
+        align-self:flex-end;
+    }
 `
 
+const Feedback = styled.div`
+    color: red;
+`
 
 class MateListPage extends React.Component {
     constructor(props) {
@@ -32,7 +36,7 @@ class MateListPage extends React.Component {
     }
 
 
-    componentDidMount() {
+    handleLoad = () => {
         const data = this.props.match.params;
         axios.get(`http://localhost:8000/search_mates/${data.ageFrom}/${data.ageTo}/${data.location ? data.location : ''}/${data.features ? data.features : ''}/${data.customs ? data.customs : ''}`).then(res => {
             this.setState({ data: res.data });
@@ -52,6 +56,10 @@ class MateListPage extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.handleLoad();
+    }
+
     render() {
 
         return (
@@ -62,6 +70,7 @@ class MateListPage extends React.Component {
                         ageTo: 100,
                         district: '',
                         features: '',
+                        customs: '',
                     }}
 
                     validationSchema={Yup.object({
@@ -74,21 +83,26 @@ class MateListPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        alert(JSON.stringify(values, null, 2));
+                        this.props.history.push(`/mate/list/${values.ageFrom}/${values.ageTo}/${values.district}/${values.features}/${values.customs}`);
+                        this.handleLoad();
                     }}
                 >
                     {props => (
                         <FormWrapper onSubmit={props.handleSubmit}>
-                            <TwoInputsAndLabel label="Age" idFrom="ageFrom" idTo="ageTo" nameFrom="ageFrom" nameTo="ageTo" onChange={props.handleChange} valueFrom={props.values.ageFrom} valueTo={props.values.ageTo} />
-                            {/* komunikat jesli walidacja sie nie powiedzie */}
-                            {props.touched.ageFrom && props.errors.ageFrom ? (
-                                <div>{props.errors.ageFrom}</div>
-                            ) : null}
-                            {props.touched.ageTo && props.errors.ageTo ? (
-                                <div>{props.errors.ageTo}</div>
-                            ) : null}
+                            <div>
+                                <TwoInputsAndLabel label="Age" idFrom="ageFrom" idTo="ageTo" nameFrom="ageFrom" nameTo="ageTo" onChange={props.handleChange} valueFrom={props.values.ageFrom} valueTo={props.values.ageTo} />
+                                {/* komunikat jesli walidacja sie nie powiedzie */}
+                                {props.touched.ageFrom && props.errors.ageFrom ? (
+                                    <Feedback>{props.errors.ageFrom}</Feedback>
+                                ) : null}
+                                {props.touched.ageTo && props.errors.ageTo ? (
+                                    <Feedback>{props.errors.ageTo}</Feedback>
+                                ) : null}
+                            </div>
+
                             <SmallInputAndLabel label="District" id="district" name="district" onChange={props.handleChange} value={props.values.district} />
                             <SmallInputAndLabel label="Personal features" id="features" name="features" onChange={props.handleChange} value={props.values.features} />
+                            <SmallInputAndLabel label="Personal customs" id="customs" name="customs" onChange={props.handleChange} value={props.values.customs} />
 
                             <SearchButton>Filter</SearchButton>
                         </FormWrapper>
@@ -101,7 +115,7 @@ class MateListPage extends React.Component {
                             return <MateCard liked={true} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} />
                         else
                             return <MateCard liked={false} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} />
-                        
+
                     })
                 }
 

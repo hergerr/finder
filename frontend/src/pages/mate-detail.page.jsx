@@ -101,7 +101,7 @@ class MateDetailPage extends React.Component {
         return (
             <Container>
 
-                <Title>{this.state.data.title}t</Title>
+                <Title>{this.state.data.title}</Title>
                 <PhotoWrapper>
                     <Photo src={`${static_host}${this.state.data.image}`} />
                 </PhotoWrapper>
