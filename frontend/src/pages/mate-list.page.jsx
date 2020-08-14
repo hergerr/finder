@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import axios from 'axios';
+import * as queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import { Formik } from 'formik';
 import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component';
@@ -37,8 +38,9 @@ class MateListPage extends React.Component {
 
 
     handleLoad = () => {
-        const data = this.props.match.params;
-        axios.get(`http://localhost:8000/search_mates/${data.ageFrom}/${data.ageTo}/${data.location ? data.location : ''}/${data.features ? data.features : ''}/${data.customs ? data.customs : ''}`).then(res => {
+        const data = queryString.parse(this.props.history.location.search);
+        const url = `http://localhost:8000/search_mates/?ageFrom=${data.ageFrom}&ageTo=${data.ageTo}&district=${data.district}&features=${data.features}&customs=${data.customs}`
+        axios.get(url).then(res => {
             this.setState({ data: res.data });
         })
 
@@ -83,7 +85,8 @@ class MateListPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        this.props.history.push(`/mate/list/${values.ageFrom}/${values.ageTo}/${values.district}/${values.features}/${values.customs}`);
+                        const url = `/mate/list/?ageFrom=${values.ageFrom}&ageTo=${values.ageTo}&district=${values.district ? values.district : ''}&features=${values.features ? values.features : ''}&customs=${values.customs ? values.customs : ''}`
+                        this.props.history.push(url);
                         this.handleLoad();
                     }}
                 >
@@ -112,9 +115,9 @@ class MateListPage extends React.Component {
                 {
                     this.state.data.map((element) => {
                         if (this.state.favIds.includes(element.id))
-                            return <MateCard liked={true} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} />
+                            return <MateCard liked={true} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} customs={element.customs} />
                         else
-                            return <MateCard liked={false} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} />
+                            return <MateCard liked={false} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} customs={element.customs} />
 
                     })
                 }

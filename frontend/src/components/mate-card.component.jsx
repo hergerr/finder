@@ -113,6 +113,7 @@ export const MateCard = (props) => {
                 <Detail>{props.age}</Detail>
                 <Detail>{props.location}</Detail>
                 <Detail>#{props.features.replace(/;/g, ' #')}</Detail>
+                <Detail>#{props.customs.replace(/;/g, ' #')}</Detail>
             </Description>
             {heart}
 

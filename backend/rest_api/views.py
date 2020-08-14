@@ -61,21 +61,21 @@ def get_mate_offer_detail(request, mate_offer_id):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def search_mates(request, age_from, age_to, district, features, customs):
-    data = MateOffer.objects.filter(age__gte=age_from, age__lte=age_to)
+def search_mates(request):
+    params = request.GET
+    data = MateOffer.objects.filter(age__gte=params['ageFrom'], age__lte=params['ageTo'])
 
-    if district:
-        data = Mateoffer.objects.filter(district=district)
+    if params['district']:
+        data = data.filter(district=params['district'])
     
-    if features:
-        data = MateOffer.objects.filter(Q(features__icontains=feaures))
+    if params['features']:
+        data = data.filter(Q(features__icontains=params['features']))
     
-    if customs:
-        data = MateOffer.objects.filter(Q(customs__icontains=customs))
+    if params['customs']:
+        data = data.filter(Q(customs__icontains=params['customs']))
 
     serializer = MateOfferListSerializer(data, many=True)
     return Response(serializer.data)
-
 
 # -----------------------USER VIEWS----------------------
 

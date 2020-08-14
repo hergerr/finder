@@ -50,7 +50,7 @@ export const MatePopup = (props) => {
         }),
 
         onSubmit: values => {
-            history.push(`/mate/list/${values.ageFrom}/${values.ageTo}/${values.district}/${values.features}/${values.customs}`);
+            history.push(`/mate/list?ageFrom=${values.ageFrom}&ageTo=${values.ageTo}&district=${values.district}&features=${values.features}&customs=${values.customs}`);
         },
     });
 

@@ -9,7 +9,8 @@ urlpatterns = [
     
     path('all_mate_offers_list/', views.get_all_mate_list_offers),
     path('mate_offer_detail/<int:mate_offer_id>', views.get_mate_offer_detail),
-    re_path(r'^search_mates/(?P<age_from>[0-9]+)/(?P<age_to>[0-9]+)/(?P<district>\w*)/(?P<features>\w*)/(?P<customs>\w*)$', views.search_mates),
+    # https://stackoverflow.com/a/3711426
+    re_path(r'^search_mates/$', views.search_mates),
    
     # ------ USER VIEWS -----
     path('user_room_detail/', views.user_room_detail),

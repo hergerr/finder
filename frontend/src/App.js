@@ -136,7 +136,7 @@ class Application extends React.Component {
               <AddMatePage />
             </Route>
             {/* https://www.digitalocean.com/community/tutorials/react-react-router-optional-parameters */}
-            <Route path="/mate/list/:ageFrom/:ageTo/:district?/:features?/:customs?">
+            <Route path="/mate/list/">
               <MateListPage />
             </Route>
             <Route path="/account">
