@@ -149,7 +149,7 @@ class AddMatePage extends React.Component {
                             data.append('id', this.props.match.params.offerId)
                             axios.put('http://localhost:8000/user_mate_detail/', data, { headers });
                         } else {
-                            axios.post('http://localhost:8000/user_mate_detail/', data, headers);
+                            axios.post('http://localhost:8000/user_mate_detail/', data, { headers });
                         }
 
                     }}
