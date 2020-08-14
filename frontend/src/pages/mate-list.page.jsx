@@ -118,7 +118,6 @@ class MateListPage extends React.Component {
                             return <MateCard liked={true} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} customs={element.customs} />
                         else
                             return <MateCard liked={false} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} customs={element.customs} />
-
                     })
                 }
 

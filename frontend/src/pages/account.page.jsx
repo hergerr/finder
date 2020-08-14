@@ -254,7 +254,7 @@ class AccountPage extends React.Component {
                                             id={element.id}
                                             key={element.id}
                                             subject={element.subject}
-                                            last_message={element.message[this.state.messages[0].message.length - 1].content}
+                                            last_message={element.message.slice(-1)[0].content}
                                             email={element.members[1].email}
                                         />
                                     </Link>

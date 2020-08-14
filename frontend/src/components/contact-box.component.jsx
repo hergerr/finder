@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import { SearchButton } from '../components/search-button.component';
 
 
@@ -49,16 +52,41 @@ const TextArea = styled.textarea`
     margin-bottom: 10px;
 `
 
-export const ContactBox = (props) => (
-    <ContactContainer>
-        <ContactTitle>Contact</ContactTitle>
+export const ContactBox = (props) => {
+    const formik = useFormik({
 
-        <ContactContentWrapper>
-            <Phone>{props.phone}</Phone>
-            <FormWrapper>
-                <TextArea />
-                <SearchButton>Send</SearchButton>
-            </FormWrapper>
-        </ContactContentWrapper>
-    </ContactContainer>
-)
+        initialValues: {
+            message: '',
+        },
+        
+        validationSchema: Yup.object({
+            message: Yup.string().required('cannot be empty')
+        }),
+
+        onSubmit: values => {
+            axios.post(`http://localhost:8000/send_message/`, { content: values.message, receiver: props.receiver, subject: props.subject }, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
+            }).then(res => {
+                if (res.status === 200) {
+                    console.log('wyslano')
+                }
+            })
+        },
+
+    });
+
+    return (
+        <ContactContainer>
+            <ContactTitle>Contact</ContactTitle>
+
+            <ContactContentWrapper>
+                <Phone>{props.phone}</Phone>
+                <FormWrapper onSubmit={formik.handleSubmit}>
+                    <TextArea name="message" id="message" onChange={formik.handleChange} value={formik.values.message}/>
+                    <SearchButton>Send</SearchButton>
+                </FormWrapper>
+            </ContactContentWrapper>
+        </ContactContainer>
+    )
+
+}

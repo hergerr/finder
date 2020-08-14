@@ -81,6 +81,7 @@ class MateDetailPage extends React.Component {
         axios.get(`http://localhost:8000/mate_offer_detail/${this.props.match.params.offerId}`).then(res => {
             if (res.status === 200) {
                 this.setState({ data: res.data });
+                console.log(this.state.data);
             }
         })
     }
@@ -128,7 +129,7 @@ class MateDetailPage extends React.Component {
                 <WhiteBorder/>
                 <DetailBlock title="Customs" features={customs}/>
 
-                <ContactBox phone={this.state.data.phone}/>
+                <ContactBox phone={this.state.data.phone} receiver={this.state.data.owner} subject={this.state.data.title}/>
             </Container>
         )
     }
