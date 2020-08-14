@@ -5,11 +5,9 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { Formik } from 'formik';
 import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component';
-import { CheckboxAndLabel } from '../components/checkbox-and-label.component';
 import { SmallInputAndLabel } from '../components/small-input-and-label';
 import { SearchButton } from '../components/search-button.component';
 import { MateCard } from '../components/mate-card.component';
-import mate_landing from '../assets/images/mate_landing.jpg';
 
 const Container = styled.div`
     width: 100%;
@@ -30,7 +28,7 @@ const FormWrapper = styled.form`
 class MateListPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = { data: [], favIds: [] };
     }
 
 
@@ -39,6 +37,19 @@ class MateListPage extends React.Component {
         axios.get(`http://localhost:8000/search_mates/${data.ageFrom}/${data.ageTo}/${data.location ? data.location : ''}/${data.features ? data.features : ''}/${data.customs ? data.customs : ''}`).then(res => {
             this.setState({ data: res.data });
         })
+
+        if (localStorage.getItem('access')) {
+
+            axios.get('http://localhost:8000/get_liked_mate_offers/', {
+                headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
+            }
+            ).then(res => {
+                if (res.status === 200) {
+                    let favIds = res.data.map((element) => (element.id))
+                    this.setState({ favIds: favIds });
+                }
+            })
+        }
     }
 
     render() {
@@ -85,9 +96,13 @@ class MateListPage extends React.Component {
                 </Formik>
 
                 {
-                    this.state.data.map((element) => (
-                        <MateCard src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} />
-                    ))
+                    this.state.data.map((element) => {
+                        if (this.state.favIds.includes(element.id))
+                            return <MateCard liked={true} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} />
+                        else
+                            return <MateCard liked={false} key={element.id} id={element.id} src={element.image} title={element.title} age={element.age} location={element.location} features={element.features} />
+                        
+                    })
                 }
 
             </Container>

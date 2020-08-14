@@ -238,6 +238,7 @@ class AccountPage extends React.Component {
                                         location={element.location}
                                         features={element.features}
                                         handleDelete={this.handleFavDelete}
+                                        image={element.image}
                                     />
 
                                 )

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { StyledTrash } from './account-utils.component';
-import room_landing from '../assets/images/room_landing.jpg';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 80%;
@@ -61,7 +61,7 @@ export const FavCard = (props) => {
             <Title>{props.title}</Title>
             <TextContent>{props.age}</TextContent>
             <TextContent>{props.location}</TextContent>
-            <TextContent>{props.features.replace(/;/g, ' #')}</TextContent>
+            <TextContent>#{props.features.replace(/;/g, ' #')}</TextContent>
         </TextWrapper>
     }
 
@@ -70,7 +70,7 @@ export const FavCard = (props) => {
         <Container>
 
             <Link to={props.link_to} >
-                <Image src={room_landing} />
+                <Image src={`${static_host}${props.image}`} />
                 {content}
             </Link>
 
