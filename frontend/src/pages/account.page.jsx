@@ -4,6 +4,7 @@ import {
     Switch,
     Route,
     Link,
+    NavLink,
     withRouter
 } from "react-router-dom";
 import axios from 'axios';
@@ -31,6 +32,14 @@ const MenuContainer = styled.div`
         font-weight: bold;
     }
 
+`
+
+const activeClassName = 'nav-item-active'
+
+const StyledLink = styled(NavLink).attrs({ activeClassName })`
+  &.${activeClassName} {
+    color: var(--color-orange);
+  }
 `
 
 
@@ -161,14 +170,14 @@ class AccountPage extends React.Component {
 
             <Container>
                 <MenuContainer>
-                    <Link to={`${this.props.match.url}/messages`}>Messages</Link>
-                    <Link to={`${this.props.match.url}/offers`}>Offers</Link>
-                    <Link to={`${this.props.match.url}/favs`}>Favourites</Link>
+                    <StyledLink to={`${this.props.match.url}/messages`}>Messages</StyledLink>
+                    <StyledLink to={`${this.props.match.url}/offers`}>Offers</StyledLink>
+                    <StyledLink to={`${this.props.match.url}/favs`}>Favourites</StyledLink>
                 </MenuContainer>
 
                 <Switch>
                     <Route path={`${this.props.match.url}/offers`}>
-                    {
+                        {
                             this.state.roomOffers.map(
                                 (element) => (
                                     <OfferCard

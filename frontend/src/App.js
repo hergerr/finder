@@ -150,9 +150,9 @@ class Application extends React.Component {
                 <li>
                   <Link to={this.state.url} onClick={e => {
                     if (this.state.url === "/mates") {
-                      this.setState({ url: "/rooms", title: "mate", buttonText: "mate" });
+                      this.setState({ url: "/rooms", title: "mate", buttonText: "room" });
                     } else {
-                      this.setState({ url: "/mates", title: "room", buttonText: "room" });
+                      this.setState({ url: "/mates", title: "room", buttonText: "mate" });
                     }
                   }}>Find {this.state.buttonText}</Link>
                 </li>
