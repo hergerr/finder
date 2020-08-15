@@ -17,6 +17,8 @@ import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
 import AddMatePage from './pages/add-mate.page';
 import ConversationPage from './pages/conversation.page';
+import { LoginPopup } from './components/login-popup.component';
+import { getSession, logOut } from './assets/auth-utils';
 
 const App = styled.div`
   width: 100%;
@@ -49,6 +51,7 @@ const Nav = styled.nav`
       padding: 1px 16px;
       text-decoration: none;
       color: black;
+      cursor: pointer;
     }
   }
 `
@@ -71,11 +74,27 @@ const Logo = styled.p`
 class Application extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { url: "/rooms", title: "mate", buttonText: "room", displayLoginPopup: false, displayRegisterPopup: false };
+    this.state = { url: "/rooms", title: "mate", buttonText: "room", displayLoginPopup: false, displayRegisterPopup: false, logged: false, userData: {} };
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    const session = getSession();
 
+    if (session) {
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
+      };
+
+      axios.get('http://localhost:8000/get_user/',
+        config).then(res => {
+          if (res.status === 200) {
+            this.setState({ logged: true });
+            this.setState({ userData: res.data })
+            console.log(this.state.userData);
+          }
+        })
+
+    }
   }
 
   handleLoginClosing = (e) => {
@@ -90,6 +109,10 @@ class Application extends React.Component {
     this.setState({ displayRegisterPopup: !this.state.displayRegisterPopup });
 
     this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
+  }
+
+  handleLoginButtonChange = (e) => {
+    this.setState({ logged: true });
   }
 
   render() {
@@ -107,6 +130,20 @@ class Application extends React.Component {
             <Nav>
               <ul>
                 <li>
+                  {}
+                  <a onClick={e => {
+                    if (!this.state.logged) {
+                      this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
+                    }
+                    else if (this.state.logged) {
+                      logOut();
+                      this.setState({ logged: false });
+                    }
+                  }}>
+                    {this.state.logged ? "Logout" : "Login"}
+                  </a>
+                </li>
+                <li>
                   <Link to={this.state.url} onClick={e => {
                     if (this.state.url === "/mates") {
                       this.setState({ url: "/rooms", title: "mate", buttonText: "mate" });
@@ -119,7 +156,6 @@ class Application extends React.Component {
                   <Link to={`/add${this.state.url}`}>Add {this.state.url.slice(1, -1)}</Link>
                 </li>
                 <li>
-                  {/* pokaz lub schowaj dialog do rejestracji lub logowania */}
                   <Link to="/account" >My account</Link>
                 </li>
               </ul>
@@ -127,7 +163,28 @@ class Application extends React.Component {
           </NavContainer>
 
           <Switch>
-            <Redirect from="/" to="/mates" exact/>
+            <Route path="/conversations/:conversationId">
+              <ConversationPage />
+            </Route>
+            <Route path={'/rooms/:offerId'}>
+              <RoomDetailPage />
+            </Route>
+            <Route path={'/mates/:offerId'}>
+              <MateDetailPage />
+            </Route>
+            <Route path="/edit/mates/:offerId">
+              <AddMatePage />
+            </Route>
+            {/* https://www.digitalocean.com/community/tutorials/react-react-router-optional-parameters */}
+            <Route path="/mate/list/">
+              <MateListPage />
+            </Route>
+            <Route path="/add/mates">
+              <AddMatePage />
+            </Route>
+            <Route path="/account">
+              <AccountPage />
+            </Route>
             <Route path="/mates">
               <LandingPage
                 title={`Find your mate in Wrocław`}
@@ -136,7 +193,8 @@ class Application extends React.Component {
                 renderRegisterPopup={this.state.displayRegisterPopup}
                 handleLoginClosing={this.handleLoginClosing}
                 handleRegisterClosing={this.handleRegisterClosing}
-                handleSwitchVisibility={this.handleSwitchVisibility} />
+                handleSwitchVisibility={this.handleSwitchVisibility}
+                handleLoginButtonChange={this.handleLoginButtonChange} />
             </Route>
             <Route path="/rooms">
               <LandingPage
@@ -146,34 +204,15 @@ class Application extends React.Component {
                 renderRegisterPopup={this.state.displayRegisterPopup}
                 handleLoginClosing={this.handleLoginClosing}
                 handleRegisterClosing={this.handleRegisterClosing}
-                handleSwitchVisibility={this.handleSwitchVisibility} />
+                handleSwitchVisibility={this.handleSwitchVisibility} 
+                handleLoginButtonChange={this.handleLoginButtonChange} />
+                
             </Route>
-            <Route path={'/rooms/:offerId'}>
-              <RoomDetailPage />
-            </Route>
-            <Route path={'/mates/:offerId'}>
-              <MateDetailPage />
-            </Route>
-            <Route path="/add/mates">
-              <AddMatePage />
-            </Route>
-            <Route path="/edit/mates/:offerId">
-              <AddMatePage />
-            </Route>
-            {/* https://www.digitalocean.com/community/tutorials/react-react-router-optional-parameters */}
-            <Route path="/mate/list/">
-              <MateListPage />
-            </Route>
-            <Route path="/account">
-              <AccountPage />
-            </Route>
-            <Route path="/conversations/:conversationId">
-              <ConversationPage />
-            </Route>
+            <Redirect from="/" to="/mates" exact />
           </Switch>
         </Router>
 
-      </App>
+      </App >
     );
   }
 }

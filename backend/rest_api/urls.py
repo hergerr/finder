@@ -32,4 +32,5 @@ urlpatterns = [
     path('delete_conversation/<int:id>/', views.delete_conversation),
 
     path('get_user_id/', views.get_user_id),
+    path('get_user/', views.get_user),
 ]

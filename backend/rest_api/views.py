@@ -333,6 +333,7 @@ def get_user_id(request):
 
 @api_view(['Get'])
 def get_user(request):
-    user = get_object_or_404(User, pk=id)
-    serializer = UserSerializer(data=user)
-    return Response(serializer.data, status=200)
+    user = get_object_or_404(User, pk=request.user.id)
+    serializer = UserSerializer(user)
+    return JsonResponse(serializer.data, status=200)
+    return Response(status=400)

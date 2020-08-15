@@ -73,7 +73,7 @@ class LandingPage extends React.Component {
                             handleLoginClosing={this.props.handleLoginClosing}
                             handleRegisterClosing={this.props.handleRegisterClosing}
                             handleSwitchVisibility={this.props.handleSwitchVisibility}
-                        />
+                            handleLoginButtonChange={this.props.handleLoginButtonChange} />
                     </PopupContainer>
                 }
                 {this.props.renderRegisterPopup &&

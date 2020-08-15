@@ -98,6 +98,7 @@ class LoginPopup extends React.Component {
                                 if (res.status === 200) {
                                     localStorage.setItem('access', res.data.access)
                                     this.setState({redirect: true});
+                                    this.props.handleLoginButtonChange();
                                 }
                             })
                         }}
