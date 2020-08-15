@@ -4,8 +4,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
+import axios from 'axios';
 import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing.page';
@@ -69,7 +71,11 @@ const Logo = styled.p`
 class Application extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { url: "/mates", title: "mate", buttonText: "room", displayLoginPopup: false, displayRegisterPopup: false };
+    this.state = { url: "/rooms", title: "mate", buttonText: "room", displayLoginPopup: false, displayRegisterPopup: false };
+  }
+
+  componentDidMount(){
+
   }
 
   handleLoginClosing = (e) => {
@@ -103,31 +109,50 @@ class Application extends React.Component {
                 <li>
                   <Link to={this.state.url} onClick={e => {
                     if (this.state.url === "/mates") {
-                      this.setState({ url: "/", title: "room", buttonText: "mate" });
+                      this.setState({ url: "/rooms", title: "mate", buttonText: "mate" });
                     } else {
-                      this.setState({ url: "/mates", title: "mate", buttonText: "room" });
+                      this.setState({ url: "/mates", title: "room", buttonText: "room" });
                     }
                   }}>Find {this.state.buttonText}</Link>
                 </li>
                 <li>
-                <Link to={`/add${this.state.url}`}>Add {this.state.url.slice(1, -1)}</Link>
+                  <Link to={`/add${this.state.url}`}>Add {this.state.url.slice(1, -1)}</Link>
                 </li>
                 <li>
                   {/* pokaz lub schowaj dialog do rejestracji lub logowania */}
-                  <Link to="/account" onClick={e => {
-                    this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
-                  }}>My account</Link>
+                  <Link to="/account" >My account</Link>
                 </li>
               </ul>
             </Nav>
           </NavContainer>
 
           <Switch>
+            <Redirect from="/" to="/mates" exact/>
+            <Route path="/mates">
+              <LandingPage
+                title={`Find your mate in Wrocław`}
+                image={mate_landing}
+                renderLoginPopup={this.state.displayLoginPopup}
+                renderRegisterPopup={this.state.displayRegisterPopup}
+                handleLoginClosing={this.handleLoginClosing}
+                handleRegisterClosing={this.handleRegisterClosing}
+                handleSwitchVisibility={this.handleSwitchVisibility} />
+            </Route>
+            <Route path="/rooms">
+              <LandingPage
+                title={`Find your room in Wrocław`}
+                image={room_landing}
+                renderLoginPopup={this.state.displayLoginPopup}
+                renderRegisterPopup={this.state.displayRegisterPopup}
+                handleLoginClosing={this.handleLoginClosing}
+                handleRegisterClosing={this.handleRegisterClosing}
+                handleSwitchVisibility={this.handleSwitchVisibility} />
+            </Route>
             <Route path={'/rooms/:offerId'}>
-              <RoomDetailPage/>
+              <RoomDetailPage />
             </Route>
             <Route path={'/mates/:offerId'}>
-              <MateDetailPage/>
+              <MateDetailPage />
             </Route>
             <Route path="/add/mates">
               <AddMatePage />
@@ -144,26 +169,6 @@ class Application extends React.Component {
             </Route>
             <Route path="/conversations/:conversationId">
               <ConversationPage />
-            </Route>
-            <Route path={this.state.url}>
-              <LandingPage
-                title={`Find your ${this.state.title} in Wrocław`}
-                image={mate_landing}
-                renderLoginPopup={this.state.displayLoginPopup}
-                renderRegisterPopup={this.state.displayRegisterPopup}
-                handleLoginClosing={this.handleLoginClosing}
-                handleRegisterClosing={this.handleRegisterClosing}
-                handleSwitchVisibility={this.handleSwitchVisibility} />
-            </Route>
-            <Route path="/">
-              <LandingPage
-                title={`Find your ${this.state.title} in Wrocław`}
-                image={room_landing}
-                renderLoginPopup={this.state.displayLoginPopup}
-                renderRegisterPopup={this.state.displayRegisterPopup}
-                handleLoginClosing={this.handleLoginClosing}
-                handleRegisterClosing={this.handleRegisterClosing}
-                handleSwitchVisibility={this.handleSwitchVisibility} />
             </Route>
           </Switch>
         </Router>

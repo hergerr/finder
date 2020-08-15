@@ -328,5 +328,11 @@ def delete_conversation(request, id):
 
 @api_view(['GET'])
 def get_user_id(request):
-    print(request.user.id)
     return Response(request.user.id)
+
+
+@api_view(['Get'])
+def get_user(request):
+    user = get_object_or_404(User, pk=id)
+    serializer = UserSerializer(data=user)
+    return Response(serializer.data, status=200)
