@@ -17,8 +17,9 @@ import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
 import AddMatePage from './pages/add-mate.page';
 import ConversationPage from './pages/conversation.page';
-import { LoginPopup } from './components/login-popup.component';
 import { getSession, logOut } from './assets/auth-utils';
+import PrivateRoute from './components/private-route.component';
+import PublicRoute from './components/public-route.component';
 
 const App = styled.div`
   width: 100%;
@@ -45,7 +46,7 @@ const Nav = styled.nav`
     border-radius: 3px;
     margin-right: 10px;
 
-    a {
+    a, p {
       display: block;
       text-align: center;
       padding: 1px 16px;
@@ -131,7 +132,7 @@ class Application extends React.Component {
               <ul>
                 <li>
                   {}
-                  <a onClick={e => {
+                  <p onClick={e => {
                     if (!this.state.logged) {
                       this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
                     }
@@ -141,7 +142,7 @@ class Application extends React.Component {
                     }
                   }}>
                     {this.state.logged ? "Logout" : "Login"}
-                  </a>
+                  </p>
                 </li>
                 <li>
                   <Link to={this.state.url} onClick={e => {
@@ -163,28 +164,13 @@ class Application extends React.Component {
           </NavContainer>
 
           <Switch>
-            <Route path="/conversations/:conversationId">
-              <ConversationPage />
-            </Route>
-            <Route path={'/rooms/:offerId'}>
-              <RoomDetailPage />
-            </Route>
-            <Route path={'/mates/:offerId'}>
-              <MateDetailPage />
-            </Route>
-            <Route path="/edit/mates/:offerId">
-              <AddMatePage />
-            </Route>
-            {/* https://www.digitalocean.com/community/tutorials/react-react-router-optional-parameters */}
-            <Route path="/mate/list/">
-              <MateListPage />
-            </Route>
-            <Route path="/add/mates">
-              <AddMatePage />
-            </Route>
-            <Route path="/account">
-              <AccountPage />
-            </Route>
+            <PrivateRoute component={ConversationPage} path="/conversations/:conversationId" /> 
+            <PublicRoute component={RoomDetailPage} path='/rooms/:offerId' />
+            <PublicRoute component={MateDetailPage} path='/mates/:offerId' />
+            <PrivateRoute component={AddMatePage} path="/edit/mates/:offerId" />
+            <PublicRoute component={MateListPage} path="/mate/list/" /> 
+            <PrivateRoute component={AddMatePage} path="/add/mates" />
+            <PrivateRoute component={AccountPage} path="/account" />
             <Route path="/mates">
               <LandingPage
                 title={`Find your mate in Wrocław`}
