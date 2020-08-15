@@ -5,7 +5,7 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import axios from 'axios';
 import room_landing from './assets/images/room_landing.jpg';
@@ -114,6 +114,9 @@ class Application extends React.Component {
 
   handleLoginButtonChange = (e) => {
     this.setState({ logged: true });
+
+    // and close window after succesful login
+    this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
   }
 
   render() {
@@ -153,22 +156,30 @@ class Application extends React.Component {
                     }
                   }}>Find {this.state.buttonText}</Link>
                 </li>
-                <li>
-                  <Link to={`/add${this.state.url}`}>Add {this.state.url.slice(1, -1)}</Link>
-                </li>
-                <li>
-                  <Link to="/account" >My account</Link>
-                </li>
+
+                {
+                  this.state.logged &&
+                  <li>
+                    <Link to={`/add${this.state.url}`}>Add {this.state.url.slice(1, -1)}</Link>
+                  </li>
+                }
+
+                {
+                  this.state.logged &&
+                  <li>
+                    <Link to="/account/messages" >My account</Link>
+                  </li>
+                }
               </ul>
             </Nav>
           </NavContainer>
 
           <Switch>
-            <PrivateRoute component={ConversationPage} path="/conversations/:conversationId" /> 
+            <PrivateRoute component={ConversationPage} path="/conversations/:conversationId" />
             <PublicRoute component={RoomDetailPage} path='/rooms/:offerId' />
             <PublicRoute component={MateDetailPage} path='/mates/:offerId' />
             <PrivateRoute component={AddMatePage} path="/edit/mates/:offerId" />
-            <PublicRoute component={MateListPage} path="/mate/list/" /> 
+            <PublicRoute component={MateListPage} path="/mate/list/" />
             <PrivateRoute component={AddMatePage} path="/add/mates" />
             <PrivateRoute component={AccountPage} path="/account" />
             <Route path="/mates">
@@ -190,9 +201,8 @@ class Application extends React.Component {
                 renderRegisterPopup={this.state.displayRegisterPopup}
                 handleLoginClosing={this.handleLoginClosing}
                 handleRegisterClosing={this.handleRegisterClosing}
-                handleSwitchVisibility={this.handleSwitchVisibility} 
+                handleSwitchVisibility={this.handleSwitchVisibility}
                 handleLoginButtonChange={this.handleLoginButtonChange} />
-                
             </Route>
             <Redirect from="/" to="/mates" exact />
           </Switch>

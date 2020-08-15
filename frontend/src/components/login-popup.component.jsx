@@ -72,7 +72,7 @@ class LoginPopup extends React.Component {
         const redirect = this.state.redirect; 
 
         if (redirect) {
-            return <Redirect push to='/account' />
+            return <Redirect push to='/account/messages' />
         }
 
         return (
