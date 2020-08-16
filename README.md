@@ -32,8 +32,17 @@ TODO:
 curl \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"username": "new", "email": "a@a.pl", "password": "new"}' \
-  http://localhost:8000/register/
+  -d '{"username": "asdasdasd", "password": "gjkfnjkgfnjkgnfjk", "password_confirm":"gjkfnjkgfnjkgnfjk", "email":"a@niepodam.pl"}' \
+  http://localhost:8000/accounts/register/
+
+```
+- confirm registration (data from querystring in email)
+```
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"user_id": "20", "timestamp": "1597593269", "signature":"Xd8dSaNRBD1cUAONlw_VkxWcInE"}' \
+  http://localhost:8000/accounts/verify-registration/
 ```
 - login
 ```bash
@@ -43,6 +52,24 @@ curl \
   -d '{"username": "new", "password": "new"}' \
   http://localhost:8000/token/
 ```
+- reset password
+```bash
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"login": "gad"}' \
+  http://localhost:8000/accounts/send-reset-password-link/
+```
+
+- change password (data from querysting in email)
+```bash
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"password": "asdasdasddas", "user_id": "20", "timestamp": "1597594109", "signature":"pZlA01E8QArtz7IJwcHgH80PRzw"}' \
+  http://localhost:8000/accounts/reset-password/
+```
+
 - get all room offers (list view)
 ```bash
 curl \

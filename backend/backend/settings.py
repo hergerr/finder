@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_api',
     'corsheaders',
+    'rest_registration',
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,20 @@ REST_FRAMEWORK = {
 }
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'finder.app.confirmation@gmail.com'
+EMAIL_HOST_PASSWORD = '1GUGbRIJh3t+rrWAkes/MA=='
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': 'http://localhost:3000/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': 'http://localhost:3000/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': 'http://localhost:3000/verify-email/',
+    'VERIFICATION_FROM_EMAIL': 'finder.app.confirmation@gmail.com',
+}
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=365),
