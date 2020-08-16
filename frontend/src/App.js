@@ -17,6 +17,7 @@ import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
 import AddMatePage from './pages/add-mate.page';
 import ConversationPage from './pages/conversation.page';
+import AccountConfirmedPage from './pages/account-confirmed.page';
 import { getSession, logOut } from './assets/auth-utils';
 import PrivateRoute from './components/private-route.component';
 import PublicRoute from './components/public-route.component';
@@ -179,6 +180,7 @@ class Application extends React.Component {
             <PublicRoute component={RoomDetailPage} path='/rooms/:offerId' />
             <PublicRoute component={MateDetailPage} path='/mates/:offerId' />
             <PrivateRoute component={AddMatePage} path="/edit/mates/:offerId" />
+            <PublicRoute component={AccountConfirmedPage} path="/verify-user" />
             <PublicRoute component={MateListPage} path="/mate/list/" />
             <PrivateRoute component={AddMatePage} path="/add/mates" />
             <PrivateRoute component={AccountPage} path="/account" />
