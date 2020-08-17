@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { Cross } from './cross.component';
@@ -122,7 +122,9 @@ class LoginPopup extends React.Component {
                     <Links>
                         <Paragraph>No account?</Paragraph>
                         <RegisterButton to="/register" onClick={this.props.handleSwitchVisibility}>Register</RegisterButton>
-                        <ForgotButton to="/forgot">Forgot password?</ForgotButton>
+                        <ForgotButton to="/forgot" onClick={e=>{
+                            this.props.history.push('/forgot-password')
+                        }}>Forgot password?</ForgotButton>
                     </Links>
 
                 </Container>
@@ -133,4 +135,4 @@ class LoginPopup extends React.Component {
     }
 }
 
-export { LoginPopup };
+export default withRouter( LoginPopup );

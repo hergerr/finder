@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LoginPopup } from '../components/login-popup.component';
+import LoginPopup from '../components/login-popup.component';
 import { RegisterPopup } from '../components/register-popup.component';
 import { MatePopup } from '../components/mate-popup.component';
 import { RoomPopup } from '../components/room-popup.component';

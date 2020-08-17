@@ -21,6 +21,8 @@ import AccountConfirmedPage from './pages/account-confirmed.page';
 import { getSession, logOut } from './assets/auth-utils';
 import PrivateRoute from './components/private-route.component';
 import PublicRoute from './components/public-route.component';
+import { ForgotPasswordPage } from './pages/forgot-password.page';
+import ResetPasswordPage from './pages/reset-password.page';
 
 const App = styled.div`
   width: 100%;
@@ -135,7 +137,6 @@ class Application extends React.Component {
             <Nav>
               <ul>
                 <li>
-                  {}
                   <p onClick={e => {
                     if (!this.state.logged) {
                       this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
@@ -181,9 +182,11 @@ class Application extends React.Component {
             <PublicRoute component={MateDetailPage} path='/mates/:offerId' />
             <PrivateRoute component={AddMatePage} path="/edit/mates/:offerId" />
             <PublicRoute component={AccountConfirmedPage} path="/verify-user" />
+            <PublicRoute component={ResetPasswordPage} path="/reset-password" />
             <PublicRoute component={MateListPage} path="/mate/list/" />
             <PrivateRoute component={AddMatePage} path="/add/mates" />
             <PrivateRoute component={AccountPage} path="/account" />
+            <PublicRoute component={ForgotPasswordPage} path="/forgot-password" />
             <Route path="/mates">
               <LandingPage
                 title={`Find your mate in Wrocław`}
