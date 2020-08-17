@@ -38,6 +38,7 @@ const ButtonWrapper = styled.div`
 
 const Links = styled.div`
     margin-top: 20px;
+    text-align: center;
 `
 
 const LoginButton = styled.button`
@@ -53,7 +54,16 @@ const Feedback = styled.div`
     color: red;
 `
 
+const SpanFeedback = styled.span`
+    white-space: pre-line;
+    color: red;
+`
+
 class RegisterPopup extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { messages: '' };
+    }
 
     render() {
         return (
@@ -89,7 +99,18 @@ class RegisterPopup extends React.Component {
                                 if (res.status === 201) {
                                     console.log(res.data)
                                 }
-                            })
+                            }).catch(error => {
+                                // https://github.com/axios/axios/issues/960
+                                const errors = error.response.data;
+                                console.log(errors);
+                                let message = '';
+                                for (const type in errors) {
+                                    message= message.concat(`${errors[type]}\nxxx\n`)
+                                    console.log();
+                                }
+                                this.setState({ messages: message })
+                                console.log(message);
+                            });
                     }}
 
                 >
@@ -113,6 +134,10 @@ class RegisterPopup extends React.Component {
                     )}
 
                 </Formik>
+
+                <SpanFeedback>
+                    {this.state.messages}
+                </SpanFeedback>
 
                 <Links>
                     <Paragraph>Already have an account?</Paragraph>

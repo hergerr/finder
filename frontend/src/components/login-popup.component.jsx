@@ -30,6 +30,7 @@ const Title = styled.h3`
 
 const Links = styled.div`
     margin-top: 10px;
+    text-align: center;
 `
 
 const Paragraph = styled.p`
