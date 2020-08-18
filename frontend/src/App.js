@@ -16,6 +16,7 @@ import MateDetailPage from './pages/mate-detail.page';
 import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
 import AddMatePage from './pages/add-mate.page';
+import AddRoomPage from './pages/add-room.page';
 import ConversationPage from './pages/conversation.page';
 import AccountConfirmedPage from './pages/account-confirmed.page';
 import { getSession, logOut } from './assets/auth-utils';
@@ -130,7 +131,7 @@ class Application extends React.Component {
           <NavContainer>
             <Logo>
               <Link to={this.state.url}>
-                {this.state.title}Finder
+                {!this.state.logged && this.state.title}Finder
             </Link>
             </Logo>
 
@@ -149,23 +150,32 @@ class Application extends React.Component {
                     {this.state.logged ? "Logout" : "Login"}
                   </p>
                 </li>
-                <li>
-                  <Link to={this.state.url} onClick={e => {
-                    if (this.state.url === "/mates") {
-                      this.setState({ url: "/rooms", title: "mate", buttonText: "room" });
-                    } else {
-                      this.setState({ url: "/mates", title: "room", buttonText: "mate" });
-                    }
-                  }}>Find {this.state.buttonText}</Link>
-                </li>
+                {!this.state.logged &&
+                  <li>
+                    <Link to={this.state.url} onClick={e => {
+                      if (this.state.url === "/mates") {
+                        this.setState({ url: "/rooms", title: "mate", buttonText: "room" });
+                      } else {
+                        this.setState({ url: "/mates", title: "room", buttonText: "mate" });
+                      }
+                    }}>Find {this.state.buttonText}</Link>
+                  </li>
+                }
 
                 {
                   this.state.logged &&
                   <li>
-                    <Link to={`/add${this.state.url}`}>Add {this.state.url.slice(1, -1)}</Link>
+                    <Link to={`/add/rooms`}>Add room</Link>
                   </li>
                 }
 
+
+                {
+                  this.state.logged &&
+                  <li>
+                    <Link to={`/add/mates`}>Add mate</Link>
+                  </li>
+                }
                 {
                   this.state.logged &&
                   <li>
@@ -181,10 +191,12 @@ class Application extends React.Component {
             <PublicRoute component={RoomDetailPage} path='/rooms/:offerId' />
             <PublicRoute component={MateDetailPage} path='/mates/:offerId' />
             <PrivateRoute component={AddMatePage} path="/edit/mates/:offerId" />
+            <PrivateRoute component={AddRoomPage} path="/edit/rooms/:offerId" />
             <PublicRoute component={AccountConfirmedPage} path="/verify-user" />
             <PublicRoute component={ResetPasswordPage} path="/reset-password" />
             <PublicRoute component={MateListPage} path="/mate/list/" />
             <PrivateRoute component={AddMatePage} path="/add/mates" />
+            <PrivateRoute component={AddRoomPage} path="/add/rooms" />
             <PrivateRoute component={AccountPage} path="/account" />
             <PublicRoute component={ForgotPasswordPage} path="/forgot-password" />
             <Route path="/mates">

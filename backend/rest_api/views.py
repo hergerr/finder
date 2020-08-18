@@ -66,7 +66,7 @@ def search_mates(request):
     data = MateOffer.objects.filter(age__gte=params['ageFrom'], age__lte=params['ageTo'])
 
     if params['district']:
-        data = data.filter(district=params['district'])
+        data = data.filter(location=params['district'])
     
     if params['features']:
         data = data.filter(Q(features__icontains=params['features']))
@@ -76,6 +76,31 @@ def search_mates(request):
 
     serializer = MateOfferListSerializer(data, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def search_rooms(request):
+    params = request.GET
+    data = MateOffer.objects.filter(price__gte=params['priceFrom'], price__lte=params['priceTo'], area_gte=params['areaFrom'], area_lte=['areaTo'])
+
+    if params['location']:
+        data = data.filter(district=params['location'])
+    
+    if params['numberOfFlatmates']:
+        data = data.filter(number_of_flatmates=params['numberOfFlatmates'])
+    
+    if params['building_features']:
+        data = data.filter(Q(customs__icontains=params['building_features']))
+
+    if params['flat_features']:
+        data = data.filter(Q(customs__icontains=params['flat_features']))
+
+    if params['flatmates_features']:
+        data = data.filter(Q(customs__icontains=params['flatmates_features']))
+
+    serializer = MateOfferListSerializer(data, many=True)
+    return Response(status=200)
 
 # -----------------------USER VIEWS----------------------
 

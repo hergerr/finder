@@ -11,6 +11,7 @@ urlpatterns = [
     path('mate_offer_detail/<int:mate_offer_id>', views.get_mate_offer_detail),
     # https://stackoverflow.com/a/3711426
     re_path(r'^search_mates/$', views.search_mates),
+    re_path(r'^search_rooms/$', views.search_rooms),
    
     # ------ USER VIEWS -----
     path('user_room_detail/', views.user_room_detail),
