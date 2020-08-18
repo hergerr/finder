@@ -55,14 +55,16 @@ const Feedback = styled.div`
 `
 
 const SpanFeedback = styled.span`
+    display: block;
     white-space: pre-line;
-    color: red;
+    margin-top: 10px;
+    color: ${props => props.status === 'success' ? 'green' : 'red'};
 `
 
 class RegisterPopup extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { messages: '' };
+        this.state = { messages: '', status: '' };
     }
 
     render() {
@@ -97,19 +99,17 @@ class RegisterPopup extends React.Component {
                             { username: values.username, email: values.email, password: values.password, password_confirm: values.password })
                             .then(res => {
                                 if (res.status === 201) {
-                                    console.log(res.data)
+                                    this.setState({messages: "Registration was succesful. Now confirm your account by clicking URL sent to your email", status: "success"})
                                 }
                             }).catch(error => {
                                 // https://github.com/axios/axios/issues/960
                                 const errors = error.response.data;
-                                console.log(errors);
                                 let message = '';
                                 for (const type in errors) {
-                                    message= message.concat(`${errors[type]}\nxxx\n`)
-                                    console.log();
+                                    message= message.concat(`${errors[type]}`)
                                 }
-                                this.setState({ messages: message })
-                                console.log(message);
+                                message = message.replace(/,/g, '\n');
+                                this.setState({ messages: message, status: "fail" })
                             });
                     }}
 
@@ -135,7 +135,7 @@ class RegisterPopup extends React.Component {
 
                 </Formik>
 
-                <SpanFeedback>
+                <SpanFeedback status={this.state.status}>
                     {this.state.messages}
                 </SpanFeedback>
 
