@@ -35,9 +35,10 @@ const Feedback = styled.p`
     color: red;
 `
 
-const Message = styled.p`
-    margin-top: 60px;
-    color: var(--color-orange);
+const Message = styled.span`
+    display: block;
+    margin-top: 10px;
+    color: ${props => props.status === 'success' ? 'green' : 'red'};
     text-align: center;
 `
 
@@ -45,7 +46,7 @@ const Message = styled.p`
 class ResetPasswordPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { message: ""}
+        this.state = { message: "" }
     }
 
     render() {
@@ -70,8 +71,19 @@ class ResetPasswordPage extends React.Component {
                         axios.post(`http://localhost:8000/accounts/reset-password/`,
                             { user_id: data.user_id, timestamp: data.timestamp, password: values.password, signature: data.signature })
                             .then(res => {
-                                this.setState({ message: "New password has been set. Now you can log in." })
-                            })
+                                if (res.status === 200) {
+                                    this.setState({ message: "New password has been set. Now you can log in.", status: 'success' })
+                                }
+                            }).catch(error => {
+                                // https://github.com/axios/axios/issues/960
+                                const errors = error.response.data;
+                                let message = '';
+                                for (const type in errors) {
+                                    message = message.concat(`${errors[type]}`)
+                                }
+                                message = message.replace(/,/g, '\n');
+                                this.setState({ message: message, status: 'fail' });
+                            });
                     }}
                 >
 
@@ -88,13 +100,15 @@ class ResetPasswordPage extends React.Component {
                             <ButtonWrapper>
                                 <PopupButton content="Set password" />
                             </ButtonWrapper>
+
+                            <Message status={this.state.status}>
+                                {this.state.message}
+                            </Message>
+
                         </FormWrapper>
                     )}
 
                 </Formik>
-                <Message>
-                    {this.state.message}
-                </Message>
             </Container>
 
         )

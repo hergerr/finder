@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -32,7 +32,15 @@ const Feedback = styled.p`
     color: red;
 `
 
+const ServerFeedback = styled.span`
+    display: block;
+    color: ${props => props.status === 'success' ? 'green' : 'red'};
+    margin-top: 10px;
+`
+
 export const ForgotPasswordPage = (props) => {
+    const [message, setMessage ] = useState('');
+    const [status, setStatus] = useState('');
     const formik = useFormik({
 
         initialValues: {
@@ -46,9 +54,20 @@ export const ForgotPasswordPage = (props) => {
                 { login: values.login })
                 .then(res => {
                     if (res.status === 200) {
-                        console.log(res.data)
+                        setMessage('Success. Now to reset your password click in the link send in the email');
+                        setStatus('success');
                     }
-                })
+                }).catch(error => {
+                    // https://github.com/axios/axios/issues/960
+                    const errors = error.response.data;
+                    let message = '';
+                    for (const type in errors) {
+                        message= message.concat(`${errors[type]}`)
+                    }
+                    message = message.replace(/,/g, '\n');
+                    setMessage(message);
+                    setStatus('fail');
+                });
 
         },
 
@@ -66,6 +85,9 @@ export const ForgotPasswordPage = (props) => {
                     <Feedback>{formik.errors.login}</Feedback>
 
                 ) : null}
+                <ServerFeedback status={status}>
+                    {message}
+                </ServerFeedback>
                 <ButtonWrapper>
                     <PopupButton content="Reset" />
                 </ButtonWrapper>
