@@ -4,7 +4,6 @@ import { getSession } from '../assets/auth-utils';
 
 // https://medium.com/@thanhbinh.tran93/private-route-public-route-and-restricted-route-with-react-router-d50b27c15f5e
 const PrivateRoute = ({component: Component, ...rest}) => {
-    console.log(rest);
     
     return (
 

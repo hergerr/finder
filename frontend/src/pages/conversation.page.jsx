@@ -115,7 +115,6 @@ class ConversationPage extends React.Component {
                         }).then(res => {
                             if (res.status === 200) {
                                 this.setState({ data: res.data })
-                                console.log(res.data)
                             }
                         })
                     }}>

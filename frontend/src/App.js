@@ -95,7 +95,6 @@ class Application extends React.Component {
           if (res.status === 200) {
             this.setState({ logged: true });
             this.setState({ userData: res.data })
-            console.log(this.state.userData);
           }
         })
 

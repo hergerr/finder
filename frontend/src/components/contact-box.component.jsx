@@ -68,7 +68,6 @@ export const ContactBox = (props) => {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
             }).then(res => {
                 if (res.status === 200) {
-                    console.log('wyslano')
                 }
             })
         },

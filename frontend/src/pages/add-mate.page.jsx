@@ -22,13 +22,6 @@ const SecondRow = styled.div`
     justify-content: space-between;
 `
 
-const ThirdRow = styled.div`
-`
-
-const ForthRow = styled.div`
-`
-
-
 // const Features = styled.div`
 //     margin-top: 70px;
 //     display: flex;
@@ -110,10 +103,6 @@ class AddMatePage extends React.Component {
                         age: Yup.number()
                             .min(0, 'Must be greater or equal 0')
                             .required('cannot be empty'),
-                        goes_to_bed: Yup.number()
-                            .min(0, 'Must be greater or equal 0'),
-                        wakes_up: Yup.number()
-                            .min(0, 'Must be greater or equal 0'),
                         field_of_study: Yup.string()
                             .required('cannot be empty'),
                         location: Yup.string()
@@ -181,15 +170,15 @@ class AddMatePage extends React.Component {
                                 </div>
                             </SecondRow>
 
-                            <ThirdRow>
+                            <div>
                                 <InputAndLabel label="Personal features. Separtate with semicolon" id="features" name="features" value={props.values.features} onChange={props.handleChange} />
                                 {props.errors.features && <Feedback>{props.errors.features}</Feedback>}
-                            </ThirdRow>
+                            </div>
 
-                            <ForthRow>
+                            <div>
                                 <InputAndLabel label="Customs. Separtate with semicolon" id="customs" name="customs" value={props.values.customs} onChange={props.handleChange} />
                                 {props.errors.customs && <Feedback>{props.errors.customs}</Feedback>}
-                            </ForthRow>
+                            </div>
 
                             <ButtonWrapper>
                                 <SearchButton>Submit</SearchButton>
