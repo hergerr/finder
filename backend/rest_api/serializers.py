@@ -23,7 +23,7 @@ class RoomOfferDetailSerializer(serializers.ModelSerializer):
         model = RoomOffer
         fields = ['owner', 'title', 'price', 'area', 'location',
         'number_of_flatmates','building_features', 'flat_features',
-        'flatmates_features', 'rules', 'phone']
+        'flatmates_features', 'rules', 'phone', 'photos']
 
 class RoomOfferListSerializer(serializers.ModelSerializer):
     class Meta:

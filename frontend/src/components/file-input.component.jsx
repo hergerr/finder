@@ -11,11 +11,24 @@ const Label = styled.div`
 `
 
 
-export const FileInput = (props) => (
-    <Container>
-        <Label>Photo</Label>
-        <input id="file" name="file" type="file" onChange={(event) => {
+export const FileInput = (props) => {
+    let input;
+
+    if (props.multiple) {
+        input = <input id="file" name="file" type="file" multiple onChange={(event) => {
+            props.setFieldValue("file", event.currentTarget.files);
+        }} />
+    } else {
+        input = <input id="file" name="file" type="file" onChange={(event) => {
             props.setFieldValue("file", event.currentTarget.files[0]);
         }} />
-    </Container>
-)
+    }
+
+    return (
+        <Container>
+            <Label>Photo</Label>
+            {input}
+        </Container>
+    )
+
+}

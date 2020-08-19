@@ -57,7 +57,7 @@ class AddRoomPage extends React.Component {
         return (
             <Container>
                 <Formik
-                    enableReinitialize
+                    // enableReinitialize
 
                     // TODO warning
                     initialValues={{
@@ -100,10 +100,12 @@ class AddRoomPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        console.log('sadasdsad')
                         let data = new FormData();
-                        data.append('image', values.file, values.file.fileName);
+                        for (let i = 0; i < values.file.length; i++) {
+                            data.append(values.file[i].name, values.file[i]);
+                        }
                         data.append('title', values.title);
+                        data.append('price', values.price);
                         data.append('area', values.area);
                         data.append('location', values.location);
                         data.append('number_of_flatmates', values.number_of_flatmates);
@@ -112,7 +114,6 @@ class AddRoomPage extends React.Component {
                         data.append('flatmates_features', values.flatmates_features);
                         data.append('rules', values.rules);
                         data.append('phone', values.phone);
-
 
                         const headers = {
                             'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
@@ -133,12 +134,17 @@ class AddRoomPage extends React.Component {
 
                             <InputAndLabel label="Title" id="title" name="title" value={props.values.title} onChange={props.handleChange} />
                             {props.errors.title && <Feedback>{props.errors.title}</Feedback>}
-                            <FileInput setFieldValue={props.setFieldValue} />
+                            <FileInput setFieldValue={props.setFieldValue} multiple={true} />
 
                             <SecondRow>
                                 <div>
-                                    <SmallInputAndLabel pos="left" label="Area" id="area" name="area" value={props.values.area} onChange={props.handleChange} />
+                                    <SmallInputAndLabel pos="left" type="number" label="Area" id="area" name="area" value={props.values.area} onChange={props.handleChange} />
                                     {props.errors.area && <Feedback>{props.errors.area}</Feedback>}
+                                </div>
+
+                                <div>
+                                    <SmallInputAndLabel pos="left" type="number" label="Price" id="price" name="price" value={props.values.price} onChange={props.handleChange} />
+                                    {props.errors.price && <Feedback>{props.errors.price}</Feedback>}
                                 </div>
 
                                 <div>

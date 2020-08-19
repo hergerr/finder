@@ -107,6 +107,7 @@ def search_rooms(request):
 # ---------------------- Room section -----------------
 # view for user (adding, editing, deleting user's offer)
 @api_view(['POST', 'PUT', 'DELETE'])
+@parser_classes([MultiPartParser,FormParser,JSONParser])
 def user_room_detail(request):
     data = request.data
     data['owner'] = request.user.id
@@ -115,6 +116,7 @@ def user_room_detail(request):
         serializer = RoomOfferDetailSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
+            print(serializer.data)
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
@@ -128,13 +130,18 @@ def user_room_detail(request):
 
     elif request.method == 'DELETE':
         offer = get_object_or_404(RoomOffer, id=data['id'])
+
+        if offer.image:
+            offer.image.delete()
         offer.delete()
+
         data = RoomOffer.objects.filter(owner=request.user)
         serializer = RoomOfferListSerializer(data, many=True)
         return Response(serializer.data)
 
 
 @api_view(['GET'])
+@parser_classes([MultiPartParser,FormParser,JSONParser])
 def user_room_list(request):
     data = RoomOffer.objects.filter(owner=request.user)
     serializer = RoomOfferListSerializer(data, many=True)
