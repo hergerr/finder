@@ -60,6 +60,8 @@ class AccountPage extends React.Component {
         ).then(res => {
             if (res.status === 200) {
                 this.setState({ roomOffers: res.data });
+                console.log(this.state.roomOffers);
+
             }
         })
 
@@ -188,6 +190,7 @@ class AccountPage extends React.Component {
                                         title={element.title}
                                         location={element.location}
                                         area={element.area}
+                                        image={element.photos[0] ? element.photos[0].image : ''}
                                         flatmates={element.number_of_flatmates}
                                         handleDelete={this.handleOfferDelete}
                                     />

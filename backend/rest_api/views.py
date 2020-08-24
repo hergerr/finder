@@ -116,7 +116,6 @@ def user_room_detail(request):
         serializer = RoomOfferDetailSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data)
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 

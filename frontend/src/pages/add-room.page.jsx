@@ -102,7 +102,7 @@ class AddRoomPage extends React.Component {
                     onSubmit={values => {
                         let data = new FormData();
                         for (let i = 0; i < values.file.length; i++) {
-                            data.append(values.file[i].name, values.file[i]);
+                            data.append('photos', values.file[i]);
                         }
                         data.append('title', values.title);
                         data.append('price', values.price);

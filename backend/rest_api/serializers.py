@@ -18,17 +18,37 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
+class RoomPhotosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoomPhotos
+        fields = "__all__"
+
+
 class RoomOfferDetailSerializer(serializers.ModelSerializer):
+    # first read only, then overriding create (hack)
+    photos = RoomPhotosSerializer(many=True, read_only=True)
+
     class Meta:
         model = RoomOffer
         fields = ['owner', 'title', 'price', 'area', 'location',
         'number_of_flatmates','building_features', 'flat_features',
         'flatmates_features', 'rules', 'phone', 'photos']
 
+    # https://stackoverflow.com/q/41141084/12422260
+    def create(self, validated_data):
+        offer = RoomOffer.objects.create(**validated_data)
+
+        for image in self.initial_data.getlist('photos'):
+            RoomPhotos.objects.create(offer=offer, image=image)
+        return offer
+
 class RoomOfferListSerializer(serializers.ModelSerializer):
+    photos = RoomPhotosSerializer(many=True, read_only=True)
+
     class Meta:
         model = RoomOffer
-        fields = ['id', 'title', 'price', 'area', 'location', 'number_of_flatmates']
+        fields = ['id', 'title', 'photos', 'price', 'area', 'location', 'number_of_flatmates']
 
 
 class MateOfferDetailSerializer(serializers.ModelSerializer):
