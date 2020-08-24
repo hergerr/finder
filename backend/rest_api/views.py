@@ -130,8 +130,9 @@ def user_room_detail(request):
     elif request.method == 'DELETE':
         offer = get_object_or_404(RoomOffer, id=data['id'])
 
-        if offer.image:
-            offer.image.delete()
+        if offer.photos:
+            for photo in offer.photos.all():
+                photo.delete()
         offer.delete()
 
         data = RoomOffer.objects.filter(owner=request.user)

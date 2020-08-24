@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_api',
     'corsheaders',
     'rest_registration',
+    # https://stackoverflow.com/questions/21941503/django-delete-unused-media-files
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
