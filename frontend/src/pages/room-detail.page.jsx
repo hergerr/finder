@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { SRLWrapper } from "simple-react-lightbox";
 import { withRouter } from "react-router-dom";
 import { Coins } from '@styled-icons/fa-solid';
 import { Area } from '@styled-icons/boxicons-regular';
 import { LocationPin } from '@styled-icons/entypo';
 import { ContactBox } from '../components/contact-box.component';
-import { DetailBlock, WhiteBorder} from '../components/detail-block.component';
+import { DetailBlock, WhiteBorder } from '../components/detail-block.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 100%;
@@ -26,6 +28,11 @@ const PhotoWrapper = styled.div`
     background-color: var(--color-dark-grey);
     height: 400px;
     display: flex;
+    justify-content: center;
+`
+
+const Image = styled.img`
+    max-height: 400px;
 `
 
 const Essentials = styled.div`
@@ -64,10 +71,10 @@ const Location = styled(LocationPin)`
 class RoomDetailPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {data: []};
+        this.state = { data: [] };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         axios.get(`http://localhost:8000/room_offer_detail/${this.props.match.params.offerId}`).then(res => {
             if (res.status === 200) {
                 this.setState({ data: res.data });
@@ -84,11 +91,15 @@ class RoomDetailPage extends React.Component {
         let flat = this.state.data.flat_features;
         let flatmates = this.state.data.flatmates_features;
         let rules = this.state.data.rules;
-        if (flat && building && flatmates && rules){
+        let photos = this.state.data.photos;
+        if (flat && building && flatmates && rules && photos) {
             building = building.split(';');
             flat = flat.split(';');
             flatmates = flatmates.split(';');
             rules = rules.split(';');
+            photos = photos.map((element, index) => (
+                <Image src={`${static_host}${element.image}`} alt="abc" key={index} />
+            ));
         } else {
             building = [];
             flat = [];
@@ -96,15 +107,23 @@ class RoomDetailPage extends React.Component {
             rules = [];
         }
 
+        console.log(photos);
+        let gallery;
+        if (photos){
+            gallery = <SRLWrapper>
+                {photos}
+            </SRLWrapper>
+        }
+
         return (
             <Container>
                 <Title>{this.state.data.title}</Title>
                 <PhotoWrapper>
-
+                {gallery}
                 </PhotoWrapper>
                 <Essentials>
                     <IconAndDescContainer>
-                        <StyledCoin/>
+                        <StyledCoin />
                         <p>{this.state.data.price}PLN/month</p>
                     </IconAndDescContainer>
                     <IconAndDescContainer>
@@ -112,21 +131,21 @@ class RoomDetailPage extends React.Component {
                         <p>{this.state.data.area} m2</p>
                     </IconAndDescContainer>
                     <IconAndDescContainer>
-                        <Location/>
+                        <Location />
                         <p>{this.state.data.location}</p>
                     </IconAndDescContainer>
                 </Essentials>
 
-               
-                <DetailBlock title="Building" features={building}/>
-                <WhiteBorder/>
-                <DetailBlock title="Flat" features={flat}/>
-                <WhiteBorder/>
-                <DetailBlock title="Flatmates" features={flatmates}/>
-                <WhiteBorder/>
-                <DetailBlock title="Rules" features={rules}/>
 
-                <ContactBox phone={this.state.data.phone}/>
+                <DetailBlock title="Building" features={building} />
+                <WhiteBorder />
+                <DetailBlock title="Flat" features={flat} />
+                <WhiteBorder />
+                <DetailBlock title="Flatmates" features={flatmates} />
+                <WhiteBorder />
+                <DetailBlock title="Rules" features={rules} />
+
+                <ContactBox phone={this.state.data.phone} />
             </Container>
         )
     }

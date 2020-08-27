@@ -8,6 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import axios from 'axios';
+import SimpleReactLightbox from "simple-react-lightbox";
 import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing.page';
@@ -126,104 +127,105 @@ class Application extends React.Component {
 
     return (
       <App>
-        <Router>
-          <NavContainer>
-            <Logo>
-              <Link to={this.state.url}>
-                {!this.state.logged && this.state.title}Finder
+        <SimpleReactLightbox>
+          <Router>
+            <NavContainer>
+              <Logo>
+                <Link to={this.state.url}>
+                  {!this.state.logged && this.state.title}Finder
             </Link>
-            </Logo>
+              </Logo>
 
-            <Nav>
-              <ul>
-                <li>
-                  <p onClick={e => {
-                    if (!this.state.logged) {
-                      this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
-                    }
-                    else if (this.state.logged) {
-                      logOut();
-                      this.setState({ logged: false });
-                    }
-                  }}>
-                    {this.state.logged ? "Logout" : "Login"}
-                  </p>
-                </li>
-                {!this.state.logged &&
+              <Nav>
+                <ul>
                   <li>
-                    <Link to={this.state.url} onClick={e => {
-                      if (this.state.url === "/mates") {
-                        this.setState({ url: "/rooms", title: "mate", buttonText: "room" });
-                      } else {
-                        this.setState({ url: "/mates", title: "room", buttonText: "mate" });
+                    <p onClick={e => {
+                      if (!this.state.logged) {
+                        this.setState({ displayLoginPopup: !this.state.displayLoginPopup });
                       }
-                    }}>Find {this.state.buttonText}</Link>
+                      else if (this.state.logged) {
+                        logOut();
+                        this.setState({ logged: false });
+                      }
+                    }}>
+                      {this.state.logged ? "Logout" : "Login"}
+                    </p>
                   </li>
-                }
+                  {!this.state.logged &&
+                    <li>
+                      <Link to={this.state.url} onClick={e => {
+                        if (this.state.url === "/mates") {
+                          this.setState({ url: "/rooms", title: "mate", buttonText: "room" });
+                        } else {
+                          this.setState({ url: "/mates", title: "room", buttonText: "mate" });
+                        }
+                      }}>Find {this.state.buttonText}</Link>
+                    </li>
+                  }
 
-                {
-                  this.state.logged &&
-                  <li>
-                    <Link to={`/add/rooms`}>Add room</Link>
-                  </li>
-                }
+                  {
+                    this.state.logged &&
+                    <li>
+                      <Link to={`/add/rooms`}>Add room</Link>
+                    </li>
+                  }
 
 
-                {
-                  this.state.logged &&
-                  <li>
-                    <Link to={`/add/mates`}>Add mate</Link>
-                  </li>
-                }
-                {
-                  this.state.logged &&
-                  <li>
-                    <Link to="/account/messages" >My account</Link>
-                  </li>
-                }
-              </ul>
-            </Nav>
-          </NavContainer>
+                  {
+                    this.state.logged &&
+                    <li>
+                      <Link to={`/add/mates`}>Add mate</Link>
+                    </li>
+                  }
+                  {
+                    this.state.logged &&
+                    <li>
+                      <Link to="/account/messages" >My account</Link>
+                    </li>
+                  }
+                </ul>
+              </Nav>
+            </NavContainer>
 
-          <Switch>
-            <PrivateRoute component={ConversationPage} path="/conversations/:conversationId" />
-            <PublicRoute component={RoomDetailPage} path='/rooms/:offerId' />
-            <PublicRoute component={MateDetailPage} path='/mates/:offerId' />
-            <PrivateRoute component={AddMatePage} path="/edit/mates/:offerId" />
-            <PrivateRoute component={AddRoomPage} path="/edit/rooms/:offerId" />
-            <PublicRoute component={AccountConfirmedPage} path="/verify-user" />
-            <PublicRoute component={ResetPasswordPage} path="/reset-password" />
-            <PublicRoute component={MateListPage} path="/mate/list/" />
-            <PrivateRoute component={AddMatePage} path="/add/mates" />
-            <PrivateRoute component={AddRoomPage} path="/add/rooms" />
-            <PrivateRoute component={AccountPage} path="/account" />
-            <PublicRoute component={ForgotPasswordPage} path="/forgot-password" />
-            <Route path="/mates">
-              <LandingPage
-                title={`Find your mate in Wrocław`}
-                image={mate_landing}
-                renderLoginPopup={this.state.displayLoginPopup}
-                renderRegisterPopup={this.state.displayRegisterPopup}
-                handleLoginClosing={this.handleLoginClosing}
-                handleRegisterClosing={this.handleRegisterClosing}
-                handleSwitchVisibility={this.handleSwitchVisibility}
-                handleLoginButtonChange={this.handleLoginButtonChange} />
-            </Route>
-            <Route path="/rooms">
-              <LandingPage
-                title={`Find your room in Wrocław`}
-                image={room_landing}
-                renderLoginPopup={this.state.displayLoginPopup}
-                renderRegisterPopup={this.state.displayRegisterPopup}
-                handleLoginClosing={this.handleLoginClosing}
-                handleRegisterClosing={this.handleRegisterClosing}
-                handleSwitchVisibility={this.handleSwitchVisibility}
-                handleLoginButtonChange={this.handleLoginButtonChange} />
-            </Route>
-            <Redirect from="/" to="/mates" exact />
-          </Switch>
-        </Router>
-
+            <Switch>
+              <PrivateRoute component={ConversationPage} path="/conversations/:conversationId" />
+              <PublicRoute component={RoomDetailPage} path='/rooms/:offerId' />
+              <PublicRoute component={MateDetailPage} path='/mates/:offerId' />
+              <PrivateRoute component={AddMatePage} path="/edit/mates/:offerId" />
+              <PrivateRoute component={AddRoomPage} path="/edit/rooms/:offerId" />
+              <PublicRoute component={AccountConfirmedPage} path="/verify-user" />
+              <PublicRoute component={ResetPasswordPage} path="/reset-password" />
+              <PublicRoute component={MateListPage} path="/mate/list/" />
+              <PrivateRoute component={AddMatePage} path="/add/mates" />
+              <PrivateRoute component={AddRoomPage} path="/add/rooms" />
+              <PrivateRoute component={AccountPage} path="/account" />
+              <PublicRoute component={ForgotPasswordPage} path="/forgot-password" />
+              <Route path="/mates">
+                <LandingPage
+                  title={`Find your mate in Wrocław`}
+                  image={mate_landing}
+                  renderLoginPopup={this.state.displayLoginPopup}
+                  renderRegisterPopup={this.state.displayRegisterPopup}
+                  handleLoginClosing={this.handleLoginClosing}
+                  handleRegisterClosing={this.handleRegisterClosing}
+                  handleSwitchVisibility={this.handleSwitchVisibility}
+                  handleLoginButtonChange={this.handleLoginButtonChange} />
+              </Route>
+              <Route path="/rooms">
+                <LandingPage
+                  title={`Find your room in Wrocław`}
+                  image={room_landing}
+                  renderLoginPopup={this.state.displayLoginPopup}
+                  renderRegisterPopup={this.state.displayRegisterPopup}
+                  handleLoginClosing={this.handleLoginClosing}
+                  handleRegisterClosing={this.handleRegisterClosing}
+                  handleSwitchVisibility={this.handleSwitchVisibility}
+                  handleLoginButtonChange={this.handleLoginButtonChange} />
+              </Route>
+              <Redirect from="/" to="/mates" exact />
+            </Switch>
+          </Router>
+        </SimpleReactLightbox>
       </App >
     );
   }
