@@ -87,8 +87,8 @@ def search_rooms(request):
     if params['location']:
         data = data.filter(district=params['location'])
     
-    # if params['number_of_flatmates'][0] != 'undefined':
-    #     data = data.filter(number_of_flatmates=params['number_of_flatmates'])
+    # if params['numberOfFlatmates'][0]:
+    #     data = data.filter(number_of_flatmates=params['numberOfFlatmates'])
     
     # if params['buildingFeatures']:
     #     data = data.filter(Q(building_features__icontains=params['buildingFeatures']))

@@ -36,7 +36,7 @@ const Button = styled.button`
 const PopupContainer = styled.div`
     z-index: 2;
     position: absolute;
-    top: 36%;
+    top: 18%;
     left: 37%;
 `
 
@@ -63,7 +63,6 @@ class LandingPage extends React.Component {
         } else {
             popup = null;
         }
-
         return (
             <Container image={this.props.image}>
                 <Title>{this.props.title}</Title>

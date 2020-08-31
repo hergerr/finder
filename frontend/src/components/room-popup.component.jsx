@@ -79,7 +79,7 @@ export const RoomPopup = (props) => {
                     <div>{formik.errors.roomAreaTo}</div>
                 ) : null}
                 <InputAndLabel label="Location" id="location" name="location" onChange={formik.handleChange} value={formik.values.location} />
-                <InputAndLabel type="number" label="Flatmates" id="number_of_flatmates" name="number_of_flatmates" onChange={formik.handleChange} value={formik.values.number_of_flatmates} />
+                <InputAndLabel type="number" label="Number of Flatmates" id="number_of_flatmates" name="number_of_flatmates" onChange={formik.handleChange} value={formik.values.number_of_flatmates} />
                 <InputAndLabel label="Building Features" id="building_features" name="building_features" onChange={formik.handleChange} value={formik.values.building_features} />
                 <InputAndLabel label="Flat Features" id="flat_features" name="flat_features" onChange={formik.handleChange} value={formik.values.flat_features} />
                 <InputAndLabel label="Flatmates Features" id="flatmates_features" name="flatmates_features" onChange={formik.handleChange} value={formik.values.flatmates_features} />

@@ -39,10 +39,15 @@ class RoomListPage extends React.Component {
 
     handleLoad = () => {
         const data = queryString.parse(this.props.history.location.search);
-        const url = `http://localhost:8000/search_rooms/?priceFrom=${data.priceFrom}&priceTo=${data.priceTo}&roomAreaFrom=${data.roomAreaFrom}&roomAreaTo=${data.roomAreaTo}&location=${data.location}&numberOfFlatmates=${data.number_of_flatmates}&buildingFeatures=${data.building_features}&flatFeatures=${data.flat_features}&flatmatesFeatures=${data.flatmates_features}&rules=${data.rules}`
+        const url = `http://localhost:8000/search_rooms/?priceFrom=${data.priceFrom}&priceTo=${data.priceTo}` +
+            `&roomAreaFrom=${data.roomAreaFrom}&roomAreaTo=${data.roomAreaTo}&location=${data.location ? data.location : ''}` +
+            `&numberOfFlatmates=${data.number_of_flatmates ? data.number_of_flatmates : ''}` +
+            `&buildingFeatures=${data.building_features ? data.building_features : ''}` +
+            `&flatFeatures=${data.flat_features ? data.flat_features : ''}` +
+            `&flatmatesFeatures=${data.flatmates_features ? data.flatmates_features : ''}` +
+            `&rules=${data.rules ? data.rules : ''}`
         axios.get(url).then(res => {
             this.setState({ data: res.data });
-            console.log(this.state.data);
         })
 
         if (localStorage.getItem('access')) {
@@ -93,7 +98,14 @@ class RoomListPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        const url = `/room/list/priceFrom=${values.priceFrom}&priceTo=${values.priceTo}&roomAreaFrom=${values.roomAreaFrom}&roomAreaTo=${values.roomAreaTo}&district=${values.location ? values.location : ''}&numberOfFlatmates=${values.number_of_flatmates ? values.number_of_flatmates : ''}&buildingFeatures=${values.building_features ? values.building_features : ''}&flatmatesFeatures=${values.flatmates_features ? values.flatmates_features : ''}&flatFeatures=${values.flat_features ? values.flat_features : ''}&rules=${values.rules ? values.rules : ''}`
+                        const url = `/room/list/?priceFrom=${values.priceFrom}&priceTo=${values.priceTo}` +
+                            `&roomAreaFrom=${values.roomAreaFrom}&roomAreaTo=${values.roomAreaTo}` +
+                            `&location=${values.location ? values.location : ''}` +
+                            `&numberOfFlatmates=${values.number_of_flatmates ? values.number_of_flatmates : ''}` +
+                            `&buildingFeatures=${values.building_features ? values.building_features : ''}` +
+                            `&flatmatesFeatures=${values.flatmates_features ? values.flatmates_features : ''}` +
+                            `&flatFeatures=${values.flat_features ? values.flat_features : ''}` +
+                            `&rules=${values.rules ? values.rules : ''}`
                         this.props.history.push(url);
                         this.handleLoad();
                     }}
@@ -129,9 +141,9 @@ class RoomListPage extends React.Component {
                 {
                     this.state.data ? this.state.data.map((element) => {
                         if (this.state.favIds.includes(element.id))
-                            return <RoomCard liked={true} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} numberOfFlatmates={element.number_of_flatmates}/>
+                            return <RoomCard liked={true} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} numberOfFlatmates={element.number_of_flatmates} />
                         else
-                            return <RoomCard liked={false} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} numberOfFlatmates={element.number_of_flatmates}/>
+                            return <RoomCard liked={false} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} numberOfFlatmates={element.number_of_flatmates} />
                     }) : ''
                 }
 
