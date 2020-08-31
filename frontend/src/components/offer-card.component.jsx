@@ -55,7 +55,7 @@ export const OfferCard = (props) => {
         content = <TextWrapper>
             <Title>{props.title}</Title>
             <TextContent>{props.location}</TextContent>
-            <TextContent>{props.area}</TextContent>
+            <TextContent>{props.area}m2</TextContent>
             <TextContent>{props.flatmates} flatmate(s)</TextContent>
         </TextWrapper>
     } else if (props.type === 'mate') {

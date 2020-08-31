@@ -42,18 +42,29 @@ const Detail = styled.p`
     font-size: 20px;
 `
 
-const EmptyHeart = styled(HeartOutline)`
-    width: 40px;
+const RightSide = styled.div`
     margin-left: auto;
     margin-right: 30px;
+    margin-top: 30px;
+`
+
+const Price = styled.p`
+    display: block;
+    color: var(--color-orange);
+    font-size: 24px;
+    margin-bottom: 40px;
+`
+
+const EmptyHeart = styled(HeartOutline)`
+    width: 40px;
     cursor: pointer;
+    float: right;
 `
 
 const FilledHeart = styled(Heart)`
     width: 40px;
-    margin-left: auto;
-    margin-right: 30px;
     cursor: pointer;
+    float: right;
 `
 
 export const RoomCard = (props) => {
@@ -75,7 +86,7 @@ export const RoomCard = (props) => {
                     setLiked(!liked);
                 }
             })
-        } 
+        }
         else if (liked && localStorage.getItem('access')) {
             axios.delete('http://localhost:8000/delete_liked_room_offer/', {
                 headers: {
@@ -109,11 +120,14 @@ export const RoomCard = (props) => {
             <Image src={`${static_host}${props.src}`} onClick={handleRedirect} />
             <Description>
                 <Title onClick={handleRedirect}>{props.title}</Title>
-                <Detail>{props.area}</Detail>
                 <Detail>{props.location}</Detail>
-                <Detail>{props.numberOfFlatmates}</Detail>
+                <Detail>{props.area} m2</Detail>
+                <Detail>{props.numberOfFlatmates} flatmate(s)</Detail>
             </Description>
-            {heart}
+            <RightSide>
+                <Price>{props.price}zł/month</Price>
+                {heart}
+            </RightSide>
 
         </Container>
     )

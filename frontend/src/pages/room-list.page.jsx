@@ -93,7 +93,7 @@ class RoomListPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        const url = `/room/list/${values.priceFrom}&priceTo=${values.priceTo}&roomAreaFrom=${values.roomAreaFrom}&roomAreaTo=${values.roomAreaTo}&district=${values.location ? values.location : ''}&numberOfFlatmates=${values.number_of_flatmates ? values.number_of_flatmates : ''}&buildingFeatures=${values.building_features ? values.building_features : ''}&flatmatesFeatures=${values.flatmates_features ? values.flatmates_features : ''}&flatFeatures=${values.flat_features ? values.flat_features : ''}&rules=${values.rules ? values.rules : ''}`
+                        const url = `/room/list/priceFrom=${values.priceFrom}&priceTo=${values.priceTo}&roomAreaFrom=${values.roomAreaFrom}&roomAreaTo=${values.roomAreaTo}&district=${values.location ? values.location : ''}&numberOfFlatmates=${values.number_of_flatmates ? values.number_of_flatmates : ''}&buildingFeatures=${values.building_features ? values.building_features : ''}&flatmatesFeatures=${values.flatmates_features ? values.flatmates_features : ''}&flatFeatures=${values.flat_features ? values.flat_features : ''}&rules=${values.rules ? values.rules : ''}`
                         this.props.history.push(url);
                         this.handleLoad();
                     }}
@@ -129,9 +129,9 @@ class RoomListPage extends React.Component {
                 {
                     this.state.data ? this.state.data.map((element) => {
                         if (this.state.favIds.includes(element.id))
-                            return <RoomCard liked={true} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} />
+                            return <RoomCard liked={true} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} numberOfFlatmates={element.number_of_flatmates}/>
                         else
-                            return <RoomCard liked={false} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} />
+                            return <RoomCard liked={false} src={element.photos[0].image} key={element.id} id={element.id} title={element.title} area={element.area} location={element.location} price={element.price} numberOfFlatmates={element.number_of_flatmates}/>
                     }) : ''
                 }
 

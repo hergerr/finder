@@ -232,6 +232,7 @@ class AccountPage extends React.Component {
                                         area={element.area}
                                         flatmates={element.number_of_flatmates}
                                         handleDelete={this.handleFavDelete}
+                                        image={element.photos[0] ? element.photos[0].image : ''}
                                     />
 
                                 ))
