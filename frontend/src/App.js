@@ -13,6 +13,7 @@ import room_landing from './assets/images/room_landing.jpg';
 import mate_landing from './assets/images/mate_landing.jpg';
 import { LandingPage } from './pages/landing.page';
 import MateListPage from './pages/mate-list.page';
+import RoomListPage from './pages/room-list.page';
 import MateDetailPage from './pages/mate-detail.page';
 import RoomDetailPage from './pages/room-detail.page';
 import AccountPage from './pages/account.page';
@@ -196,6 +197,7 @@ class Application extends React.Component {
               <PublicRoute component={AccountConfirmedPage} path="/verify-user" />
               <PublicRoute component={ResetPasswordPage} path="/reset-password" />
               <PublicRoute component={MateListPage} path="/mate/list/" />
+              <PublicRoute component={RoomListPage} path="/room/list/" />
               <PrivateRoute component={AddMatePage} path="/add/mates" />
               <PrivateRoute component={AddRoomPage} path="/add/rooms" />
               <PrivateRoute component={AccountPage} path="/account" />

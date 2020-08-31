@@ -82,25 +82,28 @@ def search_mates(request):
 @permission_classes([AllowAny])
 def search_rooms(request):
     params = request.GET
-    data = MateOffer.objects.filter(price__gte=params['priceFrom'], price__lte=params['priceTo'], area_gte=params['areaFrom'], area_lte=['areaTo'])
+    data = RoomOffer.objects.filter(price__gte=params['priceFrom'], price__lte=params['priceTo'], area__gte=params['roomAreaFrom'], area__lte=params['roomAreaTo'])
 
     if params['location']:
         data = data.filter(district=params['location'])
     
-    if params['numberOfFlatmates']:
-        data = data.filter(number_of_flatmates=params['numberOfFlatmates'])
+    # if params['number_of_flatmates'][0] != 'undefined':
+    #     data = data.filter(number_of_flatmates=params['number_of_flatmates'])
     
-    if params['building_features']:
-        data = data.filter(Q(customs__icontains=params['building_features']))
+    # if params['buildingFeatures']:
+    #     data = data.filter(Q(building_features__icontains=params['buildingFeatures']))
 
-    if params['flat_features']:
-        data = data.filter(Q(customs__icontains=params['flat_features']))
+    # if params['flatFeatures']:
+    #     data = data.filter(Q(flat_features__icontains=params['flatFeatures']))
 
-    if params['flatmates_features']:
-        data = data.filter(Q(customs__icontains=params['flatmates_features']))
+    # if params['flatmatesFeatures']:
+    #     data = data.filter(Q(flatmates_features__icontains=params['flatmatesFeatures']))
 
-    serializer = MateOfferListSerializer(data, many=True)
-    return Response(status=200)
+    # if params['rules']:
+    #     data = data.filter(Q(flatmates_features__icontains=params['rules']))
+
+    serializer = RoomOfferListSerializer(data, many=True)
+    return Response(serializer.data)
 
 # -----------------------USER VIEWS----------------------
 

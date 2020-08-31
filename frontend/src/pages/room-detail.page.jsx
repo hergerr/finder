@@ -107,7 +107,6 @@ class RoomDetailPage extends React.Component {
             rules = [];
         }
 
-        console.log(photos);
         let gallery;
         if (photos){
             gallery = <SRLWrapper>
