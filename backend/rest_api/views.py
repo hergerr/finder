@@ -87,20 +87,20 @@ def search_rooms(request):
     if params['location']:
         data = data.filter(district=params['location'])
     
-    # if params['numberOfFlatmates'][0]:
-    #     data = data.filter(number_of_flatmates=params['numberOfFlatmates'])
+    if params['numberOfFlatmates']:
+        data = data.filter(number_of_flatmates=params['numberOfFlatmates'])
     
-    # if params['buildingFeatures']:
-    #     data = data.filter(Q(building_features__icontains=params['buildingFeatures']))
+    if params['buildingFeatures']:
+        data = data.filter(Q(building_features__icontains=params['buildingFeatures']))
 
-    # if params['flatFeatures']:
-    #     data = data.filter(Q(flat_features__icontains=params['flatFeatures']))
+    if params['flatFeatures']:
+        data = data.filter(Q(flat_features__icontains=params['flatFeatures']))
 
-    # if params['flatmatesFeatures']:
-    #     data = data.filter(Q(flatmates_features__icontains=params['flatmatesFeatures']))
+    if params['flatmatesFeatures']:
+        data = data.filter(Q(flatmates_features__icontains=params['flatmatesFeatures']))
 
-    # if params['rules']:
-    #     data = data.filter(Q(flatmates_features__icontains=params['rules']))
+    if params['rules']:
+        data = data.filter(Q(flatmates_features__icontains=params['rules']))
 
     serializer = RoomOfferListSerializer(data, many=True)
     return Response(serializer.data)

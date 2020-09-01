@@ -39,12 +39,13 @@ class RoomListPage extends React.Component {
 
     handleLoad = () => {
         const data = queryString.parse(this.props.history.location.search);
+        console.log(data);
         const url = `http://localhost:8000/search_rooms/?priceFrom=${data.priceFrom}&priceTo=${data.priceTo}` +
             `&roomAreaFrom=${data.roomAreaFrom}&roomAreaTo=${data.roomAreaTo}&location=${data.location ? data.location : ''}` +
-            `&numberOfFlatmates=${data.number_of_flatmates ? data.number_of_flatmates : ''}` +
-            `&buildingFeatures=${data.building_features ? data.building_features : ''}` +
-            `&flatFeatures=${data.flat_features ? data.flat_features : ''}` +
-            `&flatmatesFeatures=${data.flatmates_features ? data.flatmates_features : ''}` +
+            `&numberOfFlatmates=${data.numberOfFlatmates ? data.numberOfFlatmates : ''}` +
+            `&buildingFeatures=${data.buildingFeatures ? data.buildingFeatures : ''}` +
+            `&flatFeatures=${data.flatFeatures ? data.flatFeatures : ''}` +
+            `&flatmatesFeatures=${data.flatmatesFeatures ? data.flatmatesFeatures : ''}` +
             `&rules=${data.rules ? data.rules : ''}`
         axios.get(url).then(res => {
             this.setState({ data: res.data });
