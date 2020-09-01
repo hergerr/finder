@@ -6,7 +6,7 @@ import * as queryString from 'query-string';
 import { withRouter } from 'react-router-dom';
 import { Formik } from 'formik';
 import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component';
-import { InputAndLabel } from '../components/input-and-label.component';
+import { SmallInputAndLabel } from '../components/small-input-and-label';
 import { SearchButton } from '../components/search-button.component';
 import { RoomCard } from '../components/room-card.component';
 
@@ -19,6 +19,7 @@ const FormWrapper = styled.form`
     margin-bottom: 50px;
     margin: 50px auto;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
 
     button {
@@ -30,6 +31,15 @@ const Feedback = styled.div`
     color: red;
 `
 
+const Row = styled.div`
+    display: flex;
+`
+
+const Break = styled.div`
+    width: 10%;
+`
+
+
 class RoomListPage extends React.Component {
     constructor(props) {
         super(props);
@@ -39,7 +49,6 @@ class RoomListPage extends React.Component {
 
     handleLoad = () => {
         const data = queryString.parse(this.props.history.location.search);
-        console.log(data);
         const url = `http://localhost:8000/search_rooms/?priceFrom=${data.priceFrom}&priceTo=${data.priceTo}` +
             `&roomAreaFrom=${data.roomAreaFrom}&roomAreaTo=${data.roomAreaTo}&location=${data.location ? data.location : ''}` +
             `&numberOfFlatmates=${data.numberOfFlatmates ? data.numberOfFlatmates : ''}` +
@@ -112,27 +121,47 @@ class RoomListPage extends React.Component {
                     }}
                 >
                     {props => (
+
                         <FormWrapper onSubmit={props.handleSubmit}>
-                            <TwoInputsAndLabel label="Price" idFrom="priceFrom" idTo="priceTo" nameFrom="priceFrom" nameTo="priceTo" onChange={props.handleChange} valueFrom={props.values.priceFrom} valueTo={props.values.priceTo} />
-                            {props.touched.priceFrom && props.errors.priceFrom ? (
-                                <Feedback>{props.errors.priceFrom}</Feedback>
-                            ) : null}
-                            {props.touched.priceTo && props.errors.priceTo ? (
-                                <Feedback>{props.errors.priceTo}</Feedback>
-                            ) : null}
-                            <TwoInputsAndLabel label="Room area" idFrom="roomAreaFrom" idTo="roomAreaTo" nameFrom="roomAreaFrom" nameTo="roomAreaTo" onChange={props.handleChange} valueFrom={props.values.roomAreaFrom} valueTo={props.values.roomAreaTo} />
-                            {props.touched.roomAreaFrom && props.errors.roomAreaFrom ? (
-                                <Feedback>{props.errors.roomAreaFrom}</Feedback>
-                            ) : null}
-                            {props.touched.roomAreaTo && props.errors.roomAreaTo ? (
-                                <Feedback>{props.errors.roomAreaTo}</Feedback>
-                            ) : null}
-                            <InputAndLabel label="Location" id="location" name="location" onChange={props.handleChange} value={props.values.location} />
-                            <InputAndLabel type="number" label="Flatmates" id="number_of_flatmates" name="number_of_flatmates" onChange={props.handleChange} value={props.values.number_of_flatmates} />
-                            <InputAndLabel label="Building Features" id="building_features" name="building_features" onChange={props.handleChange} value={props.values.building_features} />
-                            <InputAndLabel label="Flat Features" id="flat_features" name="flat_features" onChange={props.handleChange} value={props.values.flat_features} />
-                            <InputAndLabel label="Flatmates Features" id="flatmates_features" name="flatmates_features" onChange={props.handleChange} value={props.values.flatmates_features} />
-                            <InputAndLabel label="Rules" id="rules" name="rules" onChange={props.handleChange} value={props.values.rules} />
+                            <Row>
+
+                                <div>
+
+                                    <TwoInputsAndLabel label="Price" idFrom="priceFrom" idTo="priceTo" nameFrom="priceFrom" nameTo="priceTo" onChange={props.handleChange} valueFrom={props.values.priceFrom} valueTo={props.values.priceTo} />
+                                    {props.touched.priceFrom && props.errors.priceFrom ? (
+                                        <Feedback>{props.errors.priceFrom}</Feedback>
+                                    ) : null}
+                                    {props.touched.priceTo && props.errors.priceTo ? (
+                                        <Feedback>{props.errors.priceTo}</Feedback>
+                                    ) : null}
+                                </div>
+                                <Break/>
+                                <div>
+
+                                    <TwoInputsAndLabel label="Room area" idFrom="roomAreaFrom" idTo="roomAreaTo" nameFrom="roomAreaFrom" nameTo="roomAreaTo" onChange={props.handleChange} valueFrom={props.values.roomAreaFrom} valueTo={props.values.roomAreaTo} />
+                                    {props.touched.roomAreaFrom && props.errors.roomAreaFrom ? (
+                                        <Feedback>{props.errors.roomAreaFrom}</Feedback>
+                                    ) : null}
+                                    {props.touched.roomAreaTo && props.errors.roomAreaTo ? (
+                                        <Feedback>{props.errors.roomAreaTo}</Feedback>
+                                    ) : null}
+                                </div>
+                            </Row>
+                            <Row>
+                                <SmallInputAndLabel label="Location" id="location" name="location" onChange={props.handleChange} value={props.values.location} />
+                                <Break/>
+                                <SmallInputAndLabel type="number" label="Number of flatmates" id="number_of_flatmates" name="number_of_flatmates" onChange={props.handleChange} value={props.values.number_of_flatmates} />
+                                <Break/>
+                                <SmallInputAndLabel label="Building Features" id="building_features" name="building_features" onChange={props.handleChange} value={props.values.building_features} />
+                            </Row>
+
+                            <Row>
+                                <SmallInputAndLabel label="Flat Features" id="flat_features" name="flat_features" onChange={props.handleChange} value={props.values.flat_features} />
+                                <Break/>
+                                <SmallInputAndLabel label="Flatmates Features" id="flatmates_features" name="flatmates_features" onChange={props.handleChange} value={props.values.flatmates_features} />
+                                <Break/>
+                                <SmallInputAndLabel label="Rules" id="rules" name="rules" onChange={props.handleChange} value={props.values.rules} />
+                            </Row>
 
                             <SearchButton>Filter</SearchButton>
                         </FormWrapper>
