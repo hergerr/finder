@@ -64,13 +64,13 @@ const Feedback = styled.div`
 `
 
 class LoginPopup extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {redirect: false}
+        this.state = { redirect: false, message: '' }
     }
 
     render() {
-        const redirect = this.state.redirect; 
+        const redirect = this.state.redirect;
 
         if (redirect) {
             return <Redirect push to='/account/messages' />
@@ -95,13 +95,16 @@ class LoginPopup extends React.Component {
 
                         onSubmit={values => {
                             axios.post(`http://127.0.0.1:8000/token/`, { username: values.username, password: values.password })
-                            .then(res => {
-                                if (res.status === 200) {
-                                    localStorage.setItem('access', res.data.access)
-                                    this.setState({redirect: true});
-                                    this.props.handleLoginButtonChange();
-                                }
-                            })
+                                .then(res => {
+                                    if (res.status === 200) {
+                                        localStorage.setItem('access', res.data.access)
+                                        this.setState({ redirect: true });
+                                        this.props.handleLoginButtonChange();
+                                    }
+                                }).catch(error => {
+                                    this.setState({ message: 'Wrong login credentials' })
+                                });
+
                         }}
                     >
                         {props => (
@@ -111,10 +114,12 @@ class LoginPopup extends React.Component {
                                 {props.errors.username && <Feedback>{props.errors.username}</Feedback>}
                                 <InputAndLabel type="password" label="password" name="password" id="password" value={props.values.password} onChange={props.handleChange} />
                                 {props.errors.password && <Feedback>{props.errors.password}</Feedback>}
+                                <Feedback>{this.state.message}</Feedback>
 
                                 <ButtonWrapper>
                                     <PopupButton content="Log in" />
                                 </ButtonWrapper>
+
                             </FormWrapper>
                         )}
 
@@ -123,7 +128,7 @@ class LoginPopup extends React.Component {
                     <Links>
                         <Paragraph>No account?</Paragraph>
                         <RegisterButton to="/register" onClick={this.props.handleSwitchVisibility}>Register</RegisterButton>
-                        <ForgotButton to="/forgot" onClick={e=>{
+                        <ForgotButton to="/forgot" onClick={e => {
                             this.props.history.push('/forgot-password')
                         }}>Forgot password?</ForgotButton>
                     </Links>
@@ -136,4 +141,4 @@ class LoginPopup extends React.Component {
     }
 }
 
-export default withRouter( LoginPopup );
+export default withRouter(LoginPopup);

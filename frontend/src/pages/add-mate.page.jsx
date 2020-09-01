@@ -59,11 +59,18 @@ const Feedback = styled.div`
     color: red;
 `
 
+const Message = styled.span`
+    display: block;
+    margin-top: 10px;
+    color: ${props => props.status === 'success' ? 'green' : 'red'};
+    text-align: center;
+`
+
 
 class AddMatePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = { data: [], message: '', status: '' };
     }
 
     componentDidMount() {
@@ -136,9 +143,35 @@ class AddMatePage extends React.Component {
 
                         if (this.props.match.url.includes('edit')) {
                             data.append('id', this.props.match.params.offerId)
-                            axios.put('http://localhost:8000/user_mate_detail/', data, { headers });
+                            axios.put('http://localhost:8000/user_mate_detail/', data, { headers })
+                            .then(res => {
+                                    if (res.status === 200) {
+                                        this.setState({message: 'Offer edited', status: 'success' })
+                                    }
+                                }).catch(error => {
+                                    const errors = error.response.data;
+                                    let message = '';
+                                    for (const type in errors) {
+                                        message = message.concat(`${errors[type]}`)
+                                    }
+                                    message = message.replace(/,/g, '\n');
+                                    this.setState({ message: message, status: 'fail' });
+                                });
                         } else {
-                            axios.post('http://localhost:8000/user_mate_detail/', data, { headers });
+                            axios.post('http://localhost:8000/user_mate_detail/', data, { headers })
+                                .then(res => {
+                                    if (res.status === 201) {
+                                        this.setState({message: 'New offer added', status: 'success' })
+                                    }
+                                }).catch(error => {
+                                    const errors = error.response.data;
+                                    let message = '';
+                                    for (const type in errors) {
+                                        message = message.concat(`${errors[type]}`)
+                                    }
+                                    message = message.replace(/,/g, '\n');
+                                    this.setState({ message: message, status: 'fail' });
+                                });
                         }
 
                     }}
@@ -183,6 +216,9 @@ class AddMatePage extends React.Component {
                             <ButtonWrapper>
                                 <SearchButton>Submit</SearchButton>
                             </ButtonWrapper>
+                            <Message status={this.state.status}>
+                                {this.state.message}
+                            </Message>
                         </BigForm>
                     )}
                 </Formik>

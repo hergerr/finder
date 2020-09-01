@@ -98,7 +98,7 @@ class RoomDetailPage extends React.Component {
             flatmates = flatmates.split(';');
             rules = rules.split(';');
             photos = photos.map((element, index) => (
-                <Image src={`${static_host}${element.image}`} alt="abc" key={index} />
+                <Image src={`${static_host}${element.image}`} alt={index} key={index} />
             ));
         } else {
             building = [];
@@ -144,7 +144,7 @@ class RoomDetailPage extends React.Component {
                 <WhiteBorder />
                 <DetailBlock title="Rules" features={rules} />
 
-                <ContactBox phone={this.state.data.phone} />
+                <ContactBox phone={this.state.data.phone} receiver={this.state.data.owner} subject={this.state.data.title}/>
             </Container>
         )
     }

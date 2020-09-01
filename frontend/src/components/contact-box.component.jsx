@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import * as Yup from 'yup';
@@ -46,6 +46,10 @@ const FormWrapper = styled.form`
     }
 `
 
+const Feedback = styled.p`
+    color: ${props => props.status === 'success' ? 'green' : 'red'};
+`
+
 const TextArea = styled.textarea`
     width: 300px;
     height: 200px;
@@ -53,12 +57,14 @@ const TextArea = styled.textarea`
 `
 
 export const ContactBox = (props) => {
+    const [message, setMessage] = useState('');
+    const [status, setStatus] = useState('');
     const formik = useFormik({
 
         initialValues: {
             message: '',
         },
-        
+
         validationSchema: Yup.object({
             message: Yup.string().required('cannot be empty')
         }),
@@ -68,8 +74,20 @@ export const ContactBox = (props) => {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
             }).then(res => {
                 if (res.status === 200) {
+                    setMessage('Message sent succesfully');
+                    setStatus('success');
                 }
-            })
+            }).catch(error => {
+                const errors = error.response.data;
+                let message = '';
+                for (const type in errors) {
+                    message = message.concat(`${errors[type]}`)
+                }
+                message = message.replace(/,/g, '\n');
+                setMessage(message);
+                setStatus('fail');
+            });
+
         },
 
     });
@@ -81,8 +99,11 @@ export const ContactBox = (props) => {
             <ContactContentWrapper>
                 <Phone>{props.phone}</Phone>
                 <FormWrapper onSubmit={formik.handleSubmit}>
-                    <TextArea name="message" id="message" onChange={formik.handleChange} value={formik.values.message}/>
+                    <TextArea name="message" id="message" onChange={formik.handleChange} value={formik.values.message} />
                     <SearchButton>Send</SearchButton>
+                    <Feedback status={status}>
+                        {message}
+                    </Feedback>
                 </FormWrapper>
             </ContactContentWrapper>
         </ContactContainer>
