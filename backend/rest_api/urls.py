@@ -4,10 +4,10 @@ from . import views
 urlpatterns = [
     # ------ GUEST VIEWS -----
     path('register/', views.register_user),
-    path('all_room_offers_list/', views.get_all_room_list_offers),
+    path('all_room_offers_list/', views.get_all_room_list_offers, name='get_all_rooms'),
     path('room_offer_detail/<int:room_offer_id>', views.get_room_offer_detail),
     
-    path('all_mate_offers_list/', views.get_all_mate_list_offers),
+    path('all_mate_offers_list/', views.get_all_mate_list_offers, name='get_all_mates'),
     path('mate_offer_detail/<int:mate_offer_id>', views.get_mate_offer_detail),
     # https://stackoverflow.com/a/3711426
     re_path(r'^search_mates/$', views.search_mates),
