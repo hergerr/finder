@@ -186,7 +186,6 @@ def get_liked_room_offers(request):
 def delete_liked_room_offer(request):
     data = request.data
     data['owner'] = request.user.id
-    print(data)
 
     offers = get_object_or_404(LikedOffer, user=data['owner'])
     offers.room_offers.remove(data['id'])
