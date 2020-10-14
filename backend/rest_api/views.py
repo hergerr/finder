@@ -22,7 +22,7 @@ def register_user(request):
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+        return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # ---------------------- Room section -----------------
@@ -207,8 +207,8 @@ def user_mate_detail(request):
         serializer = MateOfferDetailSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
     elif request.method == 'PUT':
@@ -216,8 +216,8 @@ def user_mate_detail(request):
         serializer = MateOfferDetailSerializer(offer, data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=200)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         offer = get_object_or_404(MateOffer, id=data['id'])
