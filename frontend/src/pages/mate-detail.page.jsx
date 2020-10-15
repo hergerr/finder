@@ -5,8 +5,8 @@ import { withRouter } from "react-router-dom";
 import { LocationPin } from '@styled-icons/entypo';
 import { Books } from '@styled-icons/icomoon/Books';
 import { Calendar } from '@styled-icons/boxicons-regular/Calendar';
-import { ContactBox } from '../components/contact-box.component'; 
-import { DetailBlock, WhiteBorder} from '../components/detail-block.component';
+import { ContactBox } from '../components/contact-box.component';
+import { DetailBlock, WhiteBorder } from '../components/detail-block.component';
 import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
@@ -70,19 +70,20 @@ const Birth = styled(Calendar)`
 `
 
 
-class MateDetailPage extends React.Component {
+export class MateDetailPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {data: {}}
+        this.state = { data: {} }
     }
 
-    componentDidMount(){
-
-        axios.get(`http://localhost:8000/mate_offer_detail/${this.props.match.params.offerId}`).then(res => {
-            if (res.status === 200) {
-                this.setState({ data: res.data });
-            }
-        })
+    componentDidMount() {
+        if (this.props.match) {
+            axios.get(`http://localhost:8000/mate_offer_detail/${this.props.match.params.offerId}`).then(res => {
+                if (res.status === 200) {
+                    this.setState({ data: res.data });
+                }
+            })
+        }
     }
 
     render() {
@@ -90,7 +91,7 @@ class MateDetailPage extends React.Component {
         // cannot fetch before loading
         let features = this.state.data.features;
         let customs = this.state.data.customs
-        if (features && customs){
+        if (features && customs) {
             features = features.split(';')
             customs = customs.split(';')
         } else {
@@ -124,11 +125,11 @@ class MateDetailPage extends React.Component {
                     </IconAndDescContainer>
                 </Essentials>
 
-                <DetailBlock title="Features" features={features}/>
-                <WhiteBorder/>
-                <DetailBlock title="Customs" features={customs}/>
+                <DetailBlock title="Features" features={features} />
+                <WhiteBorder />
+                <DetailBlock title="Customs" features={customs} />
 
-                <ContactBox phone={this.state.data.phone} receiver={this.state.data.owner} subject={this.state.data.title}/>
+                <ContactBox phone={this.state.data.phone} receiver={this.state.data.owner} subject={this.state.data.title} />
             </Container>
         )
     }

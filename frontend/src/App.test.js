@@ -1,9 +1,14 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+it('renders without crashing', () => {
+  shallow(<App />);
 });
+
+
+it('passes all users to the UsersList', () => {
+  const app = shallow(<App />);
+  console.log(app.find('LangingPage').prop('title'));
+  expect(app.find('LandingPage').prop('title')).toEqual('Find your room in Wrocław');
+})
