@@ -26,6 +26,7 @@ services:
     build:
       context: ./frontend/
       dockerfile: Dockerfile
+    command: serve -s build/ -l 3000
     volumes:
       - './frontend/:/app'
       - '/app/node_modules'
