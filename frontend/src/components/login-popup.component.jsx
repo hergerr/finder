@@ -7,6 +7,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { Cross } from './cross.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     background-color: white;
@@ -94,7 +95,7 @@ class LoginPopup extends React.Component {
                         })}
 
                         onSubmit={values => {
-                            axios.post(`http://127.0.0.1:8000/token/`, { username: values.username, password: values.password })
+                            axios.post(`${static_host}/token/`, { username: values.username, password: values.password })
                                 .then(res => {
                                     if (res.status === 200) {
                                         localStorage.setItem('access', res.data.access)

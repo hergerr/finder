@@ -94,7 +94,7 @@ class RegisterPopup extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        axios.post(`http://127.0.0.1:8000/accounts/register/`,
+                        axios.post(`${$static_host}/accounts/register/`,
                             // password_confirm required by Django REST Registration
                             { username: values.username, email: values.email, password: values.password, password_confirm: values.password })
                             .then(res => {
