@@ -94,19 +94,19 @@ class RegisterPopup extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        axios.post(`${$static_host}/accounts/register/`,
+                        axios.post(`${static_host}/accounts/register/`,
                             // password_confirm required by Django REST Registration
                             { username: values.username, email: values.email, password: values.password, password_confirm: values.password })
                             .then(res => {
                                 if (res.status === 201) {
-                                    this.setState({messages: "Registration was succesful. Now confirm your account by clicking URL sent to your email.", status: "success"})
+                                    this.setState({ messages: "Registration was succesful. Now confirm your account by clicking URL sent to your email.", status: "success" })
                                 }
                             }).catch(error => {
                                 // https://github.com/axios/axios/issues/960
                                 const errors = error.response.data;
                                 let message = '';
                                 for (const type in errors) {
-                                    message= message.concat(`${errors[type]}`)
+                                    message = message.concat(`${errors[type]}`)
                                 }
                                 message = message.replace(/,/g, '\n');
                                 this.setState({ messages: message, status: "fail" })
