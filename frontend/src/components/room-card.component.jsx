@@ -79,7 +79,7 @@ export const RoomCard = (props) => {
 
     const handleChange = event => {
         if (!liked && localStorage.getItem('access')) {
-            axios.post(`http://localhost:8000/add_room_offer_to_liked/`, { id: props.id }, {
+            axios.post(`${static_host}/add_room_offer_to_liked/`, { id: props.id }, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
             }).then(res => {
                 if (res.status === 200) {
@@ -88,7 +88,7 @@ export const RoomCard = (props) => {
             })
         }
         else if (liked && localStorage.getItem('access')) {
-            axios.delete('http://localhost:8000/delete_liked_room_offer/', {
+            axios.delete(`${static_host}/delete_liked_room_offer/`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access')}`
                 },

@@ -75,7 +75,7 @@ class RoomDetailPage extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8000/room_offer_detail/${this.props.match.params.offerId}`).then(res => {
+        axios.get(`${static_host}/room_offer_detail/${this.props.match.params.offerId}`).then(res => {
             if (res.status === 200) {
                 this.setState({ data: res.data });
             }

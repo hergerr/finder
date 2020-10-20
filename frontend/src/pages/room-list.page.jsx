@@ -9,6 +9,7 @@ import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component'
 import { SmallInputAndLabel } from '../components/small-input-and-label';
 import { SearchButton } from '../components/search-button.component';
 import { RoomCard } from '../components/room-card.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 100%;
@@ -49,7 +50,7 @@ class RoomListPage extends React.Component {
 
     handleLoad = () => {
         const data = queryString.parse(this.props.history.location.search);
-        const url = `http://localhost:8000/search_rooms/?priceFrom=${data.priceFrom}&priceTo=${data.priceTo}` +
+        const url = `${static_host}/search_rooms/?priceFrom=${data.priceFrom}&priceTo=${data.priceTo}` +
             `&roomAreaFrom=${data.roomAreaFrom}&roomAreaTo=${data.roomAreaTo}&location=${data.location ? data.location : ''}` +
             `&numberOfFlatmates=${data.numberOfFlatmates ? data.numberOfFlatmates : ''}` +
             `&buildingFeatures=${data.buildingFeatures ? data.buildingFeatures : ''}` +
@@ -62,7 +63,7 @@ class RoomListPage extends React.Component {
 
         if (localStorage.getItem('access')) {
 
-            axios.get('http://localhost:8000/get_liked_room_offers/', {
+            axios.get(`${static_host}/get_liked_room_offers/`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
             }
             ).then(res => {

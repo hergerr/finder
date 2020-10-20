@@ -1,0 +1,11 @@
+server {
+   listen 80;
+   server_name 51.83.130.30 finder.tscode.net www.finder.tscode.net;
+   root /home/ubuntu/apps/finder/frontend/build;
+   index index.html index.htm;
+   
+   # https://stackoverflow.com/a/47505427
+   location / {
+   try_files $uri /index.html =404;
+   }
+}

@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { Formik } from 'formik';
 import { InputAndLabel } from '../components/input-and-label.component';
 import { PopupButton } from '../components/popup-button.component';
-
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 100%;
@@ -68,7 +68,7 @@ class ResetPasswordPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        axios.post(`http://localhost:8000/accounts/reset-password/`,
+                        axios.post(`${static_host}/accounts/reset-password/`,
                             { user_id: data.user_id, timestamp: data.timestamp, password: values.password, signature: data.signature })
                             .then(res => {
                                 if (res.status === 200) {

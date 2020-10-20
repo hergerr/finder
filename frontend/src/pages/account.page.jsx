@@ -11,6 +11,7 @@ import axios from 'axios';
 import { MessageCard } from '../components/message-card.component';
 import { OfferCard } from '../components/offer-card.component';
 import { FavCard } from '../components/fav-card.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 100%;
@@ -55,7 +56,7 @@ class AccountPage extends React.Component {
             headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
         };
 
-        axios.get('http://localhost:8000/user_room_list/',
+        axios.get(`${static_host}/user_room_list/`,
             config
         ).then(res => {
             if (res.status === 200) {
@@ -65,7 +66,7 @@ class AccountPage extends React.Component {
             }
         })
 
-        axios.get('http://localhost:8000/user_mate_list/',
+        axios.get(`${static_host}/user_mate_list/`,
             config
         ).then(res => {
             if (res.status === 200) {
@@ -73,7 +74,7 @@ class AccountPage extends React.Component {
             }
         })
 
-        axios.get('http://localhost:8000/get_liked_room_offers/',
+        axios.get(`${static_host}/get_liked_room_offers/`,
             config
         ).then(res => {
             if (res.status === 200) {
@@ -81,7 +82,7 @@ class AccountPage extends React.Component {
             }
         })
 
-        axios.get('http://localhost:8000/get_liked_mate_offers/',
+        axios.get(`${static_host}/get_liked_mate_offers/`,
             config
         ).then(res => {
             if (res.status === 200) {
@@ -89,7 +90,7 @@ class AccountPage extends React.Component {
             }
         })
 
-        axios.get('http://localhost:8000/get_user_conversations/',
+        axios.get(`${static_host}/get_user_conversations/`,
             config
         ).then(res => {
             if (res.status === 200) {
@@ -100,7 +101,7 @@ class AccountPage extends React.Component {
 
     handleFavDelete = (type, id) => {
         if (type === 'room') {
-            axios.delete('http://localhost:8000/delete_liked_room_offer/', {
+            axios.delete(`${static_host}/delete_liked_room_offer/`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access')}`
                 },
@@ -114,7 +115,7 @@ class AccountPage extends React.Component {
                 }
             })
         } else if (type === 'mate') {
-            axios.delete('http://localhost:8000/delete_liked_mate_offer/', {
+            axios.delete(`${static_host}/delete_liked_mate_offer/`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access')}`
                 },
@@ -134,7 +135,7 @@ class AccountPage extends React.Component {
     handleOfferDelete = (type, id) => {
         if (type === 'room') {
 
-            axios.delete('http://localhost:8000/user_room_detail/', {
+            axios.delete(`${static_host}/user_room_detail/`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access')}`
                 },
@@ -149,7 +150,7 @@ class AccountPage extends React.Component {
             })
         } else if (type === 'mate') {
 
-            axios.delete('http://localhost:8000/user_mate_detail/', {
+            axios.delete(`${static_host}/user_mate_detail/`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access')}`
                 },

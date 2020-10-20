@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import { withRouter } from 'react-router-dom';
 import { SearchButton } from '../components/search-button.component';
 import { ChatMessage } from '../components/chat-message.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 70%;
@@ -51,7 +52,7 @@ class ConversationPage extends React.Component {
             headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
         };
 
-        axios.get(`http://localhost:8000/get_conversation/${this.props.match.params.conversationId}`,
+        axios.get(`${static_host}/get_conversation/${this.props.match.params.conversationId}`,
             config
         ).then(res => {
             if (res.status === 200) {
@@ -59,7 +60,7 @@ class ConversationPage extends React.Component {
             }
         })
 
-        axios.get('http://localhost:8000/get_user_id/',
+        axios.get(`${static_host}/get_user_id/`,
             config).then(res => {
                 if (res.status === 200) {
                     this.setState({ id: res.data });
@@ -110,7 +111,7 @@ class ConversationPage extends React.Component {
                     })}
 
                     onSubmit={values => {
-                        axios.post(`http://localhost:8000/send_message_conv_id/`, { content: values.message, id: this.state.data.id }, {
+                        axios.post(`${static_host}/send_message_conv_id/`, { content: values.message, id: this.state.data.id }, {
                             headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
                         }).then(res => {
                             if (res.status === 200) {

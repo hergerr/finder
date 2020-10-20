@@ -9,6 +9,7 @@ import { TwoInputsAndLabel } from '../components/two-inputs-and-label.component'
 import { SmallInputAndLabel } from '../components/small-input-and-label';
 import { SearchButton } from '../components/search-button.component';
 import { MateCard } from '../components/mate-card.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 100%;
@@ -39,14 +40,14 @@ class MateListPage extends React.Component {
 
     handleLoad = () => {
         const data = queryString.parse(this.props.history.location.search);
-        const url = `http://localhost:8000/search_mates/?ageFrom=${data.ageFrom}&ageTo=${data.ageTo}&district=${data.district}&features=${data.features}&customs=${data.customs}`
+        const url = `${static_host}/search_mates/?ageFrom=${data.ageFrom}&ageTo=${data.ageTo}&district=${data.district}&features=${data.features}&customs=${data.customs}`
         axios.get(url).then(res => {
             this.setState({ data: res.data });
         })
 
         if (localStorage.getItem('access')) {
 
-            axios.get('http://localhost:8000/get_liked_mate_offers/', {
+            axios.get(`${static_host}/get_liked_mate_offers/`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
             }
             ).then(res => {

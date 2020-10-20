@@ -9,6 +9,7 @@ import { InputAndLabel } from '../components/input-and-label.component';
 import { SmallInputAndLabel } from '../components/small-input-and-label';
 import { SearchButton } from '../components/search-button.component';
 import { FileInput } from '../components/file-input.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 70%;
@@ -75,7 +76,7 @@ class AddMatePage extends React.Component {
 
     componentDidMount() {
         if (this.props.match.url.includes('edit')) {
-            axios.get(`http://localhost:8000/mate_offer_detail/${this.props.match.params.offerId}`).then(res => {
+            axios.get(`${static_host}/mate_offer_detail/${this.props.match.params.offerId}`).then(res => {
                 if (res.status === 200) {
                     this.setState({ data: res.data });
                 }
@@ -143,10 +144,10 @@ class AddMatePage extends React.Component {
 
                         if (this.props.match.url.includes('edit')) {
                             data.append('id', this.props.match.params.offerId)
-                            axios.put('http://localhost:8000/user_mate_detail/', data, { headers })
-                            .then(res => {
+                            axios.put(`${static_host}/user_mate_detail/`, data, { headers })
+                                .then(res => {
                                     if (res.status === 200) {
-                                        this.setState({message: 'Offer edited', status: 'success' })
+                                        this.setState({ message: 'Offer edited', status: 'success' })
                                     }
                                 }).catch(error => {
                                     const errors = error.response.data;
@@ -158,10 +159,10 @@ class AddMatePage extends React.Component {
                                     this.setState({ message: message, status: 'fail' });
                                 });
                         } else {
-                            axios.post('http://localhost:8000/user_mate_detail/', data, { headers })
+                            axios.post(`${static_host}/user_mate_detail/`, data, { headers })
                                 .then(res => {
                                     if (res.status === 201) {
-                                        this.setState({message: 'New offer added', status: 'success' })
+                                        this.setState({ message: 'New offer added', status: 'success' })
                                     }
                                 }).catch(error => {
                                     const errors = error.response.data;

@@ -26,6 +26,7 @@ import PrivateRoute from './components/private-route.component';
 import PublicRoute from './components/public-route.component';
 import { ForgotPasswordPage } from './pages/forgot-password.page';
 import ResetPasswordPage from './pages/reset-password.page';
+import { static_host } from './assets/global-settings';
 
 const App = styled.div`
   width: 100%;
@@ -92,7 +93,7 @@ class Application extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem('access')}` }
       };
 
-      axios.get('http://localhost:8000/get_user/',
+      axios.get(`${static_host}/get_user/`,
         config).then(res => {
           if (res.status === 200) {
             this.setState({ logged: true });

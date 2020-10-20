@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { InputAndLabel } from '../components/input-and-label.component';
 import { PopupButton } from '../components/popup-button.component';
+import { static_host } from '../assets/global-settings';
 
 const Container = styled.div`
     width: 100%;
@@ -50,7 +51,7 @@ export const ForgotPasswordPage = (props) => {
             login: Yup.string().required('required')
         }),
         onSubmit: values => {
-            axios.post(`http://localhost:8000/accounts/send-reset-password-link/`,
+            axios.post(`${static_host}/accounts/send-reset-password-link/`,
                 { login: values.login })
                 .then(res => {
                     if (res.status === 200) {

@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { SearchButton } from '../components/search-button.component';
+import { static_host } from '../assets/global-settings';
 
 
 const ContactContainer = styled.div`
@@ -70,7 +71,7 @@ export const ContactBox = (props) => {
         }),
 
         onSubmit: values => {
-            axios.post(`http://localhost:8000/send_message/`, { content: values.message, receiver: props.receiver, subject: props.subject }, {
+            axios.post(`${static_host}/send_message/`, { content: values.message, receiver: props.receiver, subject: props.subject }, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access')}` },
             }).then(res => {
                 if (res.status === 200) {
