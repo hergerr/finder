@@ -6,6 +6,7 @@ import axios from 'axios';
 import { InputAndLabel } from './input-and-label.component';
 import { PopupButton } from './popup-button.component';
 import { Cross } from './cross.component';
+import { static_host } from '../assets/global-settings';
 
 
 const Container = styled.div`
