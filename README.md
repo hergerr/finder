@@ -293,6 +293,7 @@ docker exec -it finder_db_1 psql -U finder -d finderdb
 ```sql
 select * from auth_user;
 ```
+- NGINX SERWUJE Z HOSTA, NIE Z DOCKERA, zatem po aktulizacji koniecznie trzeba zbudować pliki do serwowania lokalnie
 ### JWT
 - explanations:
 https://stackoverflow.com/a/40376819/12422260
