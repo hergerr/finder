@@ -101,10 +101,12 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'finder.app.confirmation@gmail.com'
 EMAIL_HOST_PASSWORD = 'vtwbcymchabnboky'
 
+host = 'localhost:3000'
+
 REST_REGISTRATION = {
-    'REGISTER_VERIFICATION_URL': 'http://localhost:3000/verify-user/',
-    'RESET_PASSWORD_VERIFICATION_URL': 'http://localhost:3000/reset-password/',
-    'REGISTER_EMAIL_VERIFICATION_URL': 'http://localhost:3000/verify-email/',
+    'REGISTER_VERIFICATION_URL': f'{host}/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': f'{host}/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': f'{host}/verify-email/',
     'VERIFICATION_FROM_EMAIL': 'finder.app.confirmation@gmail.com',
 }
 
