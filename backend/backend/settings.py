@@ -93,12 +93,13 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# https://dev.to/abderrahmanemustapha/how-to-send-email-with-django-and-gmail-in-production-the-right-way-24ab
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'finder.app.confirmation@gmail.com'
-EMAIL_HOST_PASSWORD = '1GUGbRIJh3t+rrWAkes/MA=='
+EMAIL_HOST_PASSWORD = 'vtwbcymchabnboky'
 
 REST_REGISTRATION = {
     'REGISTER_VERIFICATION_URL': 'http://localhost:3000/verify-user/',
