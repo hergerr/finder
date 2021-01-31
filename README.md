@@ -1,28 +1,11 @@
 # finder
-App for finding student quarters and flatmates
+App for finding student quarters. Project made in purpose of learning RESTful design and SPA client applications.
 
 
-
-### Flow
-
-###### Landing page (flats):
-
-- **Add offer** - redirect to Login/Register,  to adding form when logged
-- **My account** - redirect to Login/Register, to panel when logged
-
-TODO:
-- map?
-- captcha in register
-- creation/edit confirmation screen
-- detail - 'blurring' not active photos - like in https://www.immowelt.de/expose/2ubvz4y?bc=13
-- connection between sites - sugestion of rooms in flatmate app
-- drag and drop https://react-dnd.github.io/react-dnd/about
-- paymets
-- theme
-- language
-- admin account
-- divide backend on applications
-- start page? https://github.com/rcaferati/react-awesome-slider
+### Tech stack
+- Django
+- React
+- PostgreSQL
 
 ### CURL wiki
 #### Guest available endpoints
