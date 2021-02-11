@@ -281,10 +281,6 @@ select * from auth_user;
 - explanations:
 https://stackoverflow.com/a/40376819/12422260
 
-### Email
-finder.app.confirmation@gmail.com
-1GUGbRIJh3t+rrWAkes/MA==
-
 ### Maybe useful next time
 ```python
 https://stackoverflow.com/questions/2218327/django-manytomany-filter
